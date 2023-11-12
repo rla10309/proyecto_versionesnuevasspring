@@ -13,6 +13,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
 	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
@@ -33,27 +34,58 @@
         </nav>
 		</div>
 	</header>
-    <main class="alto-screen">
-
-                <div th:if="${msgError}" class="contenedor w-lg-75">
-                    <section class="border-1 rounded-3 text-bg-danger text-black p-5 my-5 text-center fs-1">
-                        <p th:text="${msgError}" ></p>
-                        <button type="button" class="btn text-bg-dark"><a class="text-decoration-none link-light"
-                                th:href="@{/user}">Volver</a></button>
-                    </section>
-                
-                    <a class="boton-buscar text-center" href="./listadoventas.html" th:href="@{/venta/listadoventas}">Atrás</a>
-                
-                </div>
-		<div th:unless="${msgError}" class="contenedor w-lg-75">
-            <section class="border-1 rounded-3 text-bg-dark text-light p-5 my-5 text-center fs-1" >
-                <p>Compra realizada con éxito</p>
-                <button type="button" class="btn text-bg-dark"><a class="text-decoration-none link-light" th:href="@{/user}">Volver</a></button>
-            </section>
-
-			<a class="boton-buscar text-center" href="./listadoventas.html" th:href="@{/venta/listadoventas}">Atrás</a>
-
+    <main class="alto-screen contenedor">
+		<div class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" th:if="${msgError}">
+		
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<span th:text="${msgError}">Venta nula</span>
 		</div>
+
+		
+          <section class="ticket" th:each="i : ${#numbers.sequence(1, venta.numeroentradas)}">
+			<div class="prim">
+				<div class="contenido">
+					<h3 class="fw-semibold" th:text="${grupo.nombre}">THE SADIES @ SALA CORAZÓN GIJÓN</h3>
+					<h4>Sala Corazón</h4>
+					<p>C/ Felicidad, 5</p>
+					<p>Gijón</p>
+					<p>Asturias</p>
+					<p th:text="${ventaVO.usuario.username + ' ' + ventaVO.usuario.apellidos}">Pilar Fernández</p>
+					<p>Entrada no nomitativa</p>
+					<p th:text="${i + '/' + venta.numeroentradas}"></p>
+				</div>
+				<div class="logo">
+					sala corazón
+				</div>
+
+			</div>
+			<div class="sec">
+				<div class="imagen-central">
+					<img src="/static/img/abba.jpg" th:src="@{${grupo.imagen}}" class="img-fluid"  alt="">
+				</div>
+			</div>
+			<div class="third">
+				<div class="columna-datos">
+					<div class="contenido p-0">
+						<h4 class="fw-semibold">P.V.P <span th:text="${venta.concierto.precioanticipado}">16.50</span></h4>
+						<p>Entrada 15.00€</p>
+						<p>Impuestos incluidos</p>
+						<div>ANTICIPADA</div>
+					</div>
+					<div class="codigoqr pt-4 text-center">
+						<img src="/static/img/qr.png" th:src="@{../img/qr.png}" class="w-100" alt="">
+					</div>
+				</div>
+				<div class="codigo-barras">
+					<img src="/static/img/codigobarras.png" th:src= "@{../img/codigobarras.png}" class="w-100 h-100" alt="">
+				</div>
+			</div>
+		  </section>
+
+			<div class="mt-5"><a class="boton-buscar text-center" href="user.html" th:href="@{/user/user(dni=${venta.usuario.dni})}">Atrás</a></div>
+
 
 	</main>
 	<footer class="footer">

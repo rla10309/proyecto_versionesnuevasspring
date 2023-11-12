@@ -51,25 +51,28 @@
 				<div class="formulario">
 	
 					<div class="mb-5">
+						<input type="hidden" th:field="*{concierto.grupo.idgrupo}">
+						<input type="hidden" th:field="*{concierto.grupo.imagen}">
 						<label for="grupo" class="form-label">Grupo</label>
 						<input type="text" class="form-control" id="grupo" name="grupo"
-                        th:value="${venta.concierto.grupo.nombre}">
+                        th:value="${venta.concierto.grupo.nombre}" th:field="*{concierto.grupo.nombre}" >
 					</div>
                     <input type="hidden" th:field="*{concierto.idconcierto}">
+                   
 
 
 
 					<div class="mb-5">
 						<label for="fecha" class="form-label">Fecha</label>
-						<input type="text" class="form-control" id="fecha" name="fecha" th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}" readonly>
+						<input type="text" class="form-control" id="fecha" name="fecha" th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}" readonly th:field="*{concierto.fecha}">
 					</div>
                     <div class="mb-5">
 						<label for="hora" class="form-label">Hora</label>
-						<input type="text" class="form-control" id="hora" name="hora" th:value="${venta.concierto.hora}" readonly>
+						<input type="text" class="form-control" id="hora" name="hora" th:value="${venta.concierto.hora}" th:field="*{concierto.hora}" readonly>
 					</div>
                     <div class="mb-5">
 						<label for="precioanticipado" class="form-label">Precio Anticipado</label>
-						<input type="text" class="form-control" id="precioanticipado" name="precioanticipado" th:value="${venta.concierto.precioanticipado}" readonly>
+						<input type="text" class="form-control" id="precioanticipado" name="precioanticipado" th:value="${venta.concierto.precioanticipado}" th:field="*{concierto.precioanticipado}" readonly>
 					</div>
 
 					<div class="row">

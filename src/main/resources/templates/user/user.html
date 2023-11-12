@@ -13,6 +13,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" />
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
 	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
@@ -31,10 +32,12 @@
 			</div>
 		<nav class="navegacion ">
 			<a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+			<a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
 		</nav>
 		</div>
 	</header>
 	<nav class="navegacion-usuario">
+		<h3 th:text="${usuario.username + ' '+ usuario.apellidos}"></h3>
 		<ul>
 		<li><a href="">Busca por fechas</a></li>
 		<li><a href="">Mi cuenta</a></li>
@@ -43,16 +46,17 @@
 	</nav>
 	<main class="alto-screen centrar">
 		<div class="contenedor-listados">
+
 			
-			<section class="concierto-usuario sombra-negra" th:each=" v : ${ventas}">
+			<section class="concierto-usuario sombra-negra px-5 mb-3" th:each=" v : ${ventas}">
 				<div class="row align-items-center">
-					<div class="col-md-6">
-						<h3 th:text="${v.concierto.grupo.nombre}">The Police</h3>
+					<div class="col-md-6 text-center">
+						<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>
 						<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg" alt="grupo ${v.concierto.grupo.nombre}" />
 					</div>
 					<div class="col-md-6 p-4">
 						<p class="fs-1 text-uppercase">Fecha:</p>
-						<p th:text="${v.concierto.fecha}" class="info">11/10/2023</p>
+						<p th:text="${#temporals.format(v.concierto.fecha, 'dd/MM/yyyy')}" class="info">11/10/2023</p>
 						<p class="fs-1 text-uppercase">Hora:</p>
 						<p th:text="${v.concierto.hora}" class="info">20:30</p>
 						<p class="fs-1 text-uppercase">Entradas adquiridas: </p>
@@ -62,28 +66,9 @@
 					</div>
 
 				</div>
+
+
 			</section>
-						<section class="concierto-usuario sombra-negra" th:each=" v : ${ventas}">
-							<div class="row align-items-center">
-								<div class="col-md-6">
-									<h3 th:text="${v.concierto.grupo.nombre}">The Police</h3>
-									<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg"
-										alt="grupo ${v.concierto.grupo.nombre}" />
-								</div>
-								<div class="col-md-6 p-4">
-									<p class="fs-1 text-uppercase">Fecha:</p>
-									<p th:text="${v.concierto.fecha}" class="info">11/10/2023</p>
-									<p class="fs-1 text-uppercase">Hora:</p>
-									<p th:text="${v.concierto.hora}" class="info">20:30</p>
-									<p class="fs-1 text-uppercase">Entradas adquiridas: </p>
-									<p th:text="${v.numeroentradas}" class="info">4</p>
-									<p class="fs-1 text-uppercase">Fecha y hora de la compra: </p>
-									<p th:text="${v.fechaventa + ' - ' + v.horaventa }" class="info">9/11/2023 - 21:11</p>
-								</div>
-						
-							</div>
-						</section>
-						
 	
 			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#lists.isEmpty(ventas)}">
 

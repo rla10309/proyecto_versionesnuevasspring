@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dawes.modelo.ConciertoVO;
+import com.dawes.modelo.GrupoVO;
 import com.dawes.modelo.VentaVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
@@ -39,10 +41,12 @@ public class UserController {
 
 	@RequestMapping("/compra")
 	public String compra(@RequestParam int idconcierto, Model modelo) {
-	    VentaVO ventaVO = new VentaVO();
-	    ventaVO.setConcierto(sc.findById(idconcierto).get());
-		modelo.addAttribute("venta", ventaVO);
+	    VentaVO venta = new VentaVO();
+	    ConciertoVO concierto = sc.findById(idconcierto).get();
+	    venta.setConcierto(concierto);
+		modelo.addAttribute("venta", venta);
 		modelo.addAttribute("usuarios", su.findAll());
+		modelo.addAttribute("grupo", concierto.getGrupo());
 		return "user/formcompra";
 		
 	}
@@ -50,9 +54,13 @@ public class UserController {
 	@RequestMapping("/insertar")
 	public String insertar(@ModelAttribute VentaVO venta, Model modelo)  {
 		try {
-		sv.save(venta);
-		}catch(DataIntegrityViolationException e) {
-			modelo.addAttribute("msgError", "No se ha podido realizar la venta");
+			sv.save(venta);
+			modelo.addAttribute("venta", venta);
+			modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
+		}
+		catch(Exception e) {
+			System.out.println("pasa por aquí");
+			modelo.addAttribute("msgError", "No se ha podido realizar la venta " + e.getStackTrace());
 			
 		}
 
