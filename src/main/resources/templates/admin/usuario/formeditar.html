@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Gestión de Usuarios</title>
+	<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+	<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+	<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+</head>
+
+<body>
+	<header>
+		<div class="contenido-navegacion fondo-negro">
+
+			<h1 class="text-center">
+				<a href="#" th:href="@{/index}">Sala Corazón</a>
+			</h1>
+
+
+			<div class="mobile-menu">
+				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
+					alt="icono menu responsive" />
+			</div>
+			<nav class="navegacion-admin">
+            <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
+            <a href="../grupo/listadogrupos.html" 
+            th:href="@{/concierto/listadoconciertos}">Conciertos</a>
+            <a href="../venta/listadoventas.html" 
+            th:href="@{/venta/listadoventas}">Ventas</a>
+            <a href="../usuario/listadousuarios.html"
+            th:href="@{/usuario/listadousuarios}">Usuarios</a>
+			</nav>
+		</div>
+	</header>
+    <main class="alto-screen">
+        <div class="contenedor w-xl-75">
+
+            <h1 class="text-center text-uppercase">Editar Usuario</h1>
+            <!-- TODO Enviar un usuariorol en vez del usuario -->
+
+            <form class="mt-5 sombra d-flex flex-column" 
+            th:action="@{/usuario/insertaeditado}" th:object="${usuariorol}"
+                method="post">
+                <div class="formulario">
+                    <input type="hidden" name="idusuariorol" th:field="*{idusuariorol}">
+                    <input type="hidden" name="idusuario" th:field="*{usuario.idusuario}">
+                    <div class="mb-5">
+                        <label for="username">Nombre</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Nombre"
+                            th:field="*{usuario.username}" required autofocus />
+                    </div>
+                    <div class="mb-5">
+                        <label for="apellidos">Apellidos</label>
+                        <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos"
+                            th:field="*{usuario.apellidos}" required />
+                    </div>
+                    <div class="mb-5">
+                        <label for="password">Contraseña</label>
+                        <input type="text" id="password" name="password" class="form-control" placeholder="Contraseña"
+                            th:field="*{usuario.password}" required />
+                    </div>
+                    <div class="mb-5">
+                        <label for="dni">DNI</label>
+                        <input type="text" name="dni" id="dni" class="form-control"
+                            placeholder="DNI" th:field="*{usuario.dni}" required />
+                    </div>
+                    <div class="mb-5">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="E-mail" 
+                        th:field="*{usuario.email}" required />
+                    </div>
+                     <div class="mb-5">
+              <label for="rol">Rol</label>
+              <select class="form-select fs-2" title="rol" name="rol">
+                <option th:each="r : ${roles}"
+                th:selected="${r.idrol == usuariorol.rol.idrol}"
+                  th:value="${r.idrol}"
+                  th:text="${r.nombre}">
+                </option>
+              </select>
+            </div>
+                </div>
+                <input class="boton negro" type="submit" value="Nuevo Usuario" />
+               
+            </form>
+            <a class="boton-link mt-3 text-center" href="./listadousuarios.html" th:href="@{/usuario/listadousuarios}">Atrás</a>
+           
+
+        </div>
+
+    </main>
+    <footer class="footer">
+        <div class="contenido-navegacion justify-content-center justify-content-lg-between">
+            <a href="#">
+                <h1>Sala Corazón</h1>
+            </a>
+        </div>
+        <div class="contenido-footer">
+            <div class="datos">
+                <ul>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                </ul>
+            </div>
+            <div class="datos">
+                <ul>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                </ul>
+            </div>
+            <div class="datos">
+                <ul>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                    <li>Datos de contacto</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+</body>
+
+</html>

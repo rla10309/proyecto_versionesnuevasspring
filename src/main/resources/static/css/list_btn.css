@@ -1,0 +1,14 @@
+.datos {
+
+    font-weight: 500;
+}
+.datos ul {
+    border-bottom: 1px solid grey;
+    padding: 0;
+}
+.datos li {
+    list-style-type: none;
+}
+.datos li:last-of-type{
+    margin-bottom: 1rem;
+}

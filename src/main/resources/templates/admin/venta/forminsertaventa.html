@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Nueva Venta</title>
+	<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+	<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+	<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+</head>
+
+<body>
+	<header>
+		<div class="contenido-navegacion fondo-negro">
+			<a href="#" th:href="@{/index}">
+				<h1 class="text-center">Sala Corazón</h1>
+			</a>
+			<div class="mobile-menu">
+				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
+					alt="icono menu responsive" />
+			</div>
+			<nav class="navegacion-admin">
+            <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
+            <a href="../grupo/listadogrupos.html" 
+            th:href="@{/concierto/listadoconciertos}">Conciertos</a>
+            <a href="../venta/listadoventas.html" 
+            th:href="@{/venta/listadoventas}">Ventas</a>
+            <a href="../usuario/listadousuarios.html"
+            th:href="@{/usuario/listadousuarios}">Usuarios</a>
+			</nav>
+		</div>
+	</header>
+	<main class="alto-screen">
+		<div class="contenedor w-lg-75">
+			<h1 class="text-center text-uppercase" th:text="${venta.idventa != 0} ? 'Editar Venta' : 'Nueva Venta'">
+				Nueva Venta</h1>
+			<form th:object="${venta}" th:action="@{/venta/insertar}" class="my-5 sombra d-flex flex-column"
+				method="post">
+				<input type="hidden" th:field="*{idventa}">
+
+				<div class="formulario">
+					<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span>Error en la venta</span>
+					</div>
+					<div class="mb-5">
+						<label for="grupo" class="form-label">Grupo</label>
+						<select class="form-select fs-2" id="grupo">
+							<option value="0" selected>---Seleccione grupo---</option>
+							<option th:if="${venta.idventa != 0}" th:each=" g : ${grupos}" th:value="${g.idgrupo}"
+								th:text="${g.nombre}" th:selected="${g.idgrupo == venta.concierto.grupo.idgrupo}">
+							</option>
+							<option th:unless="${venta.idventa != 0}" th:each=" g: ${grupos}" th:value="${g.idgrupo}"
+								th:text="${g.nombre}"></option>
+
+						</select>
+					</div>
+					<div class="mb-5">
+						<label for="concierto" class="form-label">Concierto</label>
+						<select class="form-select fs-2" id="concierto" th:field="*{concierto}">
+							<option value="0" selected>---Seleccione concierto---</option>
+							<div th:if="${venta.idventa != 0}">
+								<option th:each="concierto : ${conciertos}" th:value="${concierto.idconcierto}"
+									th:text="${concierto.fecha + ' - ' + concierto.hora}"
+									th:selected="${concierto.idconcierto == venta.concierto.idconcierto}">
+								</option>
+
+							</div>
+						</select>
+					</div>
+
+					<div class="row">
+						<div class="mb-5 col-xl-6">
+							<label for="numeroentradas" class="form-label">Nª de
+								Entradas</label>
+							<input type="number" class="form-control" id="numeroentradas" name="numeroentradas"
+								th:field="*{numeroentradas}">
+						</div>
+						
+
+						<div class="mb-5 col-xl-6">
+							<label for="usuario" class="form-label">Usuario</label>
+							<select th:field="*{usuario}" class="form-select fs-2" title="usuario">
+								<option value="0" selected>---Seleccione usuario---</option>
+								<option th:each=" u: ${usuarios}" th:value="${u.idusuario}"
+									th:text="${u.dni + ' - ' + u.username + '  ' + u.apellidos}">
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="mb-5">
+						<label for="fechaventa" class="form-label">Fecha Venta</label>
+						<input type="text" class="form-control" id="fechaventa" th:field="*{fechaventa}" readonly>
+					</div>
+					<div class="mb-5">
+						<label for="horaventa" class="form-label">Hora Venta</label>
+						<input type="text" class="form-control" id="horaventa" th:field="*{horaventa}" readonly>
+					</div>
+
+
+
+
+
+				</div>
+				<input class="boton negro" type="submit" value="Nueva Venta" />
+			</form>
+			<div class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.error}">
+
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span>Venta nula</span>
+			</div>
+			<a class="boton-buscar text-center" href="./listadoventas.html" th:href="@{/venta/listadoventas}">Atrás</a>
+
+		</div>
+
+	</main>
+	<footer class="footer">
+		<div class="contenido-navegacion justify-content-center justify-content-lg-between">
+			<a href="#">
+				<h1 class="text-center">Sala Corazón</h1>
+			</a>
+		</div>
+		<div class="contenido-footer">
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/static/js/scriptselect.js" th:src="@{../../../js/scriptselect.js}"></script>
+	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+</body>
+
+</html>

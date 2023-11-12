@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="html://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Nuevo Grupo</title>
+	<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+	<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+	<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+</head>
+
+<body>
+	<header>
+		<div class="contenido-navegacion fondo-negro">
+			<a href="#" th:href="@{/index}">
+				<h1 class="text-center">Sala Corazón</h1>
+			</a>
+
+			<div class="mobile-menu">
+				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
+					alt="icono menu responsive" />
+			</div>
+			<nav class="navegacion-admin">
+            <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
+            <a href="../grupo/listadogrupos.html" 
+            th:href="@{/concierto/listadoconciertos}">Conciertos</a>
+            <a href="../venta/listadoventas.html" 
+            th:href="@{/venta/listadoventas}">Ventas</a>
+            <a href="../usuario/listadousuarios.html"
+            th:href="@{/usuario/listadousuarios}">Usuarios</a>
+			</nav>
+		</div>
+	</header>
+	<main class="alto-screen">
+		<div class="contenedor w-xl-75">
+
+
+
+			<form class="my-5 sombra d-flex flex-column" th:action=" @{/grupo/insertagrupo}"
+				enctype="multipart/form-data" th:object="${grupo}" method="post">
+				<h2 class=" text-center text-uppercase">Nuevo Grupo</h2>
+
+				<div class="formulario">
+					<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<span>Este grupo ya está en nuestra base de datos</span>
+					</div>
+
+					<div class="mb-5">
+						<label for="nombre">Nombre</label> <input type="text" id="nombre" th:field="*{nombre}"
+							class="form-control" placeholder="Nombre" required autofocus />
+					</div>
+					<div class="mb-5">
+						<label for="miembros">Miembros</label> <input type="number" id="miembros" th:field="*{miembros}"
+							class="form-control" placeholder="Miembros" required />
+					</div>
+					<div class="mb-5">
+						<label for="file">Imagen</label> <input type="file" id="file" name="file" class="form-control"
+							placeholder="Imagen" required />
+						
+					</div>
+					<div class="mb-5">
+						<label for="estilo">Estilo</label> <input type="text" th:field="*{estilo}" id="estilo"
+							class="form-control" placeholder="Estilo" required />
+					</div>
+					<div class="mb-5">
+						<label for="origen">Origen</label> <input type="text" th:field="*{origen}" id="origen"
+							class="form-control" placeholder="Origen" required />
+					</div>
+					<div class="mb-5">
+						<label for="descripcion">Descripción</label>
+						<textarea th:field="*{descripcion}" id="descripcion" class="form-control"></textarea>
+					</div>
+				</div>
+				<input class="boton negro" type="submit" value="Nuevo Grupo" />
+			</form>
+			<a class="boton-buscar text-center" href="./listadogrupos.html" th:href="@{/grupo/listadogrupos}">Atrás</a>
+
+
+		</div>
+
+	</main>
+	<footer class="footer">
+		<div class="contenido-navegacion justify-content-center justify-content-lg-between">
+			<a href="#">
+				<h1 class="text-center">Sala Corazón</h1>
+			</a>
+		</div>
+		<div class="contenido-footer">
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+
+</body>
+
+</html>

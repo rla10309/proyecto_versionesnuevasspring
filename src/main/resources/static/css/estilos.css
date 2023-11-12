@@ -1,0 +1,419 @@
+:root{
+    --grisClaro: #f6f6f6;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; 
+    margin: 0;
+    padding: 0;
+}
+body {
+	font-size: 1.6rem;
+    line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
+    height: 100%;
+}
+
+.img-body{
+    background-image: url(../img/audience1.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-size: 4.8rem;
+}
+h2 {
+    font-size: 4rem;
+}
+h3 {
+    font-size: 3.2rem;
+}
+h4 {
+    font-size: 2.8rem;
+}
+a {
+    text-decoration: none;
+   /*margin: 0;*/
+}
+.fondo-negro {
+    background-color: black;
+}
+.sombra-negra {
+
+    background-image: linear-gradient(to top, #373737 0%, #000 100%);
+    padding: 2rem 0;
+    border-radius: 3.75px;
+    color: white;
+    
+}
+.sombra {
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, white 100%);
+    box-shadow: 0px 5px 15px 0px rgba(112, 112, 112, 0.48);
+    padding: 1rem 0;
+    border-radius: 3.75px;
+}
+.alto-screen {
+    min-height: 60vh;
+ }
+/* .min-height{
+    min-height: 100%;
+ } */
+ .capa {
+    background-color: rgba(0 0 0 /50%);
+    width: 100%;
+    height: 100%;
+} 
+.header-body, .footer-body {
+    background-color: rgba(246 , 246, 246, 0.5);
+    height: 25rem;
+
+}
+.header, .footer {
+    background-color: black;
+}
+.contenido-navegacion{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 2rem 10rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 20rem;
+}
+.centrado-footer{
+    justify-content: center;
+}
+
+.contenido-navegacion a {
+   color:white;
+   
+}
+.navegacion-admin {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+}
+.navegacion-usuario ul{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    border-bottom: 1px solid black;
+}
+.navegacion-usuario li {
+    list-style-type: none;
+    padding: 2rem;
+}
+.navegacion-usuario a {
+    color: black;
+}
+.navegacion-usuario a:hover{
+    color:white;
+}
+.navegacion-usuario li:hover{
+    background-color: black;
+}
+
+.barras {
+    width: 3rem;
+}
+.grupo-detalle img {
+    box-shadow: 10px 10px 16px 1px rgba(133 131 131 / 0.75);
+    width: 90%;
+    height: 90%;
+}
+/* .form-index{
+    width: 80%;
+    margin: 0 auto;
+} */
+
+.titulos {
+    padding: 2rem;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+.titulos h3{
+    font-size: 2rem;
+}
+.contenedor-index {
+   max-width: 1200px;
+   margin: 5rem auto;
+}
+.contenedor-listados{
+    width: 90%;
+    max-width: 1200px;
+    margin: 5rem auto;
+}
+.contenedor {
+    width: 90%;
+   
+    margin: 5rem auto
+}
+.contenedor h1 {
+    text-align: center;
+}
+.contenedor + button {
+  
+    text-align: center;
+}
+.barra-busqueda {
+	width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: rgba(0 0 0 / 0.5);
+    padding: 1rem;
+    border-radius: 3.75px;
+}
+.icono-lupa {
+    width: 4rem;
+}
+.barra-busqueda input {
+    border-radius: 3.75px;
+    border: 1px solid gainsboro;
+    padding: 1rem;
+}
+.contenido-conciertos{
+	width: 90%;
+	margin: 0 auto;
+}
+.contenido-conciertos img {
+    width: 100%;
+    height: 100%;
+}
+.concierto {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid gainsboro;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    ;
+}
+i {
+    font-size: 1.6rem;
+}
+
+.info-concierto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+    padding: 2rem 0;
+    width: 100%;
+}
+.info-concierto h2 {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.info-concierto p {
+    font-size: 2rem;
+}
+
+.contenido-footer {
+    margin: 0 auto;
+    color: white;
+    padding: 2rem 5rem 5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-entrada {
+    background-color: tomato;
+    padding: 1rem 2rem;
+    color: white;
+    font-size: 2rem;
+    border-radius:3.75px;
+}
+.boton-entrada:hover {
+    background-color: rgb(255, 99, 71 / .5);
+}
+/** DETALLE GRUPOS **/
+.concierto-usuario img{
+    width: 100%;
+    border-radius: 3.75px;
+}
+.concierto-usuario .info {
+    color: tomato;
+    font-size: 2rem;
+}
+
+
+
+
+/**PAGINA LOGIN**/
+.alerta {
+    background-color: #FFF3CD;
+    padding: 1rem;
+    border-radius: 3.75px;
+}
+.centrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formulario-login {
+    width: 80%;
+}
+.campo {
+    width: 100%;
+}
+.campo label {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: dodgerblue;
+    font-weight: 700;
+}
+.campo input {
+    font-size: 2rem;
+    padding: 1rem;
+}
+.campo input::placeholder {
+    font-size: 1.7rem;
+}
+/** BOTONES **/
+.boton-login {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid gainsboro;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3.75px;
+}
+.boton-link {
+    background-color: black;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 1rem;
+        border: none;
+        border-radius: 3.75px;
+        margin: 3rem auto;
+        display: inline-block;
+}
+.boton-registro {
+    background-color: dodgerblue;
+    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid dodgerblue;
+    border-radius: 3.75px;
+}
+.boton {
+    text-transform: uppercase;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 3.75px;
+}
+.boton-registro a{
+    color: white;
+}
+/* .boton {
+    width: 85%;
+    margin: 0 auto;
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    border:1px solid black;
+    border-radius: 3.75px;
+    text-transform: uppercase;
+    font-weight: 700;
+} */
+
+.rojo {
+    background-color: crimson;
+    border:1px solid crimson;
+}
+.azul {
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
+}
+.negro {
+    background-color: black;
+    border: black;
+}
+.boton-buscar {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3.75px;
+    border: none;
+}
+table {
+    padding: 1rem;
+}
+table a {
+   margin: 0.5rem;
+}
+td, th {
+    vertical-align: middle;
+}
+.truncate-text {
+      max-width: 100px;
+      /* Ajusta este valor según sea necesario */
+      white-space: nowrap;
+      overflow: scroll;
+      /*text-overflow: ellipsis;*/
+ }
+.ancho-celda-descripcion{
+    width: 30%;
+        
+}
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76%;
+    margin: 0 auto 2rem auto;
+    gap: 2rem;
+}
+/** FORMULARIOS **/
+.formulario {
+    width: 85%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+}
+.formulario label {
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+
+.formulario input, 
+.formulario textarea
+
+{
+    padding: 0.7rem;
+    font-size: 1.6rem;
+}
+.formulario input::placeholder{
+    font-size: 1.6rem;
+}
+
+/** VENTANA MODAL **/
+.swal2-confirm {
+    font-size: 2rem;
+}
+
+

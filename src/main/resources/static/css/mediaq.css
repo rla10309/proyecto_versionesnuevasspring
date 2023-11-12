@@ -1,0 +1,78 @@
+@media (min-width: 768px) {
+    i{
+        font-size: 2rem;
+    }
+    .contenedor-index{
+        width: 90%;
+    }
+    .barras {
+        display: none;
+    }
+    .barra-busqueda {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .contenido-navegacion {
+        flex-direction: row;
+        font-size: 1.7rem;
+    }
+    /* .contenido-conciertos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    } */
+    .concierto{
+        margin-bottom: 0;
+    }
+    h2 {
+        font-size: 2.2rem;
+    }
+    .formulario-login {
+        width: 40%;
+    }
+
+
+    .boton-registro,
+    .boton {
+        width: auto;
+    }
+    .navegacion-admin {
+        display: flex;
+        flex-direction: row;
+    }
+    .navegacion-admin a {
+        margin-left: 2rem;
+    }
+    .botones {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .boton-azul,
+    .boton {
+        width: auto;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .contenedor {
+        width: 80%;
+    }
+    /* .contenido-conciertos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    } */
+    .barra-busqueda {
+        width: 60%;
+        padding: 1rem 3rem;
+    }
+    .contenido-footer {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .formulario {
+        width: 50%;
+    }
+}

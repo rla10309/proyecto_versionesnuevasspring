@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Historial Usuario</title>
+	<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+	<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+	<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+</head>
+
+<body>
+	<header>
+		<div class="contenido-navegacion fondo-negro">
+
+			<h1 class="text-center">
+				<a href="../index.html" th:href="@{/index}">Sala Corazón</a>
+			</h1>
+			<div class="mobile-menu">
+				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
+					alt="icono menu responsive" />
+			</div>
+		<nav class="navegacion ">
+			<a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+		</nav>
+		</div>
+	</header>
+	<nav class="navegacion-usuario">
+		<ul>
+		<li><a href="">Busca por fechas</a></li>
+		<li><a href="">Mi cuenta</a></li>
+		</ul>
+	
+	</nav>
+	<main class="alto-screen centrar">
+		<div class="contenedor-listados">
+			
+			<section class="concierto-usuario sombra-negra" th:each=" v : ${ventas}">
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<h3 th:text="${v.concierto.grupo.nombre}">The Police</h3>
+						<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg" alt="grupo ${v.concierto.grupo.nombre}" />
+					</div>
+					<div class="col-md-6 p-4">
+						<p class="fs-1 text-uppercase">Fecha:</p>
+						<p th:text="${v.concierto.fecha}" class="info">11/10/2023</p>
+						<p class="fs-1 text-uppercase">Hora:</p>
+						<p th:text="${v.concierto.hora}" class="info">20:30</p>
+						<p class="fs-1 text-uppercase">Entradas adquiridas: </p>
+						<p th:text="${v.numeroentradas}" class="info">4</p>
+						<p class="fs-1 text-uppercase">Fecha y hora de la compra: </p>
+						<p th:text="${v.fechaventa + ' - ' + v.horaventa }" class="info">9/11/2023 - 21:11</p>
+					</div>
+
+				</div>
+			</section>
+						<section class="concierto-usuario sombra-negra" th:each=" v : ${ventas}">
+							<div class="row align-items-center">
+								<div class="col-md-6">
+									<h3 th:text="${v.concierto.grupo.nombre}">The Police</h3>
+									<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg"
+										alt="grupo ${v.concierto.grupo.nombre}" />
+								</div>
+								<div class="col-md-6 p-4">
+									<p class="fs-1 text-uppercase">Fecha:</p>
+									<p th:text="${v.concierto.fecha}" class="info">11/10/2023</p>
+									<p class="fs-1 text-uppercase">Hora:</p>
+									<p th:text="${v.concierto.hora}" class="info">20:30</p>
+									<p class="fs-1 text-uppercase">Entradas adquiridas: </p>
+									<p th:text="${v.numeroentradas}" class="info">4</p>
+									<p class="fs-1 text-uppercase">Fecha y hora de la compra: </p>
+									<p th:text="${v.fechaventa + ' - ' + v.horaventa }" class="info">9/11/2023 - 21:11</p>
+								</div>
+						
+							</div>
+						</section>
+						
+	
+			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#lists.isEmpty(ventas)}">
+
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span>No hay datos que mostrar</span>
+			</div>
+			<div class="my-5">
+				<a class="boton-buscar" th:href="@{/index}" href="../index.html">Atrás</a>
+			</div>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="contenido-navegacion justify-content-center">
+			<a href="#">
+				<h1 class="text-center">Sala Corazón</h1>
+			</a>
+		</div>
+		<div class="contenido-footer">
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+			<div class="datos">
+				<ul>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+					<li>Datos de contacto</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="html://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sala Corazón</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{../css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{../css/estilos.css}" />
+    <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{../css/mediaq.css}" />
+    <link rel="stylesheet" href="../static/css/list_btn.css" th:href="@{../css/list_btn.css}" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/91eae316a2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="img-body">
+   
+    <header class="header contenido-navegacion">
+    
+        <a href="#">
+          <h1  class="text-center">Sala Corazón</h1>
+        </a>
+        <nav class="navegacion ">
+          <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+          <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
+        </nav>
+  
+    </header>
+
+    <main>
+      <div class="contenedor alto-screen">
+      <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
+        <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
+          <div class="barra-busqueda">
+            <div class="row justify-content-between aling-items-center col-md-10 mx-2">
+              <div class="text-center col-1">
+                <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
+                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+              </div>
+              <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
+            </div>
+            <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+              Buscar
+            </button>
+          </div>
+        </form>
+        <!-- FIN DEL FORMULARIO DE BUSQUEDA -->
+      
+
+
+      <div class="contenedor-index  sombra-negra " >
+        <!-- CONTENIDO CONCIERTOS -->
+
+        <div class="contenido-conciertos" >
+          <div class="card my-5 border-0" th:each="c: ${conciertos}">
+            <div class="row g-0">
+              <div class="col-md-4">
+
+              <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
+                <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg" alt="" /></a>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
+                  <h3 class="card-title" th:text="${c.grupo.nombre}">Nombre del Grupo</h3>
+                  <p class="card-text" th:text="${c.intro}">Texto de prueba
+                  </p>
+                  <p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
+                  <p class="card-text" th:text="${c.hora}">21:30</p>
+                  <p class="card-text text-end">
+                    <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
+                      class="btn boton-entrada mt-5">Compra entradas</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+         
+        </div>
+        <div class="text-center">
+          <a th:href="@{/index}" class="boton-buscar">Todos los conciertos</a>
+        </div>
+      </div>
+      </div>
+              <form th:action="@{/user/user}" method="post" class="form-index">
+                <div class="barra-busqueda">
+                  <div class="row justify-content-between aling-items-center col-md-10 mx-2">
+                    <div class="text-center col-1">
+                      <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
+                      <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                    </div>
+                    <input type="text" placeholder="Introduce tu dni" class="col-10" name="dni" />
+                  </div>
+                  <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+                    Buscar
+                  </button>
+                </div>
+              </form>
+    </main>
+    <footer class="footer">
+      <div class="contenido-navegacion justify-content-center justify-content-lg-between">
+        <a href="#" >
+          <h1  class="text-center">Sala Corazón</h1>
+        </a>
+      </div>
+      <div class="contenido-footer">
+        <div class="datos">
+          <ul class=" text-white">
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+          </ul>
+        </div>
+        <div class="datos">
+          <ul class=" text-white">
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+          </ul>
+        </div>
+        <div class="datos">
+          <ul class=" text-white">
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+            <li>Datos de contacto</li>
+          </ul>
+        </div>
+      </div>
+         </footer>
+
+  </body>
+</html>

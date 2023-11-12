@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{../../css/estilos.css}">
+  <title>Conciertos</title>
+</head>
+
+<body>
+  <header>
+     <nav class="nav text-bg-dark text-light p-5 align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <a class="fs-2 nav-link link-light" th:href="@{../../index}">Sala Corazón</a>
+                <a class="nav-link active link-light" sec:authorize="isAuthenticated() && hasRole('ROLE_ADMIN')" th:href="@{/sala/listadosalas}">Salas</a>
+                <a class="nav-link link-light" th:href="@{/concierto/listadoconciertos}">Conciertos</a>
+                <a class="nav-link link-light" th:href="@{/venta/listadoventas}">Ventas</a>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link link-light" href="/index.html" th:href="@{/login}">Iniciar sesión</a>
+                <a class="nav-link active link-light" th:href="@{/salir}">Salir</a>
+            </div>
+
+        </nav>
+  </header>
+
+  <section class="container w-25 my-5">
+    <form th:object="${concierto}" th:action="@{/concierto/insertar}" method="post">
+      <input type="hidden" class="form-control" id="idconcierto" name="idconcierto" th:field="*{idconcierto}"
+        th:value="${idconcierto}">
+
+	 <div class="mb-3">
+        <label for="grupo" class="form-label">Grupo</label>
+        <input id="grupo" type="text" class="form-control" name="grupo" th:field="*{grupo}" th:value="${grupo}">
+      </div>
+
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="text" class="form-control" id="fecha" name="fecha" th:field="*{fecha}" th:value="${fecha}">
+      </div>
+      <div class="mb-3">
+        <label for="hora" class="form-label">Hora</label>
+        <input type="text" class="form-control" id="hora" name="hora" th:field="*{hora}" th:value="${hora}">
+      </div>
+      <div class="mb-3">
+        <label for="precioanticipado" class="form-label">Precio Anticipado</label>
+        <input type="text" class="form-control" id="precioanticipado" name="precioanticipado"
+          th:field="*{precioanticipado}" th:value="${precioanticipado}">
+      </div>
+      <div class="mb-3">
+        <label for="preciotaquilla" class="form-label">Precio Taquilla</label>
+        <input type="text" class="form-control" id="preciotaquilla" name="preciotaquilla" th:field="*{preciotaquilla}"
+          th:value="${preciotaquilla}">
+      </div>
+      <div class="mb-3">
+        <label for="plazas" class="form-label">Plazas disponibles</label>
+        <input type="text" class="form-control" id="plazas" name="plazas" th:field="*{plazas}" th:value="${plazas}">
+      </div>
+    
+
+      <button type="submit" class="btn text-bg-dark">Editar</button>
+      <button type="button" class="btn text-bg-dark">
+        <a class="text-decoration-none link-light" th:href="@{/concierto/listadoconciertos}">Atrás</a>
+    </button>
+    </form>
+
+  </section>
+  <footer class="p-4 text-bg-dark h-100 fs-6">
+		<p>Pilar Fernández Nieto</p>
+		<p>Proyecto Final Módulo Desarrollo Web en Entorno Servidor</p>
+		<p>rla10309@educastur.es</p>
+	</footer>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
