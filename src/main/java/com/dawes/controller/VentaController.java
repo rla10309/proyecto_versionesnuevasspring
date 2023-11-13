@@ -1,10 +1,11 @@
 package com.dawes.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -78,7 +79,13 @@ public class VentaController {
 	}
 	@RequestMapping("/informe")
 	public String findByGrupoNombre(@RequestParam String nombre, Model modelo) {
-		modelo.addAttribute("ventas", sv.findByConciertoGrupoNombre(nombre).get());
+		List<VentaVO> ventas = sv.findByConciertoGrupoNombre(nombre).get();
+		if(!ventas.isEmpty()) {
+			modelo.addAttribute("ventas", ventas);
+		} else {
+			modelo.addAttribute("msgError", "No hay datos que mostrar");
+		}
+		
 		return "admin/venta/informeventas";
 	}
 }

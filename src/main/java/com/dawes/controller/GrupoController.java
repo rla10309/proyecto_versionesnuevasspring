@@ -47,7 +47,7 @@ public class GrupoController {
 	}
 	
 	@RequestMapping("/insertagrupo")
-	public String insertagrupo(@ModelAttribute GrupoVO grupo, @RequestParam("file") MultipartFile file) {
+	public String insertagrupo(@ModelAttribute GrupoVO grupo, @RequestParam("file") MultipartFile file, Model modelo) {
 		
 		if(!file.isEmpty()) {
 			String imagen = storageService.store(file, grupo.getIdgrupo());
@@ -58,9 +58,10 @@ public class GrupoController {
 		try {
 		sg.save(grupo);
 		} catch(DataIntegrityViolationException e) {
-			return "redirect:/grupo/creagrupo?error=true";
+			modelo.addAttribute("msgError", "Ya existe un grupo con ese nombre");
 		}
-		return "redirect:/grupo/listadogrupos";
+		modelo.addAttribute("grupos", sg.findAll());
+		return "admin/grupo/listadogrupos";
 	}
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
@@ -82,10 +83,13 @@ public class GrupoController {
 	public String delete(@RequestParam int idgrupo, Model modelo) {
 		try {
 			sg.deleteById(idgrupo);
+			modelo.addAttribute("msgSuccess", "Grupo eliminado con éxito");
 		} catch (DataIntegrityViolationException e) {
-			return "redirect:/grupo/listadogrupos?error=true";
+			modelo.addAttribute("msgError", "No se puede eliminar el grupo");
 		}
-		return "redirect:/grupo/listadogrupos?success=true";
+
+		modelo.addAttribute("grupos", sg.findAll());
+		return "admin/grupo/listadogrupos";
 	}
 	
 	@RequestMapping("/buscarporgrupo")

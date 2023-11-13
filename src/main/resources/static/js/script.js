@@ -59,3 +59,12 @@ barras.addEventListener("click", (e) => {
   barras.style.display = "none";
   contenido.style.flexDirection = "column";
 });
+
+/** Lanza formulario buscar por fechas **/
+$(".busca-por-fechas").on("click", function(e){
+  // $("#busca_por_fecha_form").css("visibility", "visible");
+  $("#busca_por_fecha_form").show();
+});
+
+
+

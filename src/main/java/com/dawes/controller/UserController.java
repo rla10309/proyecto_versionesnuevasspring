@@ -1,7 +1,9 @@
 package com.dawes.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawes.modelo.ConciertoVO;
-import com.dawes.modelo.GrupoVO;
 import com.dawes.modelo.VentaVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
@@ -30,9 +31,19 @@ public class UserController {
 	ServicioUsuario su;
 	
 	@RequestMapping("/user")
+	public String user() {
+		return "user/user";
+	}
+	
+	@RequestMapping("/userByDni")
 	public String userByDni(@RequestParam String dni, Model modelo) {
+		List<VentaVO> ventas = sv.findByUsuarioDni(dni).get();
 		modelo.addAttribute("usuario", su.findByDni(dni).get() );
-		modelo.addAttribute("ventas", sv.findByUsuarioDni(dni).get());
+		if(!ventas.isEmpty())
+			modelo.addAttribute("ventas", ventas);
+		else {
+			modelo.addAttribute("msgError", "No hay datos que mostrar");
+		}
 		return "user/user";
 	}
 	
@@ -65,5 +76,20 @@ public class UserController {
 		}
 
 		return "user/ticket";
+	}
+	
+	@RequestMapping("/findByFechaBetween")
+	public String findByFechaBetween(@RequestParam LocalDate f_inicio, LocalDate f_fin, Model modelo) {
+		
+		List<ConciertoVO> conciertos = sc.findByFechaBetween(f_inicio, f_fin).get();
+		if(!conciertos.isEmpty()) {
+			modelo.addAttribute("conciertos", conciertos);
+			
+		} else {
+			modelo.addAttribute("msgError", "No hay conciertos entre esas fechas");
+		}
+
+		return "user/user";
+		
 	}
 }

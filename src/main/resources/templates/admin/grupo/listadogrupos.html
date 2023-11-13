@@ -32,25 +32,23 @@
 					alt="icono menu responsive" />
 			</div>
 			<nav class="navegacion-admin">
-            <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
-            <a href="../grupo/listadogrupos.html" 
-            th:href="@{/concierto/listadoconciertos}">Conciertos</a>
-            <a href="../venta/listadoventas.html" 
-            th:href="@{/venta/listadoventas}">Ventas</a>
-            <a href="../usuario/listadousuarios.html"
-            th:href="@{/usuario/listadousuarios}">Usuarios</a>
+				<a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
+				<a href="../grupo/listadogrupos.html" th:href="@{/concierto/listadoconciertos}">Conciertos</a>
+				<a href="../venta/listadoventas.html" th:href="@{/venta/listadoventas}">Ventas</a>
+				<a href="../usuario/listadousuarios.html" th:href="@{/usuario/listadousuarios}">Usuarios</a>
 			</nav>
 		</div>
 	</header>
 	<main class="alto-screen">
 		<div class="contenedor-listados">
 			<h1 class="text-center mb-5">Grupos</h1>
-			<div th:if="${param.success}" class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div th:if="${msgSuccess}" class="alert alert-warning alert-dismissible fade show" role="alert">
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<span>Grupo eliminado con éxito</span>
+				<span th:text="${msgSuccess}">Grupo eliminado con éxito</span>
 			</div>
+
 			<div class="table-responsive-md">
 				<table class="table table-hover">
 					<thead>
@@ -71,10 +69,11 @@
 							<td th:text="${g.idgrupo}">1</td>
 							<td th:text="${g.nombre}">Otto</td>
 							<td th:text="${g.miembros}" class="text-center">Carter</td>
-							<td><img th:src="@{${g.imagen}}" width="100px" alt="grupo ${g.nombre}"/></td>
+							<td><img th:src="@{${g.imagen}}" width="100px" alt="grupo ${g.nombre}" /></td>
 							<td th:text="${g.estilo}">otto@ott.com</td>
 							<td th:text="${g.origen}">otto@ott.com</td>
-							<td th:text="${g.descripcion}" class="ancho-celda-descripcion truncate-text" id="descripcion">
+							<td th:text="${g.descripcion}" class="ancho-celda-descripcion truncate-text"
+								id="descripcion">
 								<p class="mb-0">otto@ott.com</p>
 							</td>
 							<td class="text-center">
@@ -87,16 +86,17 @@
 								<a th:href="@{/grupo/buscarporgrupo(nombre=${g.nombre})}" class="">
 									<i class="fa-solid fa-magnifying-glass text-warning"></i>
 								</a>
-								
+
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+
+				<div th:if="${msgError}" class="alert alert-danger alert-dismissible fade show" role="alert">
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<span>Este grupo no se puede eliminar porque tiene
+					<span th:text="${msgError}">Este grupo no se puede eliminar porque tiene
 						conciertos contratados</span>
 				</div>
 
@@ -148,6 +148,8 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+
+
 </body>
 
 </html>

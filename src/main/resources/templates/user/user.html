@@ -30,53 +30,130 @@
 				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
 					alt="icono menu responsive" />
 			</div>
-		<nav class="navegacion ">
-			<a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
-			<a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
-		</nav>
+			<nav class="navegacion ">
+				<a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+				<a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
+			</nav>
 		</div>
 	</header>
 	<nav class="navegacion-usuario">
-		<h3 th:text="${usuario.username + ' '+ usuario.apellidos}"></h3>
+		<div th:if="${usuario}" class="fs-1 w-25" th:text="${usuario.username + ' '+ usuario.apellidos}">Lola Flores</div>
 		<ul>
-		<li><a href="">Busca por fechas</a></li>
-		<li><a href="">Mi cuenta</a></li>
+			<li class="busca-por-fechas">Busca por fechas</li>
+			<li><a class="btn btn-primary" data-bs-toggle="offcanvas" href="#micuenta" role="button"
+				aria-controls="offcanvasExample"></a></li>
 		</ul>
-	
+
 	</nav>
 	<main class="alto-screen centrar">
+	
+		<div class="offcanvas offcanvas-end" tabindex="-1" id="micuenta" aria-labelledby="offcanvasExampleLabel">
+			<div class="offcanvas-header">
+				<h3 class="offcanvas-title" id="offcanvasExampleLabel">Mi cuenta</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<div>
+					Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists,
+					etc.
+				</div>
+				<div class="dropdown mt-3">
+					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+						Dropdown button
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">Action</a></li>
+						<li><a class="dropdown-item" href="#">Another action</a></li>
+						<li><a class="dropdown-item" href="#">Something else here</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<div class="contenedor-listados">
+			<section id="busca_por_fecha_form" class="busca-por-fecha-form">
+				<form th:action="@{/user/findByFechaBetween}">
+					<div class="row">
+						<div class="col">
+							<label for="f_inicio" class="form-label text-white">Fecha Inicio</label>
+							<input type="date" class="form-control fs-2" id="f_inicio" name="f_inicio" required>
+						</div>
+						<div class="col">
+							<label for="f_fin" class="form-label text-white">Fecha Fin</label>
+							<input type="date" class="form-control fs-2" id="f_fin" name="f_fin" required>
+						</div>
+					</div>
+					<div class="col-12">
+						<button type="submit" class="boton-buscar ">Buscar</button>
+					</div>
+				</form>
 
-			
-			<section class="concierto-usuario sombra-negra px-5 mb-3" th:each=" v : ${ventas}">
+			</section>
+					<section th:unless="${#lists.isEmpty(conciertos)}">
+						<div class="contenido-conciertos">
+							<div class="card my-5 border-0" th:each="c: ${conciertos}">
+								<div class="row g-0">
+									<div class="col-md-4">
+						
+										<a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
+											<img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="/static/img/multitud.jpg"
+												alt="" /></a>
+						
+									</div>
+									<div class="col-md-8">
+										<div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
+											<h3 class="card-title" th:text="${c.grupo.nombre}">Nombre del Grupo</h3>
+											<p class="card-text" th:text="${c.intro}">Texto de prueba
+											</p>
+											<p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
+											<p class="card-text" th:text="${c.hora}">21:30</p>
+											<p class="card-text text-end">
+												<a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
+													class="btn boton-entrada mt-5">Compra entradas</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+
+
+			<section th:if="${ventas}">
+				<h3 class="text-center p-3">Historial de compras</h3>
+				<div  class="concierto-usuario sombra-negra px-5 mb-3" th:each=" v : ${ventas}">
+				
 				<div class="row align-items-center">
 					<div class="col-md-6 text-center">
 						<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>
-						<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg" alt="grupo ${v.concierto.grupo.nombre}" />
+						<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid" src="/static/img/thepolice1.jpeg"
+							alt="grupo ${v.concierto.grupo.nombre}" />
 					</div>
 					<div class="col-md-6 p-4">
-						<p class="fs-1 text-uppercase">Fecha:</p>
+						<p class="fs-2 text-uppercase">Fecha:</p>
 						<p th:text="${#temporals.format(v.concierto.fecha, 'dd/MM/yyyy')}" class="info">11/10/2023</p>
-						<p class="fs-1 text-uppercase">Hora:</p>
+						<p class="fs-2 text-uppercase">Hora:</p>
 						<p th:text="${v.concierto.hora}" class="info">20:30</p>
-						<p class="fs-1 text-uppercase">Entradas adquiridas: </p>
+						<p class="fs-2 text-uppercase">Entradas adquiridas: </p>
 						<p th:text="${v.numeroentradas}" class="info">4</p>
-						<p class="fs-1 text-uppercase">Fecha y hora de la compra: </p>
+						<p class="fs-2 text-uppercase">Fecha y hora de la compra: </p>
 						<p th:text="${v.fechaventa + ' - ' + v.horaventa }" class="info">9/11/2023 - 21:11</p>
 					</div>
 
 				</div>
+				</div>
 
 
 			</section>
-	
-			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#lists.isEmpty(ventas)}">
 
+
+
+			<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${alertError}">
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<span>No hay datos que mostrar</span>
-			</div>
+				<span th:text="${msgError}">No hay datos que mostrar</span>
+			</div> -->
 			<div class="my-5">
 				<a class="boton-buscar" th:href="@{/index}" href="../index.html">Atrás</a>
 			</div>
@@ -121,6 +198,21 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+			<script th:if="${msgError}" th:inline="javascript">
+				var mensajeError = /*[[${msgError}]]*/'';
+				// Muestra el SweetAlert2 cuando se cumple la condición
+				Swal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: mensajeError,
+					confirmButtonColor: "#000",
+					width: "40rem",
+					    customClass: {
+						content: 'mi-clase-de-texto-personalizado'
+					}
+
+				});
+			</script>
 </body>
 
 </html>

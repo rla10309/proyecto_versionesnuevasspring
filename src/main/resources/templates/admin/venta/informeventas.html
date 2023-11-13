@@ -78,7 +78,7 @@
 					</tr>
 
 				</tbody>
-				<table class="my-5 table table-striped-columns w-25">
+				<table class="my-5 table table-striped-columns w-25" th:if="${ventas}">
 					<tr class="p-2">
 						<th class="text-light bg-black ps-4">Total: </th>
 						<td th:text="${#aggregates.sum(ventas.![numeroentradas])}" class="fs-1 text-end pe-4"></td>
@@ -86,13 +86,13 @@
 				</table>
 			</table>
 			</div>
-			<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#lists.isEmpty(ventas)}">
+			<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#lists.isEmpty(ventas)}">
 
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<span>No hay datos que mostrar</span>
-			</div>
+			</div> -->
 			<div class="my-5">
 				<a class="boton-buscar" th:href="@{/concierto/listadoconciertos}">Atrás</a>
 			</div>
@@ -137,6 +137,21 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+	<script th:if="${msgError}" th:inline="javascript">
+		var mensajeError = /*[[${msgError}]]*/'';
+		// Muestra el SweetAlert2 cuando se cumple la condición
+		Swal.fire({
+			icon: 'error',
+			title: 'Error',
+			text: mensajeError,
+			confirmButtonColor: "#000",
+			width: "40rem",
+			customClass: {
+				content: 'mi-clase-de-texto-personalizado'
+			}
+
+		});
+	</script>
 </body>
 
 </html>
