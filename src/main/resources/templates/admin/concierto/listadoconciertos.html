@@ -92,13 +92,13 @@
                         </tr>
                     </tbody>
                 </table>
-				<!-- <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+				<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<span>Este concierto no se puede eliminar porque tiene
 						ventas asociadas</span>
-				</div> -->
+				</div>
             </div>
 			<div class="my-5">
             <a class="boton-buscar" href="../admin.html" th:href="@{/admin}">Inicio</a>
@@ -150,21 +150,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
-	<script th:if="${msgError}" th:inline="javascript">
-		var mensajeError = /*[[${msgError}]]*/'';
-		// Muestra el SweetAlert2 cuando se cumple la condición
-		Swal.fire({
-			icon: 'error',
-			title: 'Error',
-			text: mensajeError,
-			confirmButtonColor: "#000",
-			width: "40rem",
-			customClass: {
-				content: 'mi-clase-de-texto-personalizado'
-			}
 
-		});
-	</script>
 </body>
 
 </html>

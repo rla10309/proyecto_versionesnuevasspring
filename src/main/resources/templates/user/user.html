@@ -40,8 +40,8 @@
 		<div th:if="${usuario}" class="fs-1 w-25" th:text="${usuario.username + ' '+ usuario.apellidos}">Lola Flores</div>
 		<ul>
 			<li class="busca-por-fechas">Busca por fechas</li>
-			<li><a class="btn btn-primary" data-bs-toggle="offcanvas" href="#micuenta" role="button"
-				aria-controls="offcanvasExample"></a></li>
+			<li class="micuenta"><a class="" data-bs-toggle="offcanvas" href="#micuenta" role="button"
+				aria-controls="offcanvasExample">Mi Cuenta</a></li>
 		</ul>
 
 	</nav>
@@ -207,9 +207,7 @@
 					text: mensajeError,
 					confirmButtonColor: "#000",
 					width: "40rem",
-					    customClass: {
-						content: 'mi-clase-de-texto-personalizado'
-					}
+		
 
 				});
 			</script>
