@@ -40,6 +40,9 @@ a {
     text-decoration: none;
    /*margin: 0;*/
 }
+header h1 {
+    padding: 2rem 0;
+}
 .fondo-negro {
     background-color: black;
 }
@@ -84,7 +87,7 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    min-height: 20rem;
+    min-height: 10rem;
 }
 .centrado-footer{
     justify-content: center;

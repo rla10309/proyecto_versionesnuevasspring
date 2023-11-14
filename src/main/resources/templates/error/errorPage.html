@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="html://www.thymeleaf.org">
+<html lang="es" xmlns:th="html://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8" />
@@ -39,6 +39,13 @@
     </header>
     <main class="contenedor centrar alto-screen">
         <h1 th:text="${error}"></h1>
+        <section class="container-fluid w-75 mx-auto border-1 rounded-3 bg-black text-light p-5 my-5 text-center fs-1">
+            <p>Error 404</p>
+            <p>Acceso no autorizado</p>
+           
+        </section>
+        <button type="button" class="boton-buscar"><a th:href="@{/index}"
+                class="text-decoration-none link-light">Volver</a></button>
     </main>
     <footer class="footer">
         <div class="contenido-navegacion justify-content-center">

@@ -43,22 +43,23 @@ public class UsuarioController {
 		return "admin/usuario/formregistro";
 	}
 	@RequestMapping("/insertausuario")
-	public String insertausuario(@ModelAttribute UsuarioVO usuario) {
+	public String insertausuario(@ModelAttribute UsuarioVO usuario, Model modelo) {
 		
 		try {
 			su.save(usuario);
 		}catch(Exception e) {
+			modelo.addAttribute("Error", "Error en " + e.getStackTrace());
 			return "redirect:/usuario/registrousuario?error=true";
 		}
 		return "redirect:/usuario/listadousuarios";
 	}
 	
-//	@RequestMapping("/edit")
-//	public String edit(@RequestParam int idusuariorol, Model modelo) {
-//		modelo.addAttribute("usuariorol", sur.findById(idusuariorol).get());
-//		modelo.addAttribute("roles", sr.findAll());
-//		return "admin/usuario/formeditar";
-//	}
+	@RequestMapping("/edit")
+	public String edit(@RequestParam int idusuario, Model modelo) {
+		modelo.addAttribute("usuario", su.findById(idusuario).get());
+		modelo.addAttribute("roles", sr.findAll());
+		return "admin/usuario/formregistro";
+	}
 //	
 //	@RequestMapping("/insertaeditado")
 //	public String insertaeditado(@ModelAttribute UsuarioRolVO usuariorol) {
