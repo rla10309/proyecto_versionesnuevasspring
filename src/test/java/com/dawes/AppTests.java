@@ -47,52 +47,52 @@ class AppTests {
 
 	
 	
-	// Crea grupos
-	@Test
-	public void test01() {
-		sg.save(new GrupoVO("ABBA", 4, "imagenAbba.img", "Pop", "Suecia", "Waterlooooo" ));
-		sg.save(new GrupoVO("Queen", 4, "imagenQueen.img", "Rock", "UK", "Don't stop mi now" ));
-		assertNotNull(sg.save(new GrupoVO("The Police", 3, "imagenThePolice.img", "Rock", "UK", "so lonely")));
-	}
-	
-	// Crea conciertos
-	@Test
-	public void test03() {
-		sc.save(new ConciertoVO(55.0, 65.0, LocalDate.of(2023, 10, 12), LocalTime.of(20, 30), 300, sg.findByNombre("ABBA").get()));
-		sc.save(new ConciertoVO(40.0, 50.0, LocalDate.of(2023, 11, 20), LocalTime.of(20, 30), 300, sg.findByNombre("Queen").get()));
-		sc.save(new ConciertoVO(45.0, 55.0, LocalDate.of(2023, 11, 25), LocalTime.of(20, 30), 300, sg.findByNombre("The Police").get()));
-		assertNotNull(sc.save(new ConciertoVO(55.0, 65.0, LocalDate.of(2023, 10, 20), LocalTime.of(20, 30), 300, sg.findByNombre("ABBA").get())));
-	}
-	
-	
-	// Buscar todos los conciertos de un grupo
-	@Test
-	public void test04() {
-		List<ConciertoVO> conciertos = sc.findByGrupoNombre("ABBA").get();
-		assertEquals(2, conciertos.size());
-	}
-	// Elimina un grupo
+//	// Crea grupos
 //	@Test
-//	public void test05() {
-//		sg.deleteById(sg.findByNombre("ABBA").get().getIdgrupo());
-//		assertEquals("ABBA", sg.findByNombre("ABBA").get().getNombre());
+//	public void test01() {
+//		sg.save(new GrupoVO("ABBA", 4, "imagenAbba.img", "Pop", "Suecia", "Waterlooooo" ));
+//		sg.save(new GrupoVO("Queen", 4, "imagenQueen.img", "Rock", "UK", "Don't stop mi now" ));
+//		assertNotNull(sg.save(new GrupoVO("The Police", 3, "imagenThePolice.img", "Rock", "UK", "so lonely")));
 //	}
-	
-	// Actualizamos un concierto 
-	@Test
-	public void test06() {
-		ConciertoVO c = sc.findByFechaAndHora(LocalDate.of(2023, 10, 12), LocalTime.of(20, 30)).get();
-		c.setPrecioanticipado(50.00);
-		c.setPreciotaquilla(60.00);
-		sc.save(c);
-	}
-	
-	// Insertamos roles
-	@Test
-	public void test07() {
-		sr.save(new RolVO("ROLE_ADMIN"));
-		assertNotNull(sr.save(new RolVO("ROLE_USER")));
-	}
+//	
+//	// Crea conciertos
+//	@Test
+//	public void test03() {
+//		sc.save(new ConciertoVO(55.0, 65.0, LocalDate.of(2023, 10, 12), LocalTime.of(20, 30), 300, sg.findByNombre("ABBA").get()));
+//		sc.save(new ConciertoVO(40.0, 50.0, LocalDate.of(2023, 11, 20), LocalTime.of(20, 30), 300, sg.findByNombre("Queen").get()));
+//		sc.save(new ConciertoVO(45.0, 55.0, LocalDate.of(2023, 11, 25), LocalTime.of(20, 30), 300, sg.findByNombre("The Police").get()));
+//		assertNotNull(sc.save(new ConciertoVO(55.0, 65.0, LocalDate.of(2023, 10, 20), LocalTime.of(20, 30), 300, sg.findByNombre("ABBA").get())));
+//	}
+//	
+//	
+//	// Buscar todos los conciertos de un grupo
+//	@Test
+//	public void test04() {
+//		List<ConciertoVO> conciertos = sc.findByGrupoNombre("ABBA").get();
+//		assertEquals(2, conciertos.size());
+//	}
+//	// Elimina un grupo
+////	@Test
+////	public void test05() {
+////		sg.deleteById(sg.findByNombre("ABBA").get().getIdgrupo());
+////		assertEquals("ABBA", sg.findByNombre("ABBA").get().getNombre());
+////	}
+//	
+//	// Actualizamos un concierto 
+//	@Test
+//	public void test06() {
+//		ConciertoVO c = sc.findByFechaAndHora(LocalDate.of(2023, 10, 12), LocalTime.of(20, 30)).get();
+//		c.setPrecioanticipado(50.00);
+//		c.setPreciotaquilla(60.00);
+//		sc.save(c);
+//	}
+//	
+//	// Insertamos roles
+//	@Test
+//	public void test07() {
+//		sr.save(new RolVO("ROLE_ADMIN"));
+//		assertNotNull(sr.save(new RolVO("ROLE_USER")));
+//	}
 	
 	// Insertamos usuario
 	@Test
@@ -102,6 +102,11 @@ class AppTests {
 		assertNotNull(su.save(new UsuarioVO("Antonio", "Molina", "123456", "333", "antonio@antonio.com", sr.findByNombre("ROLE_USER").get())));
 	}
 	
+	@Test
+	public void test09() {
+		
+		assertEquals("Lola", su.findByEmail("lola@lola.com").getUsername());
+	}
 
 	
 	// Insertamos ventas

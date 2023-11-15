@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,16 +24,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService 
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if(ur.findByUsername(username) == null) {
+		UserDetails user = ur.findByEmail(username);
+		if(user == null) {
 			throw new UsernameNotFoundException("No se encuentra al usuario " + username);
 		}
 		
-		return ur.findByUsername(username);
+		return user;
 	}
 	
 	
 
-	public Optional<UsuarioVO> findByEmail(String email) {
+	public UserDetails findByEmail(String email) {
 		return ur.findByEmail(email);
 	}
 
