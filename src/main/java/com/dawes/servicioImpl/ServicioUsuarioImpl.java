@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.dawes.modelo.UsuarioVO;
@@ -11,11 +14,21 @@ import com.dawes.repositorios.UsuarioRepositorio;
 import com.dawes.servicio.ServicioUsuario;
 
 @Service
-public class ServicioUsuarioImpl implements ServicioUsuario  {
+public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService  {
 	@Autowired
 	UsuarioRepositorio ur;
 	
 
+	
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		if(ur.findByUsername(username) == null) {
+			throw new UsernameNotFoundException("No se encuentra al usuario " + username);
+		}
+		
+		return ur.findByUsername(username);
+	}
 	
 	
 
@@ -23,9 +36,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario  {
 		return ur.findByEmail(email);
 	}
 
-	public Optional<UsuarioVO> findByUsername(String username) {
+
+
+	public UserDetails findByUsername(String username) {
 		return ur.findByUsername(username);
 	}
+
+
 
 	@Override
 	public Optional<UsuarioVO> findByDni(String dni) {
@@ -101,6 +118,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario  {
 	public void deleteAll() {
 		ur.deleteAll();
 	}
+
 
 
 	

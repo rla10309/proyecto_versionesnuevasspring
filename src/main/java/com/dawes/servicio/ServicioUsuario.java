@@ -2,12 +2,14 @@ package com.dawes.servicio;
 
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.dawes.modelo.UsuarioVO;
 @Service
 public interface ServicioUsuario {
-	Optional<UsuarioVO> findByUsername(String username);
+	
+	UserDetails findByUsername(String username);
 	
 	Optional<UsuarioVO> findByEmail(String email);
 

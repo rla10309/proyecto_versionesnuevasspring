@@ -69,7 +69,7 @@ public class UsuarioVO implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority(this.rol.toString()));
+		roles.add(new SimpleGrantedAuthority(this.rol.getNombre()));
 		return roles;
 	}
 
