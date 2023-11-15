@@ -36,9 +36,10 @@ public class SecurityConfig {
 		http.getSharedObject(AuthenticationManagerBuilder.class)
 			.userDetailsService(su)
 			.passwordEncoder(encripta());
+
 		
 		http.authorizeHttpRequests(
-				(authz) -> authz.requestMatchers("/public/**", "/", "/index", "/css/**", "/js/**", "/img/**")
+				(authz) -> authz.requestMatchers("/","/public/formregistro", "/registrousuario", "/registro",  "/index", "/css/**", "/js/**", "/img/**")
 						.permitAll()
 						.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated())

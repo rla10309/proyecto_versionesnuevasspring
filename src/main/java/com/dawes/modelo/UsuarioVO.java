@@ -59,6 +59,19 @@ public class UsuarioVO implements UserDetails {
 		this.email = email;
 		this.rol = rol;
 	}
+	
+	public UsuarioVO(String username, String apellidos, String password, String dni, String email) {
+		super();
+		this.username = username;
+		this.apellidos = apellidos;
+		this.password = password;
+		this.dni = dni;
+		this.email = email;
+		
+	}
+
+	
+	
 
 	@Override
 	public String toString() {
@@ -96,6 +109,9 @@ public class UsuarioVO implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+
+
 
 		
 	

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawes.modelo.ConciertoVO;
+import com.dawes.modelo.UsuarioVO;
 import com.dawes.modelo.VentaVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
+import com.dawes.servicio.ServicioRol;
 import com.dawes.servicio.ServicioUsuario;
 import com.dawes.servicio.ServicioVenta;
 
@@ -29,6 +32,7 @@ public class UserController {
 	ServicioConcierto sc;
 	@Autowired
 	ServicioUsuario su;
+
 	
 	@RequestMapping("/user")
 	public String user() {
@@ -47,7 +51,7 @@ public class UserController {
 		return "user/user";
 	}
 	
-	
+
 	
 
 	@RequestMapping("/compra")

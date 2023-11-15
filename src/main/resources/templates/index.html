@@ -27,6 +27,7 @@
         </a>
         <nav class="navegacion ">
           <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+          <a href="login.html" class="fs-2" th:href="@{/registrousuario}">Regístrate</a>
           <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
         </nav>
   
@@ -35,7 +36,7 @@
     <main>
       <div class="contenedor alto-screen">
       <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
-        <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
+        <form th:action="@{/buscarporgrupo}" method="post" class="form-index">
           <div class="barra-busqueda">
             <div class="row justify-content-between aling-items-center col-md-10 mx-2">
               <div class="text-center col-1">
@@ -61,7 +62,7 @@
             <div class="row g-0">
               <div class="col-md-4">
 
-              <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
+              <a th:href="@{/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
                 <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg" alt="" /></a>
                 
               </div>
