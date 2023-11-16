@@ -43,6 +43,7 @@ a {
 header h1 {
     padding: 2rem 0;
 }
+
 .fondo-negro {
     background-color: black;
 }
@@ -89,14 +90,14 @@ header h1 {
     gap: 2rem;
     min-height: 10rem;
 }
+.contenido-navegacion > a{
+    color: white;
+}
 .centrado-footer{
     justify-content: center;
 }
 
-.contenido-navegacion a {
-   color:white;
-   
-}
+
 .navegacion-admin {
     display: none;
     align-items: center;
@@ -115,7 +116,17 @@ header h1 {
     display: flex;
     justify-content: end;
     align-content: center;
-    
+}
+.navegacion > a{
+    color: white;
+}
+.desplegable{
+    font-size: 1.5rem;
+    padding: 1rem 0.5rem;
+}
+.dropdown-menu{
+    min-width: 12rem;
+    padding: 1rem;
 }
 .navegacion-usuario li {
     list-style-type: none;
@@ -360,9 +371,7 @@ i {
     align-items: center;
     justify-content: center;
 }
-.formulario-login {
-    width: 80%;
-}
+
 .campo {
     width: 100%;
 }
@@ -380,6 +389,14 @@ i {
     font-size: 1.7rem;
 }
 /** BOTONES **/
+
+.boton-drop{
+    padding: 1rem 2rem;
+    border: 1px solid white;
+    border-radius: 3.75px;
+    background-color: black;
+    color: white;
+}
 .boton-login {
     width: 100%;
     margin-bottom: 1rem;
@@ -404,11 +421,16 @@ i {
     background-color: dodgerblue;
     padding: 1rem;
     width: 100%;
-    margin: 0 auto;
+    margin: 1rem auto;
     text-align: center;
     font-weight: 700;
-    border: 1px solid dodgerblue;
+    border: none;
     border-radius: 3.75px;
+    color: white;
+    text-transform: uppercase;
+}
+.boton-registro a{
+    color: white;
 }
 .boton {
     text-transform: uppercase;
@@ -418,9 +440,7 @@ i {
     font-weight: 700;
     border-radius: 3.75px;
 }
-.boton-registro a{
-    color: white;
-}
+
 /* .boton {
     width: 85%;
     margin: 0 auto;
@@ -505,6 +525,19 @@ td, th {
 }
 .formulario input::placeholder{
     font-size: 1.6rem;
+}
+.formulario-login {
+    width: 80%;
+    
+}
+
+.formulario-registro {
+    width: 90%;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid gainsboro;
+    border-radius: 3.75px;
+    background-color: white;
 }
 
 /** VENTANA MODAL **/

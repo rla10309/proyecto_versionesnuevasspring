@@ -18,13 +18,6 @@ public class SecurityConfig {
 	@Autowired
 	ServicioUsuarioImpl su;
 
-//	    @Bean
-//	    public DaoAuthenticationProvider authProvider() {
-//	        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//	        authProvider.setUserDetailsService(userDetailsService);
-//	        authProvider.setPasswordEncoder(encripta());
-//	        return authProvider;
-//	    }
 
 	@Bean
 	public BCryptPasswordEncoder encripta() {
@@ -39,11 +32,12 @@ public class SecurityConfig {
 
 		
 		http.authorizeHttpRequests(
-				(authz) -> authz.requestMatchers("/","/public/formregistro", "/registrousuario", "/registro",  "/index", "/css/**", "/js/**", "/img/**")
+				(authz) -> authz.requestMatchers("/","public/**", "/public/formregistro", "/registrousuario", "/registro",  "/index", "/css/**", "/js/**", "/img/**")
 						.permitAll()
 						.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/login")
+						.defaultSuccessUrl("/index")
 						.permitAll())
 				.logout((logout) -> logout.permitAll());
 		

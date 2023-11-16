@@ -3,8 +3,10 @@ package com.dawes.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +18,6 @@ import com.dawes.modelo.UsuarioVO;
 import com.dawes.modelo.VentaVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
-import com.dawes.servicio.ServicioRol;
 import com.dawes.servicio.ServicioUsuario;
 import com.dawes.servicio.ServicioVenta;
 
@@ -35,12 +36,15 @@ public class UserController {
 
 	
 	@RequestMapping("/user")
-	public String user() {
+	public String user(Authentication  authentication, Model modelo) {
+		UserDetails user = (UserDetails) authentication.getPrincipal();
+		modelo.addAttribute("usuario", user);
+		
 		return "user/user";
 	}
 	
 	@RequestMapping("/userByDni")
-	public String userByDni(@RequestParam String dni, Model modelo) {
+	public String userByDni(@RequestParam String dni, Model modelo ) {
 		List<VentaVO> ventas = sv.findByUsuarioDni(dni).get();
 		modelo.addAttribute("usuario", su.findByDni(dni).get() );
 		if(!ventas.isEmpty())
