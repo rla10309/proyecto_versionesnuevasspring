@@ -58,7 +58,12 @@
                         th:value="${venta.concierto.grupo.nombre}" th:field="*{concierto.grupo.nombre}" >
 					</div>
                     <input type="hidden" th:field="*{concierto.idconcierto}">
-                   
+					<input type="hidden" th:field="*{usuario.idusuario}">
+					<input type="text" class="form-control"  th:placeholder="${venta.usuario.username + ' ' + venta.usuario.apellidos}" readonly>	
+					<!-- <div th:if="${#authorization.expression('isAuthenticated()')}">
+						<p>Hola</p>
+					</div> -->
+                    
 
 
 
@@ -82,7 +87,7 @@
 							<input type="number" class="form-control" id="numeroentradas" name="numeroentradas"
 								th:field="*{numeroentradas}" required>
 						</div>
-
+<!-- 
 						<div class="mb-5 col-xl-6">
 							<label for="usuario" class="form-label">Usuario</label>
 							<select th:field="*{usuario}" class="form-select fs-2" title="usuario">
@@ -91,7 +96,7 @@
 									th:text="${u.dni + ' - ' + u.username + '  ' + u.apellidos}">
 								</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="mb-5">
 						<label for="fechaventa" class="form-label">Fecha Venta</label>

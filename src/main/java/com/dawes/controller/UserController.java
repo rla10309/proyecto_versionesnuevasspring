@@ -37,8 +37,15 @@ public class UserController {
 	
 	@RequestMapping("/user")
 	public String user(Authentication  authentication, Model modelo) {
-		UserDetails user = (UserDetails) authentication.getPrincipal();
-		modelo.addAttribute("usuario", user);
+		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
+		List<VentaVO> ventas = sv.findByUsuarioDni(usuario.getDni()).get();
+		modelo.addAttribute("usuario", usuario);
+		if(!ventas.isEmpty())
+			modelo.addAttribute("ventas", ventas);
+		else {
+			modelo.addAttribute("msgError", "No hay datos que mostrar");
+		}
+		
 		
 		return "user/user";
 	}
@@ -59,12 +66,13 @@ public class UserController {
 	
 
 	@RequestMapping("/compra")
-	public String compra(@RequestParam int idconcierto, Model modelo) {
+	public String compra(@RequestParam int idconcierto, Model modelo, Authentication authentication) {
 	    VentaVO venta = new VentaVO();
 	    ConciertoVO concierto = sc.findById(idconcierto).get();
+	    UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
 	    venta.setConcierto(concierto);
+	    venta.setUsuario(usuario);
 		modelo.addAttribute("venta", venta);
-		modelo.addAttribute("usuarios", su.findAll());
 		modelo.addAttribute("grupo", concierto.getGrupo());
 		return "user/formcompra";
 		
@@ -74,7 +82,6 @@ public class UserController {
 	public String insertar(@ModelAttribute VentaVO venta, Model modelo)  {
 		try {
 			sv.save(venta);
-			modelo.addAttribute("venta", venta);
 			modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
 		}
 		catch(Exception e) {
