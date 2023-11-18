@@ -33,6 +33,7 @@ public class SecurityConfig {
 		
 		http.authorizeHttpRequests(
 				(authz) -> authz.requestMatchers("/", "/index", "/public/**", "/css/**", "/js/**", "/img/**", "/public/formregistro", "/registrousuario",  "/registro")
+
 						.permitAll()
 						.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated())

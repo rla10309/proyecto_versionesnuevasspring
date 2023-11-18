@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +23,7 @@ import com.dawes.servicio.ServicioUsuario;
 import com.dawes.servicio.ServicioVenta;
 
 @Controller
+
 public class MainController {
 	@Autowired
 	ServicioConcierto sc;
@@ -37,25 +37,33 @@ public class MainController {
 	ServicioRol sr;
 	@Autowired
 	BCryptPasswordEncoder encoder;
+
 	
 	
-	@RequestMapping({"/", "/index"})
-	public String index(Model modelo) {
-		modelo.addAttribute("conciertos",sc.findAll()); 
+
+
+	@RequestMapping({ "/", "/index" })
+	public String index(Model modelo, Authentication authentication) {
+		if(authentication != null) {
+			UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
+			modelo.addAttribute("usuario", usuario);
+		}	
+		modelo.addAttribute("conciertos", sc.findAll());
 		return "index";
 	}
-	
-	@RequestMapping("/public/findgrupobyid")
+
+	@RequestMapping("public/findgrupobyid")
 	public String findGrupoById(@RequestParam int idgrupo, Model modelo) {
 		modelo.addAttribute("grupo", sg.findById(idgrupo).get());
 		return "public/vistaconcierto";
 	}
+
 	@RequestMapping("/registrousuario")
 	public String formRegistro(Model modelo) {
 		modelo.addAttribute("usuario", new UsuarioVO());
 		return "public/formregistro";
 	}
-	
+
 	@RequestMapping("/registro")
 	public String registrar(@ModelAttribute UsuarioVO usuario) {
 		 usuario.setPassword(encoder.encode(usuario.getPassword()));
@@ -63,12 +71,12 @@ public class MainController {
 		 su.save(usuario);
 		 return "public/login";
 	}
-	
+
 	@RequestMapping("/login")
-		public String login() {
-			return "public/login";
+	public String login() {
+		return "public/login";
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout() {
 		return "index";
@@ -78,24 +86,24 @@ public class MainController {
 	public String admin() {
 		return "admin/admin";
 	}
+
 	@RequestMapping("/user")
 	public String user() {
 		return "user/user";
 	}
 
+
 	@RequestMapping("/public/buscarporgrupo")
+
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
 		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombre(nombre);
 
 		if (conciertos.isPresent()) {
 			modelo.addAttribute("conciertos", conciertos.get());
 		} else {
-			// Handle the case when no concert is found, for example, redirect to an error
-			// page
 			modelo.addAttribute("error", "Concert not found");
-			return "error/errorPage"; // Adjust the view name accordingly
+			return "error/errorPage"; 
 		}
-
 		return "index";
 	}
 
