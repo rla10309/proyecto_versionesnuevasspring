@@ -2,96 +2,113 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Listado Conciertos</title>
-<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}"/>
-<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
-<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
-<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-	rel="stylesheet" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
-<script src="/static/js/jquery-3.7.1.min.js"
-	th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Listado Conciertos</title>
+	<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+	<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+	<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+	<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
 </head>
 
 <body>
-   <header>
+	<header>
 		<div class="contenido-navegacion fondo-negro">
 
 			<h1 class="text-center">
 				<a href="#" th:href="@{/index}">Sala Corazón</a>
 			</h1>
-			<div class="mobile-menu">
-				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
-					alt="icono menu responsive" />
-			</div>
+
 			<nav class="navegacion-admin">
-				<a href="../grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
-				<a href="../concierto/listadoconciertos.html" th:href="@{/concierto/listadoconciertos}">Conciertos</a>
-				<a href="#" th:href="@{/venta/listadoventas}">Ventas</a>
-				<a href="../usuario/listadousuarios.html"
-					th:href="@{/usuario/listadousuarios}">Usuarios</a>
+				<div th:if="${!#authorization.expression('isAuthenticated()')}">
+					<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+				</div>
+
+				<!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+				<div class="dropdown" sec:authorize="hasRole('USER')">
+					<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"></button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+								Cuenta</a></li>
+						<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+					</ul>
+				</div>
+				<div class="dropdown" sec:authorize="hasRole('ADMIN')">
+					<button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"></button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+								th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+								th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+								th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+								th:href="@{/venta/listadoventas}">Ventas</a></li>
+						<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+					</ul>
+				</div>
 			</nav>
 		</div>
 	</header>
-    <main class="alto-screen centrar">
-        <div class="contenedor-listados">
-            <h1 class="text-center mb-5">Conciertos</h1>
+	<main class="alto-screen centrar">
+		<div class="contenedor-listados">
+			<h1 class="text-center mb-5">Conciertos</h1>
 			<div th:if="${param.success}" class="alert alert-warning alert-dismissible fade show" role="alert">
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				<span>Concierto eliminado con éxito</span>
 			</div>
-            <div class="table-responsive-md mb-5">
-                <table class="table table-hover">
-                    <thead>
-                        <tr class="text-uppercase">
-                            <th scope="col">Id</th>
-                            <th scope="col">Precio Anticipado</th>
-                            <th scope="col">Precio Taquilla</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Plazas</th>
-                            <th scope="col">Grupo</th>
-                            <th scope="col">Acciones</th>
+			<div class="table-responsive-md mb-5">
+				<table class="table table-hover">
+					<thead>
+						<tr class="text-uppercase">
+							<th scope="col">Id</th>
+							<th scope="col">Precio Anticipado</th>
+							<th scope="col">Precio Taquilla</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Hora</th>
+							<th scope="col">Plazas</th>
+							<th scope="col">Grupo</th>
+							<th scope="col">Acciones</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each=" c : ${conciertos}">
-                            <td th:text="${c.idconcierto}">1</td>
-                            <td th:text="${c.precioanticipado}">P.Anticipado</td>
-                            <td th:text="${c.preciotaquilla}">P.Taquilla</td>
-                            <td th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">20/20/2020</td>
-                            <td th:text="${c.hora}">Hora</td>
-                            <td th:text="${c.plazas}">300</td>
-                            <td th:text="${c.grupo.nombre}">El grupo</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each=" c : ${conciertos}">
+							<td th:text="${c.idconcierto}">1</td>
+							<td th:text="${c.precioanticipado}">P.Anticipado</td>
+							<td th:text="${c.preciotaquilla}">P.Taquilla</td>
+							<td th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">20/20/2020</td>
+							<td th:text="${c.hora}">Hora</td>
+							<td th:text="${c.plazas}">300</td>
+							<td th:text="${c.grupo.nombre}">El grupo</td>
 							<td class="text-center">
-							<a th:href="@{/concierto/edit(idconcierto=${c.idconcierto})}" class="link-primary">
-								<i class="fa-sharp fa-solid fa-pen-to-square"></i>
-							</a>
-							<a th:href="@{/concierto/delete(idconcierto=${c.idconcierto})}" class="delete-group link-danger"
-								><i	class="fa-solid fa-trash-can"></i>
-							</a>
-							<a th:href="@{/venta/informe(nombre=${c.grupo.nombre})}" class="link-success">
-								
-								<i class="fa-solid fa-eye"></i>
-							</a>
+								<a th:href="@{/concierto/edit(idconcierto=${c.idconcierto})}" class="link-primary">
+									<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+								</a>
+								<a th:href="@{/concierto/delete(idconcierto=${c.idconcierto})}"
+									class="delete-group link-danger"><i class="fa-solid fa-trash-can"></i>
+								</a>
+								<a th:href="@{/venta/informe(nombre=${c.grupo.nombre})}" class="link-success">
+
+									<i class="fa-solid fa-eye"></i>
+								</a>
 							</td>
-                        </tr>
-                    </tbody>
-                </table>
+						</tr>
+					</tbody>
+				</table>
 				<div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -99,17 +116,17 @@
 					<span>Este concierto no se puede eliminar porque tiene
 						ventas asociadas</span>
 				</div>
-            </div>
+			</div>
 			<div class="my-5">
-            <a class="boton-buscar" href="../admin.html" th:href="@{/admin}">Inicio</a>
-            <a class="boton-buscar" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
-                Concierto</a>
-				</div>
+				<a class="boton-buscar" href="../admin.html" th:href="@{/admin}">Inicio</a>
+				<a class="boton-buscar" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
+					Concierto</a>
+			</div>
 
-        </div>
+		</div>
 
-    </main>
-   <footer class="footer">
+	</main>
+	<footer class="footer">
 		<div class="contenido-navegacion justify-content-center justify-content-lg-between">
 			<a href="#">
 				<h1 class="text-center">Sala Corazón</h1>
@@ -139,13 +156,11 @@
 			</div>
 		</div>
 	</footer>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 		crossorigin="anonymous"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

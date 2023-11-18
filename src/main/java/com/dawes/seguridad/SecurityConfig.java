@@ -40,7 +40,9 @@ public class SecurityConfig {
 				.formLogin((form) -> form.loginPage("/login")
 						.defaultSuccessUrl("/index")
 						.permitAll())
-				.logout((logout) -> logout.permitAll());
+				.logout((logout) -> logout
+						.logoutSuccessUrl("/index")
+						.permitAll());
 		
 		http.csrf(c -> c.disable());
 

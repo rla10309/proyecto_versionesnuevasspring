@@ -50,15 +50,15 @@ $(".edit-group").on("click", function(e) {
 
 
 
-const barras = document.querySelector(".barras");
-const navegacion = document.querySelector(".navegacion-admin");
-const contenido = document.querySelector(".contenido-navegacion");
-barras.addEventListener("click", (e) => {
-  navegacion.style.display = "flex";
-  navegacion.style.flexDirection = "column";
-  barras.style.display = "none";
-  contenido.style.flexDirection = "column";
-});
+// const barras = document.querySelector(".barras");
+// const navegacion = document.querySelector(".navegacion");
+// const contenido = document.querySelector(".contenido-navegacion");
+// barras.addEventListener("click", (e) => {
+//   navegacion.style.display = "flex";
+//   navegacion.style.flexDirection = "column";
+//   barras.style.display = "none";
+//   contenido.style.flexDirection = "column";
+// });
 
 /** Lanza formulario buscar por fechas **/
 $(".busca-por-fechas").on("click", function(e){

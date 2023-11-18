@@ -2,44 +2,65 @@
 <html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Listado Grupos</title>
-<link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
-<link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
-<link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
-<link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
-<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado Grupos</title>
+    <link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{../../../css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{../../../css/estilos.css}" />
+    <link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{../../../css/mediaq.css}" />
+    <link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{../../../css/list_btn.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://kit.fontawesome.com/91eae316a2.js"></script>
+    <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
 </head>
 
 <body>
-<header>
-    <div class="contenido-navegacion fondo-negro">
-        <a href="#" th:href="@{/index}">
-            <h1 class="text-center">Sala Corazón</h1>
-        </a>
+    <header>
+        <div class="contenido-navegacion fondo-negro">
+            <a href="#" th:href="@{/index}">
+                <h1 class="text-center">Sala Corazón</h1>
+            </a>
 
-        <div class="mobile-menu">
-            <img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
-                alt="icono menu responsive" />
+
+            <nav class="navegacion-admin">
+                <div th:if="${!#authorization.expression('isAuthenticated()')}">
+                    <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+                </div>
+
+                <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+                <div class="dropdown" sec:authorize="hasRole('USER')">
+                    <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+                        class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+                                Cuenta</a></li>
+                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown" sec:authorize="hasRole('ADMIN')">
+                    <button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+                        class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+                                th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+                                th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+                                th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                                th:href="@{/venta/listadoventas}">Ventas</a></li>
+                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-        <nav class="navegacion-admin">
-            <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
-            <a href="../grupo/listadogrupos.html" 
-            th:href="@{/concierto/listadoconciertos}">Conciertos</a>
-            <a href="../venta/listadoventas.html" 
-            th:href="@{/venta/listadoventas}">Ventas</a>
-            <a href="../usuario/listadousuarios.html"
-            th:href="@{/usuario/listadousuarios}">Usuarios</a>
-        </nav>
-    </div>
-</header>
+    </header>
     <main class="alto-screen">
         <div class="contenedor w-xl-75">
             <h2 class="text-center text-uppercase">Edita Grupo</h2>
@@ -47,16 +68,16 @@
             <form class="my-5 sombra d-flex flex-column" th:action="@{/grupo/insertagrupo}"
                 enctype="multipart/form-data" th:object="${grupo}" method="post">
                 <div class="formulario">
-                    <input type="hidden" th:field="*{idgrupo}" >
+                    <input type="hidden" th:field="*{idgrupo}">
                     <div class="mb-5">
                         <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" th:field="*{nombre}" required
-                            autofocus />
+                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" th:field="*{nombre}"
+                            required autofocus />
                     </div>
                     <div class="mb-5">
                         <label for="miembros">Miembros</label>
-                        <input type="number" id="miembros" class="form-control" th:field="*{miembros}" placeholder="Miembros"
-                            required />
+                        <input type="number" id="miembros" class="form-control" th:field="*{miembros}"
+                            placeholder="Miembros" required />
                     </div>
                     <div class="mb-5">
                         <label for="file">Imagen</label>
@@ -75,7 +96,7 @@
                     </div>
                     <div class="mb-5">
                         <label for="descripcion">Descripción</label>
-                        <textarea  id="descripcion" class="form-control" th:field="*{descripcion}"></textarea>
+                        <textarea id="descripcion" class="form-control" th:field="*{descripcion}"></textarea>
                     </div>
                 </div>
                 <input class="boton negro" type="submit" value="Edita Grupo" />
@@ -118,6 +139,15 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
 
 </body>
 

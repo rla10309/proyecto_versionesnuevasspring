@@ -26,16 +26,38 @@
                 <a href="#" th:href="@{/index}">Sala Corazón</a>
             </h1>
 
-
-            <div class="mobile-menu">
-                <img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
-                    alt="icono menu responsive" />
-            </div>
             <nav class="navegacion-admin">
-                <a href="grupo/listadogrupos.html" th:href="@{/grupo/listadogrupos}">Grupos</a>
-                <a href="../grupo/listadogrupos.html" th:href="@{/concierto/listadoconciertos}">Conciertos</a>
-                <a href="../venta/listadoventas.html" th:href="@{/venta/listadoventas}">Ventas</a>
-                <a href="../usuario/listadousuarios.html" th:href="@{/usuario/listadousuarios}">Usuarios</a>
+                <div th:if="${!#authorization.expression('isAuthenticated()')}">
+                    <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+                </div>
+
+                <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+                <div class="dropdown" sec:authorize="hasRole('USER')">
+                    <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+                        class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+                                Cuenta</a></li>
+                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown" sec:authorize="hasRole('ADMIN')">
+                    <button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+                        class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+                                th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+                                th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+                                th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+                        <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                                th:href="@{/venta/listadoventas}">Ventas</a></li>
+                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -46,7 +68,7 @@
 
             <form class="mt-5 sombra d-flex flex-column" th:action="@{/usuario/insertausuario}" th:object="${usuario}"
                 method="post">
-               
+
                 <div class="formulario">
                     <input type="hidden" th:field="*{idusuario}">
                     <div class="mb-5">
@@ -78,16 +100,11 @@
                         <label for="rol">Rol</label>
                         <select class="form-select fs-2" title="rol" name="rol">
                             <option th:value="0">--- Seleccione rol ---</option>
-                            <option th:if="${usuario.idusuario != 0}" 
-                                    th:each="r : ${roles}" 
-                                    th:value="${r.idrol}"
-                                    th:text="${r.nombre.substring(5)}"
-                                    th:selected="${r.idrol == usuario.rol.idrol}">
+                            <option th:if="${usuario.idusuario != 0}" th:each="r : ${roles}" th:value="${r.idrol}"
+                                th:text="${r.nombre.substring(5)}" th:selected="${r.idrol == usuario.rol.idrol}">
                             </option>
-                            <option th:unless="${usuario.idusuario != 0}" 
-                                    th:each="r : ${roles}" 
-                                    th:value="${r.idrol}"
-                                    th:text="${r.nombre.substring(5)}">
+                            <option th:unless="${usuario.idusuario != 0}" th:each="r : ${roles}" th:value="${r.idrol}"
+                                th:text="${r.nombre.substring(5)}">
                             </option>
 
                         </select>
@@ -134,11 +151,12 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

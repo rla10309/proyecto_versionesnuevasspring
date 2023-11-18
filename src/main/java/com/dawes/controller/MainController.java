@@ -69,12 +69,12 @@ public class MainController {
 		 usuario.setPassword(encoder.encode(usuario.getPassword()));
 		 usuario.setRol(sr.findByNombre("ROLE_USER").get());
 		 su.save(usuario);
-		 return "public/login";
+		 return "login";
 	}
 
 	@RequestMapping("/login")
 	public String login() {
-		return "public/login";
+		return "login";
 	}
 
 	@RequestMapping("/logout")

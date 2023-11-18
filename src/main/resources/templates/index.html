@@ -26,14 +26,17 @@
     <a href="#">
       <h1 class="text-center">Sala Corazón</h1>
     </a>
-    <div class="mobile-menu">
+
+    <!-- <div class="mobile-menu">
       <img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
         alt="icono menu responsive" />
-    </div>
+    </div> -->
     <nav class="navegacion navegacion-admin">
-      <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+      <div th:if="${!#authorization.expression('isAuthenticated()')}">
+      <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+      </div>
+      
       <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
-      <a href="./admin/" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Administrador</a>
       <div class="dropdown" sec:authorize="hasRole('USER')">
         <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
           class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
@@ -43,8 +46,25 @@
           <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
         </ul>
       </div>
+      <div class="dropdown" sec:authorize="hasRole('ADMIN')">
+        <button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+          class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false"></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+              th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+          <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+              th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+          <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+              th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+          <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+              th:href="@{/venta/listadoventas}">Ventas</a></li>
+          <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+        </ul>
+      </div>
 
     </nav>
+
 
   </header>
 
@@ -55,11 +75,8 @@
 
 
         <div class="barra-busqueda">
-          <div class="row justify-content-between aling-items-center col-md-10 mx-2">
-            <div class="text-center col-1">
-              <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
-              <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-            </div>
+          <div class="row justify-content-between align-items-center col-md-10 mx-2">
+            <i class="fa-solid fa-magnifying-glass text-center col-1 lupa"></i>
             <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
           </div>
           <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
@@ -110,20 +127,6 @@
         </div>
       </div>
     </div>
-    <form th:action="@{/user/userByDni}" method="post" class="form-index">
-      <div class="barra-busqueda">
-        <div class="row justify-content-between aling-items-center col-md-10 mx-2">
-          <div class="text-center col-1">
-            <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
-            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-          </div>
-          <input type="text" placeholder="Introduce tu dni" class="col-10" name="dni" />
-        </div>
-        <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
-          Buscar
-        </button>
-      </div>
-    </form>
   </main>
   <footer class="footer">
     <div class="contenido-navegacion justify-content-center justify-content-lg-between">
@@ -164,7 +167,7 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
-  
+
   <script th:if="${param.success}" th:inline="javascript">
     var mensajeExito = /*[[${msgSuccess}]]*/'';
     // Muestra el SweetAlert2 cuando se cumple la condición
