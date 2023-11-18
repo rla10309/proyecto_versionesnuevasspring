@@ -3,7 +3,10 @@ package com.dawes.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawes.modelo.ConciertoVO;
+import com.dawes.modelo.UsuarioVO;
 import com.dawes.modelo.VentaVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
@@ -29,14 +33,25 @@ public class UserController {
 	ServicioConcierto sc;
 	@Autowired
 	ServicioUsuario su;
+
 	
 	@RequestMapping("/user")
-	public String user() {
+	public String user(Authentication  authentication, Model modelo) {
+		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
+		List<VentaVO> ventas = sv.findByUsuarioDni(usuario.getDni()).get();
+		modelo.addAttribute("usuario", usuario);
+		if(!ventas.isEmpty())
+			modelo.addAttribute("ventas", ventas);
+		else {
+			modelo.addAttribute("msgError", "No hay datos que mostrar");
+		}
+		
+		
 		return "user/user";
 	}
 	
 	@RequestMapping("/userByDni")
-	public String userByDni(@RequestParam String dni, Model modelo) {
+	public String userByDni(@RequestParam String dni, Model modelo ) {
 		List<VentaVO> ventas = sv.findByUsuarioDni(dni).get();
 		modelo.addAttribute("usuario", su.findByDni(dni).get() );
 		if(!ventas.isEmpty())
@@ -47,16 +62,17 @@ public class UserController {
 		return "user/user";
 	}
 	
-	
+
 	
 
 	@RequestMapping("/compra")
-	public String compra(@RequestParam int idconcierto, Model modelo) {
+	public String compra(@RequestParam int idconcierto, Model modelo, Authentication authentication) {
 	    VentaVO venta = new VentaVO();
 	    ConciertoVO concierto = sc.findById(idconcierto).get();
+	    UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
 	    venta.setConcierto(concierto);
+	    venta.setUsuario(usuario);
 		modelo.addAttribute("venta", venta);
-		modelo.addAttribute("usuarios", su.findAll());
 		modelo.addAttribute("grupo", concierto.getGrupo());
 		return "user/formcompra";
 		
@@ -66,7 +82,6 @@ public class UserController {
 	public String insertar(@ModelAttribute VentaVO venta, Model modelo)  {
 		try {
 			sv.save(venta);
-			modelo.addAttribute("venta", venta);
 			modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
 		}
 		catch(Exception e) {

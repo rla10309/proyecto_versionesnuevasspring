@@ -11,7 +11,7 @@ public interface ServicioUsuario {
 	
 	UserDetails findByUsername(String username);
 	
-	Optional<UsuarioVO> findByEmail(String email);
+	UserDetails findByEmail(String email);
 
 	Optional<UsuarioVO> findByDni(String dni);
 

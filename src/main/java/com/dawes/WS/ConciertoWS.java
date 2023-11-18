@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class ConciertoWS {
 	 * Devuelve todos los conciertos de un grupo
 	 * desde http://localhost:808/api/conciertos/ABBA
 	 */
+	@Secured("ROLE_ADMN")
 	@GetMapping("/conciertos/{nombre}")
 	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre){
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();

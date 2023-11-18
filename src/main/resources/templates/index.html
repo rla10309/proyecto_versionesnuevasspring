@@ -1,69 +1,89 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sala Corazón</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{../css/bootstrap.min.css}" />
-    <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{../css/estilos.css}" />
-    <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{../css/mediaq.css}" />
-    <link rel="stylesheet" href="../static/css/list_btn.css" th:href="@{../css/list_btn.css}" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
-    <script
-      src="https://kit.fontawesome.com/91eae316a2.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body class="img-body">
-   
-    <header class="header contenido-navegacion">
-    
-        <a href="#">
-          <h1  class="text-center">Sala Corazón</h1>
-        </a>
-        <nav class="navegacion ">
-          <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
-          <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a>
-        </nav>
-  
-    </header>
 
-    <main>
-      <div class="contenedor alto-screen">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sala Corazón</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{../css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{../css/estilos.css}" />
+  <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{../css/mediaq.css}" />
+  <link rel="stylesheet" href="../static/css/list_btn.css" th:href="@{../css/list_btn.css}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/91eae316a2.js" crossorigin="anonymous"></script>
+  <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+
+</head>
+
+<body class="img-body">
+
+  <header class="header contenido-navegacion">
+
+    <a href="#">
+      <h1 class="text-center">Sala Corazón</h1>
+    </a>
+    <div class="mobile-menu">
+      <img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
+        alt="icono menu responsive" />
+    </div>
+    <nav class="navegacion navegacion-admin">
+      <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
+      <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+      <a href="./admin/" th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Administrador</a>
+      <div class="dropdown" sec:authorize="hasRole('USER')">
+        <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+          class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+          aria-expanded="false"></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi Cuenta</a></li>
+          <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+
+    </nav>
+
+  </header>
+
+  <main>
+    <div class="contenedor alto-screen">
       <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
-        <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
-          <div class="barra-busqueda">
-            <div class="row justify-content-between aling-items-center col-md-10 mx-2">
-              <div class="text-center col-1">
-                <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
-                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-              </div>
-              <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
+      <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
+        <div class="barra-busqueda">
+          <div class="row justify-content-between aling-items-center col-md-10 mx-2">
+            <div class="text-center col-1">
+              <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
+              <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
             </div>
-            <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
-              Buscar
-            </button>
+            <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
           </div>
-        </form>
-        <!-- FIN DEL FORMULARIO DE BUSQUEDA -->
-      
+          <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+            Buscar
+          </button>
+        </div>
+      </form>
+      <!-- FIN DEL FORMULARIO DE BUSQUEDA -->
+      <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <p>Hola</p>
+      </div>
 
 
-      <div class="contenedor-index  sombra-negra " >
+
+      <div class="contenedor-index  sombra-negra ">
         <!-- CONTENIDO CONCIERTOS -->
 
-        <div class="contenido-conciertos" >
+        <div class="contenido-conciertos">
           <div class="card my-5 border-0" th:each="c: ${conciertos}">
             <div class="row g-0">
               <div class="col-md-4">
 
-              <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
-                <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg" alt="" /></a>
-                
+                <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
+                  <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg"
+                    alt="" /></a>
+
               </div>
               <div class="col-md-8">
                 <div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
@@ -85,52 +105,75 @@
           <a th:href="@{/index}" class="boton-buscar">Todos los conciertos</a>
         </div>
       </div>
-      </div>
-              <form th:action="@{/user/userByDni}" method="post" class="form-index">
-                <div class="barra-busqueda">
-                  <div class="row justify-content-between aling-items-center col-md-10 mx-2">
-                    <div class="text-center col-1">
-                      <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
-                      <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-                    </div>
-                    <input type="text" placeholder="Introduce tu dni" class="col-10" name="dni" />
-                  </div>
-                  <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
-                    Buscar
-                  </button>
-                </div>
-              </form>
-    </main>
-    <footer class="footer">
-      <div class="contenido-navegacion justify-content-center justify-content-lg-between">
-        <a href="#" >
-          <h1  class="text-center">Sala Corazón</h1>
-        </a>
-      </div>
-      <div class="contenido-footer">
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
+    </div>
+    <form th:action="@{/user/userByDni}" method="post" class="form-index">
+      <div class="barra-busqueda">
+        <div class="row justify-content-between aling-items-center col-md-10 mx-2">
+          <div class="text-center col-1">
+            <img src="../static/img/lupa.png" th:src="@{../img/lupa.png}" alt="lupa" class="icono-lupa" />
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+          </div>
+          <input type="text" placeholder="Introduce tu dni" class="col-10" name="dni" />
         </div>
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
-        </div>
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
-        </div>
+        <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+          Buscar
+        </button>
       </div>
-         </footer>
+    </form>
+  </main>
+  <footer class="footer">
+    <div class="contenido-navegacion justify-content-center justify-content-lg-between">
+      <a href="#">
+        <h1 class="text-center">Sala Corazón</h1>
+      </a>
+    </div>
+    <div class="contenido-footer">
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+        </ul>
+      </div>
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+        </ul>
+      </div>
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+  
+  <script th:if="${param.success}" th:inline="javascript">
+    var mensajeExito = /*[[${msgSuccess}]]*/'';
+    // Muestra el SweetAlert2 cuando se cumple la condición
+    Swal.fire({
+      icon: 'success',
+      title: '¡Enhorabuena!',
+      text: mensajeExito,
+      confirmButtonColor: "##20c997",
+      width: "40rem",
+    });
+
+  </script>
+
+</body>
+
 </html>
