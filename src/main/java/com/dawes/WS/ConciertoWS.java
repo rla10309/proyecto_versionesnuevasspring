@@ -31,7 +31,7 @@ public class ConciertoWS {
 	 * Devuelve todos los conciertos de un grupo
 	 * desde http://localhost:808/api/conciertos/ABBA
 	 */
-	@Secured("ROLE_ADMN")
+
 	@GetMapping("/conciertos/{nombre}")
 	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre){
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();

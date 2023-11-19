@@ -46,6 +46,11 @@ header h1 {
 h1 a{
     color: white;
 }
+.dropdown-item:hover{
+    background-color: gainsboro;
+    color: black;
+
+}
 
 .fondo-negro {
     background-color: black;
@@ -376,8 +381,9 @@ i {
 /**PAGINA LOGIN**/
 .alerta {
     background-color: #FFF3CD;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 3.75px;
+    margin-bottom: 3rem;
 }
 .centrar {
     display: flex;

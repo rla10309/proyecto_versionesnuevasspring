@@ -47,9 +47,9 @@
         </ul>
       </div>
       <div class="dropdown" sec:authorize="hasRole('ADMIN')">
-        <button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+        <button href="./admin/admin.html" th:href="@{/admin}" 
           class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-          aria-expanded="false"></button>
+          aria-expanded="false" th:text="${#authentication.principal.username + ' (Admin)'}"></button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
               th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
@@ -69,6 +69,8 @@
   </header>
 
   <main>
+
+    <!-- <p th:text="${#authentication.principal.username + ' ' + 'Administrador'}"></p> -->
     <div class="contenedor alto-screen">
       <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
       <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
@@ -85,12 +87,6 @@
         </div>
       </form>
       <!-- FIN DEL FORMULARIO DE BUSQUEDA -->
-      <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <p>Hola</p>
-      </div>
-
-
-
       <div class="contenedor-index  sombra-negra ">
         <!-- CONTENIDO CONCIERTOS -->
 
@@ -113,7 +109,7 @@
                   </p>
                   <p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
                   <p class="card-text" th:text="${c.hora}">21:30</p>
-                  <p class="card-text text-end">
+                  <p class="card-text text-center text-sm-end">
                     <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
                       class="btn boton-entrada mt-5">Compra entradas</a>
                   </p>
@@ -180,6 +176,7 @@
     });
 
   </script>
+
 
 </body>
 

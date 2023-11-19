@@ -70,11 +70,17 @@ public class UserController {
 	    VentaVO venta = new VentaVO();
 	    ConciertoVO concierto = sc.findById(idconcierto).get();
 	    UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
+	    if(usuario!=null) {
 	    venta.setConcierto(concierto);
 	    venta.setUsuario(usuario);
 		modelo.addAttribute("venta", venta);
 		modelo.addAttribute("grupo", concierto.getGrupo());
+		
 		return "user/formcompra";
+	    } else {
+	    	modelo.addAttribute("msgError", "Debes estar registrado/a para comprar");
+	    	return "login";
+	    }
 		
 	}
 	

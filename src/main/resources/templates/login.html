@@ -34,12 +34,12 @@
   </header>
   <main class="contenedor centrar alto-screen">
     <form class="formulario-login" th:action="@{/login}" method="post">
-      <!-- <div th:if="${param.error}" class="alerta">
+      <div th:if="${param.error}" class="alerta">
         Usuario o contraseña incorrectos
       </div>
       <div th:if="${param.logout}" class="alerta">
         Has salido correctamente
-      </div> -->
+      </div>
 
       <div class="mb-5 campo">
         <label for="username">E-Mail</label>
@@ -100,12 +100,12 @@
   // Muestra el SweetAlert2 cuando se cumple la condición
   Swal.fire({
     icon: 'error',
-    title: 'Error',
     text: mensajeError,
     confirmButtonColor: "#000",
     width: "40rem",
   });
 </script>
+
 
 </body>
 

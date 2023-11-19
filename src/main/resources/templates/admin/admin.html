@@ -30,7 +30,7 @@
           <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
         </div>
 
-        <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+      <p sec:authorize="hasRole('ADMIN')">Administrador</p>
         <div class="dropdown" sec:authorize="hasRole('USER')">
           <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
             class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"

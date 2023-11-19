@@ -71,5 +71,20 @@ const dropdownList = [...dropdownElementList].map(
   (dropdownToggleEl) => new bootstrap.Dropdown(dropdownToggleEl)
 );
 
+$(function () {
+  if (window.location.href.includes("logout")) {
+          Swal.fire({
+            icon: "success",
+            text: "Sesión cerrada correctamente",
+            confirmButtonColor: "##20c997",
+            width: "40rem",
+          }).then((result) => {
+            if(result.isConfirmed){
+            window.location.href = "http://localhost:8080/index";
+            }
+          });
+  }
+  
+});
 
 
