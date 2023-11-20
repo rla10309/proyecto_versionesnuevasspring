@@ -100,9 +100,11 @@
 					<div class="mb-5">
 						<label for="descripcion">Descripción</label>
 						<textarea th:field="*{descripcion}" id="descripcion" class="form-control"></textarea>
+						
 					</div>
+					<input class="boton negro" type="submit" value="Nuevo Grupo" />
 				</div>
-				<input class="boton negro" type="submit" value="Nuevo Grupo" />
+				
 			</form>
 			<a class="boton-buscar text-center" href="./listadogrupos.html" th:href="@{/grupo/listadogrupos}">Atrás</a>
 

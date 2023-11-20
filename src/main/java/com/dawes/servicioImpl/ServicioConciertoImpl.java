@@ -29,8 +29,8 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	
 
 
-	public Optional<List<ConciertoVO>> findByGrupoNombre(String nombre) {
-		return cr.findByGrupoNombre(nombre);
+	public Optional<List<ConciertoVO>> findByGrupoNombreIgnoreCase(String nombre) {
+		return cr.findByGrupoNombreIgnoreCase(nombre);
 	}
 
 

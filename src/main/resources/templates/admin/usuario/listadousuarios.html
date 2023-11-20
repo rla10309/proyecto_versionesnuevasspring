@@ -16,6 +16,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
   <script src="https://kit.fontawesome.com/91eae316a2.js"></script>
   <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+  <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+  <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+  <script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
 </head>
 
 <body>
@@ -68,46 +71,53 @@
         <span>Usuario eliminado con éxito</span>
       </div>
       <div class="table-responsive-md">
-        <table class="table table-hover">
+        <table class="table table-hover" id="tabla-usuarios">
           <thead>
             <tr class="text-uppercase">
               <th scope="col">Id</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellidos</th>
               <th scope="col">Dni</th>
-              <th scope="col">Contraseña</th>
+              <!-- <th scope="col">Contraseña</th> -->
               <th scope="col">Email</th>
               <th scope="col">Rol</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each=" usuario : ${usuarios}">
+            <tr th:each=" usuario : ${usuarios}" th:id="${'fila-usuario'  + usuario.id}">
               <td th:text="${usuario.idusuario}">1</td>
               <td th:text="${usuario.username}">Otto</td>
               <td th:text="${usuario.apellidos}">Carter</td>
               <td th:text="${usuario.dni}">10880333C</td>
-              <td th:text="${usuario.password}" class="ocultar truncate-text">Contraseña</td>
+              <!-- <td th:text="${usuario.password}" class="ocultar truncate-text">Contraseña</td> -->
               <td th:text="${usuario.email}">otto@ott.com</td>
               <td th:text="${usuario.rol.nombre.substring(5)}">otto@ott.com</td>
-              <td>
-                <a th:href="@{/usuario/edit(idusuario=${usuario.idusuario})}">
+              <td class="iconos">
+                <a th:href="@{/usuario/edit(idusuario=${usuario.idusuario})}" title="Editar">
                   <i class="fa-sharp fa-solid fa-pen-to-square link-primary"></i>
                 </a>
-                <a th:href="@{/usuario/delete(idusuario=${usuario.idusuario})}" class="link-danger delete-group">
+                <a th:href="@{/usuario/delete(idusuario=${usuario.idusuario})}" class="link-danger delete-group" title="Eliminar">
                   <i class="fa-solid fa-trash-can"></i>
                 </a>
-                <a th:href="@{/usuario/historial(dni=${usuario.dni})}" class="link-success">
+                <a th:href="@{/usuario/historial(dni=${usuario.dni})}" class="link-success" title="Historial">
 
                   <i class="fa-solid fa-eye"></i>
                 </a>
-
-
-
+                <a th:href="@{usuario/muestrapass(dni=${usuario.dni})}" class="link-info getpass" title="Muestra password">
+                  <i class="fa-solid fa-lock"></i>
+                </a>
               </td>
             </tr>
           </tbody>
+       
         </table>
+        <div id="muestra_password" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <span></span>
+        </div>
         <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -161,6 +171,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+  <script src="/static/js/scriptselect.js" th:src="@{../../../js/scriptselect.js}"></script>
 </body>
 
 </html>

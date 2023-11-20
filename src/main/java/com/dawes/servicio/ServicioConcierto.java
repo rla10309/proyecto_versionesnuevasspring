@@ -15,7 +15,7 @@ public interface ServicioConcierto {
 	Iterable<ConciertoVO> findAllByOrderByFechaAsc();
 	
 	
-	Optional<List<ConciertoVO>> findByGrupoNombre(String nombre);
+	Optional<List<ConciertoVO>> findByGrupoNombreIgnoreCase(String nombre);
 
 	Optional<List<ConciertoVO>> findByFechaBetween(LocalDate inicio, LocalDate fin);
 

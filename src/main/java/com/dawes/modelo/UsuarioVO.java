@@ -39,7 +39,6 @@ public class UsuarioVO implements UserDetails {
 	private String username;
 	@Column(length = 60, nullable = false)
 	private String apellidos;
-	
 	private String password;
 	@Column(length = 15, nullable = false)
 	private String dni;

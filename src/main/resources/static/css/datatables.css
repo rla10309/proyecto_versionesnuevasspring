@@ -603,7 +603,8 @@ table.dataTable td {
     text-align: center;
   }
   .dataTables_wrapper .dataTables_paginate {
-    margin-top: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 }
 @media screen and (max-width: 640px) {

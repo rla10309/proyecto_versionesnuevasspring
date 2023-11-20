@@ -96,7 +96,7 @@ public class MainController {
 	@RequestMapping("/public/buscarporgrupo")
 
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
-		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombre(nombre);
+		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombreIgnoreCase(nombre);
 
 		if (conciertos.isPresent()) {
 			modelo.addAttribute("conciertos", conciertos.get());

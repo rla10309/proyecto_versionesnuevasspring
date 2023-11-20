@@ -65,7 +65,7 @@ public class VentaController {
 		modelo.addAttribute("venta", sv.findById(idventa).get());
 		modelo.addAttribute("usuarios", su.findAll());
 		modelo.addAttribute("grupos", sg.findAll());
-		modelo.addAttribute("conciertos", sc.findByGrupoNombre(nombre).get());
+		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get());
 		} catch(Exception e) {
 			System.out.println("Error ventas: " + e.getStackTrace());
 		}
@@ -81,6 +81,7 @@ public class VentaController {
 	public String findByGrupoNombre(@RequestParam String nombre, Model modelo) {
 		List<VentaVO> ventas = sv.findByConciertoGrupoNombre(nombre).get();
 		if(!ventas.isEmpty()) {
+			modelo.addAttribute("nombregrupo", nombre);
 			modelo.addAttribute("ventas", ventas);
 		} else {
 			modelo.addAttribute("msgError", "No hay datos que mostrar");

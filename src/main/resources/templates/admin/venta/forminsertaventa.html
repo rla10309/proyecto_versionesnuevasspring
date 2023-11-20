@@ -126,13 +126,9 @@
 						<label for="horaventa" class="form-label">Hora Venta</label>
 						<input type="text" class="form-control" id="horaventa" th:field="*{horaventa}" readonly>
 					</div>
-
-
-
-
-
+					<input class="boton negro" type="submit" value="Nueva Venta" />
 				</div>
-				<input class="boton negro" type="submit" value="Nueva Venta" />
+				
 			</form>
 			<div class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.error}">
 

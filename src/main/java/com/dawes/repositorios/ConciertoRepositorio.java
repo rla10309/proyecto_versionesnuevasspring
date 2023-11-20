@@ -13,7 +13,7 @@ public interface ConciertoRepositorio extends CrudRepository<ConciertoVO, Intege
 	
 	Optional<ConciertoVO> findByFechaAndHora(LocalDate fecha, LocalTime hora);
 	Optional<List<ConciertoVO>> findByFechaBetween(LocalDate inicio, LocalDate fin);
-	Optional<List<ConciertoVO>> findByGrupoNombre(String nombre);
+	Optional<List<ConciertoVO>> findByGrupoNombreIgnoreCase(String nombre);
 	Iterable<ConciertoVO> findAllByOrderByFechaAsc();
 	
 

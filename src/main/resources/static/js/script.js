@@ -66,13 +66,11 @@ const dropdownList = [...dropdownElementList].map(
 );
 
 $(function () {
-  // new DataTable("#mitabla", {
-  //   order: [[3, "desc"]],
-  // });
 
+  // TABLA DE CONCIERTOS
   $("#mitabla").DataTable({
     "columnDefs": [
-            { "orderable": false, "targets": [1, 2, 4, 6, 7] } // Las columnas 1 y 3 no serán ordenables
+            { "orderable": false, "targets": [1, 2, 4, 6, 7] }
         ],
     info: false,
     oPaginate: false,
@@ -94,6 +92,89 @@ $(function () {
       sProcessing: "Cargando...",
     },
   });
+
+  // TABLA DE USUARIOS
+  $("#tabla-usuarios").DataTable({
+    columnDefs: [{ orderable: false, targets: [6] }],
+    info: false,
+    oPaginate: false,
+    language: {
+      decimal: ",",
+      thousands: ".",
+      lengthMenu: "Mostrar _MENU_ registros",
+      zeroRecords: "No se encontraron resultados",
+      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+      infoFiltered: "(filtrado de un total de _MAX_ registros)",
+      sSearch: "Buscar:",
+      oPaginate: {
+        sFirst: "Primero",
+        sLast: "Último",
+        sNext: "Siguiente",
+        sPrevious: "Anterior",
+      },
+      sProcessing: "Cargando...",
+    },
+  });
+
+  // TABLA DE VENTAS
+    $("#tabla-ventas").DataTable({
+      columnDefs: [{ orderable: false, targets: [5,6] }],
+      info: false,
+      oPaginate: false,
+      language: {
+        decimal: ",",
+        thousands: ".",
+        lengthMenu: "Mostrar _MENU_ registros",
+        zeroRecords: "No se encontraron resultados",
+        info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+        infoFiltered: "(filtrado de un total de _MAX_ registros)",
+        sSearch: "Buscar:",
+        oPaginate: {
+          sFirst: "Primero",
+          sLast: "Último",
+          sNext: "Siguiente",
+          sPrevious: "Anterior",
+        },
+        sProcessing: "Cargando...",
+      },
+    });
+
+    // TABLA DE INFORME DE VENTAS
+        $("#tabla-informe").DataTable({
+          columnDefs: [{ orderable: false, targets: [0, 1, 7] }],
+          info: false,
+          oPaginate: false,
+          language: {
+            decimal: ",",
+            thousands: ".",
+            lengthMenu: "Mostrar _MENU_ registros",
+            zeroRecords: "No se encontraron resultados",
+            info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            infoEmpty:
+              "Mostrando registros del 0 al 0 de un total de 0 registros",
+            infoFiltered: "(filtrado de un total de _MAX_ registros)",
+            sSearch: "Buscar:",
+            oPaginate: {
+              sFirst: "Primero",
+              sLast: "Último",
+              sNext: "Siguiente",
+              sPrevious: "Anterior",
+            },
+            sProcessing: "Cargando...",
+          },
+        });
+    
+
+
+
+
+
+
+
+
+
   if (window.location.href.includes("logout")) {
     Swal.fire({
       icon: "success",

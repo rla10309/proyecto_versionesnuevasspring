@@ -94,7 +94,7 @@ public class GrupoController {
 	
 	@RequestMapping("/buscarporgrupo")
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
-		modelo.addAttribute("conciertos", sc.findByGrupoNombre(nombre).get() );
+		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get() );
 		return "admin/concierto/listadoconciertos";
 	}
 

@@ -15,6 +15,16 @@ body {
     font-family: 'Montserrat', sans-serif;
     height: 100%;
 }
+.iconos {
+    display: flex;
+}
+#muestra_password {
+    display:none;
+}
+.tabla-mini {
+    min-width: 10rem;
+    max-width: 20rem;
+}
 
 .img-body{
     background-image: url(../img/audience1.jpg);
@@ -549,7 +559,9 @@ td, th {
 }
 .formulario-login {
     width: 80%;
-    
+}
+.formulario input[type="submit"]{
+    width: 100%;
 }
 
 .formulario-registro {

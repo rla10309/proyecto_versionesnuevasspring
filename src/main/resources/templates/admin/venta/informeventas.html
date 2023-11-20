@@ -16,6 +16,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
 	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+	<link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+	<script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
 </head>
 
 <body>
@@ -62,8 +65,9 @@
 	<main class="alto-screen centrar">
 		<div class="contenedor-listados">
 			<h1 class="text-center mb-5">Informe de ventas</h1>
+			<h2 class="text-center mb-5" th:text="${nombregrupo}"></h2>
 			<div class="table-responsive-md mb-5">
-				<table class="table table-hover">
+				<table class="table table-hover" id="tabla-informe">
 					<thead>
 
 						<tr class="text-uppercase fstable">
@@ -100,7 +104,7 @@
 						</tr>
 
 					</tbody>
-					<table class="my-5 table table-striped-columns w-25" th:if="${ventas}">
+					<table class="my-5 table table-striped-columns tabla-mini" th:if="${ventas}">
 						<tr class="p-2">
 							<th class="text-light bg-black ps-4">Total: </th>
 							<td th:text="${#aggregates.sum(ventas.![numeroentradas])}" class="fs-1 text-end pe-4"></td>

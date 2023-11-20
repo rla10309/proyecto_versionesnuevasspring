@@ -16,6 +16,10 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
 	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+	<link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+	<script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
+	<link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+	<script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
 </head>
 
 <body>
@@ -25,35 +29,39 @@
 				<h1 class="text-center">Sala Corazón</h1>
 			</a>
 
-        <nav class="navegacion "><div th:if="${!#authorization.expression('isAuthenticated()')}">
-			<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
-		</div>
-		
-		<!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
-		<div class="dropdown" sec:authorize="hasRole('USER')">
-			<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
-				class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi Cuenta</a></li>
-				<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-			</ul>
-		</div>
-		<div class="dropdown" sec:authorize="hasRole('ADMIN')">
-			<button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
-				class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
-						th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
-				<li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
-						th:href="@{/grupo/listadogrupos}">Grupos</a></li>
-				<li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
-						th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
-				<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
-						th:href="@{/venta/listadoventas}">Conciertos</a></li>
-				<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-			</ul>
-		</div>
-        </nav>
+			<nav class="navegacion ">
+				<div th:if="${!#authorization.expression('isAuthenticated()')}">
+					<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+				</div>
+
+				<!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
+				<div class="dropdown" sec:authorize="hasRole('USER')">
+					<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"></button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+								Cuenta</a></li>
+						<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+					</ul>
+				</div>
+				<div class="dropdown" sec:authorize="hasRole('ADMIN')">
+					<button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
+						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+						aria-expanded="false"></button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+								th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+								th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+								th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+						<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+								th:href="@{/venta/listadoventas}">Conciertos</a></li>
+						<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
 	</header>
 	<main class="alto-screen">
@@ -62,45 +70,51 @@
 				Compra tu entrada</h1>
 			<form th:object="${venta}" th:action="@{/user/insertar}" class="my-5 sombra d-flex flex-column"
 				method="post">
-                
-                <div th:if="${msgError}" class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" >
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <span th:text="${msgError}">Venta nula</span>
-                </div>
-				
+
+				<div th:if="${msgError}" class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert">
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<span th:text="${msgError}">Venta nula</span>
+				</div>
+
 
 				<div class="formulario">
-	
+
 					<div class="mb-5">
 						<input type="hidden" th:field="*{concierto.grupo.idgrupo}">
 						<input type="hidden" th:field="*{concierto.grupo.imagen}">
 						<label for="grupo" class="form-label">Grupo</label>
 						<input type="text" class="form-control" id="grupo" name="grupo"
-                        th:value="${venta.concierto.grupo.nombre}" th:field="*{concierto.grupo.nombre}" >
+							th:value="${venta.concierto.grupo.nombre}" th:field="*{concierto.grupo.nombre}">
 					</div>
-                    <input type="hidden" th:field="*{concierto.idconcierto}">
+					<input type="hidden" th:field="*{concierto.idconcierto}">
 					<input type="hidden" th:field="*{usuario.idusuario}">
-					<input type="text" class="form-control"  th:placeholder="${venta.usuario.username + ' ' + venta.usuario.apellidos}" readonly>	
+					<input type="text" class="form-control"
+						th:placeholder="${venta.usuario.username + ' ' + venta.usuario.apellidos}" readonly>
 					<!-- <div th:if="${#authorization.expression('isAuthenticated()')}">
 						<p>Hola</p>
 					</div> -->
-                    
+
 
 
 
 					<div class="mb-5">
 						<label for="fecha" class="form-label">Fecha</label>
-						<input type="text" class="form-control" id="fecha" name="fecha" th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}" readonly th:field="*{concierto.fecha}">
+						<input type="text" class="form-control" id="fecha" name="fecha"
+							th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}" readonly
+							th:field="*{concierto.fecha}">
 					</div>
-                    <div class="mb-5">
+					<div class="mb-5">
 						<label for="hora" class="form-label">Hora</label>
-						<input type="text" class="form-control" id="hora" name="hora" th:value="${venta.concierto.hora}" th:field="*{concierto.hora}" readonly>
+						<input type="text" class="form-control" id="hora" name="hora" th:value="${venta.concierto.hora}"
+							th:field="*{concierto.hora}" readonly>
 					</div>
-                    <div class="mb-5">
+					<div class="mb-5">
 						<label for="precioanticipado" class="form-label">Precio Anticipado</label>
-						<input type="text" class="form-control" id="precioanticipado" name="precioanticipado" th:value="${venta.concierto.precioanticipado}" th:field="*{concierto.precioanticipado}" readonly>
+						<input type="text" class="form-control" id="precioanticipado" name="precioanticipado"
+							th:value="${venta.concierto.precioanticipado}" th:field="*{concierto.precioanticipado}"
+							readonly>
 					</div>
 
 					<div class="row">
@@ -110,7 +124,7 @@
 							<input type="number" class="form-control" id="numeroentradas" name="numeroentradas"
 								th:field="*{numeroentradas}" required>
 						</div>
-<!-- 
+						<!-- 
 						<div class="mb-5 col-xl-6">
 							<label for="usuario" class="form-label">Usuario</label>
 							<select th:field="*{usuario}" class="form-select fs-2" title="usuario">
@@ -138,7 +152,7 @@
 				</div>
 				<input class="boton negro" type="submit" value="Nueva Venta" />
 			</form>
-			
+
 			<a class="boton-buscar text-center" href="../index.html" th:href="@{/index}">Atrás</a>
 
 		</div>
