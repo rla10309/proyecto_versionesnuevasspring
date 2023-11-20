@@ -30,8 +30,6 @@
 				<div th:if="${!#authorization.expression('isAuthenticated()')}">
 					<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
 				</div>
-
-				<!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
 				<div class="dropdown" sec:authorize="hasRole('USER')">
 					<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
 						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
@@ -43,9 +41,9 @@
 					</ul>
 				</div>
 				<div class="dropdown" sec:authorize="hasRole('ADMIN')">
-					<button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
-						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-						aria-expanded="false"></button>
+					<button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2"
+						type="button" data-bs-toggle="dropdown" aria-expanded="false"
+						th:text="${#authentication.principal.username + ' (Admin)'}"></button>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
 								th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>

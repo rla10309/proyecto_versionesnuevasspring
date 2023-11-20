@@ -12,6 +12,8 @@ import com.dawes.modelo.ConciertoVO;
 @Service
 public interface ServicioConcierto {
 	
+	Iterable<ConciertoVO> findAllByOrderByFechaAsc();
+	
 	
 	Optional<List<ConciertoVO>> findByGrupoNombre(String nombre);
 

@@ -42,11 +42,11 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	
 
 	@Override
-	public <S extends ConciertoVO> S save(S entity) {
+	public <S extends ConciertoVO> S save(S entity)  throws DataIntegrityViolationException{
 		try {
 			cr.save(entity);
 		}catch(DataIntegrityViolationException e) {
-			System.out.println("La fecha y la hora están ocupadas");
+			throw new DataIntegrityViolationException("La fecha y la hora seleccionadas están ocupadas");
 		}
 		return entity;
 	}
@@ -80,6 +80,11 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	public long count() {
 		return cr.count();
 	}
+
+	public Iterable<ConciertoVO> findAllByOrderByFechaAsc() {
+		return cr.findAllByOrderByFechaAsc();
+	}
+
 
 	@Override
 	public void deleteById(Integer id) {

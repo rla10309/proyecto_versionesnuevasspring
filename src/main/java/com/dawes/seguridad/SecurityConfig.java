@@ -33,8 +33,8 @@ public class SecurityConfig {
 
 		
 		http.authorizeHttpRequests(
-				(authz) -> authz.requestMatchers("/", "/index", "/public/**", "/css/**", "/js/**", "/img/**","/user/compra", "/public/formregistro", "/registrousuario",  "/registro", "/index?logout")
-
+				(authz) -> authz.requestMatchers("/", "/index", "/public/**", "/css/**", "/js/**", "/img/**",
+						"/user/compra", "/public/formregistro", "/registrousuario",  "/registro", "/index?logout")
 						.permitAll()
 						.requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated())

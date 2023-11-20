@@ -29,8 +29,6 @@
         <div th:if="${!#authorization.expression('isAuthenticated()')}">
           <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
         </div>
-
-        <!-- <a href="login.html" class="fs-2" th:href="@{/logout}">Salir</a> -->
         <div class="dropdown" sec:authorize="hasRole('USER')">
           <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
             class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
@@ -42,9 +40,9 @@
           </ul>
         </div>
         <div class="dropdown" sec:authorize="hasRole('ADMIN')">
-          <button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
-            class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false"></button>
+          <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false"
+            th:text="${#authentication.principal.username + ' (Admin)'}"></button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
                 th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
@@ -67,6 +65,12 @@
         th:text="${concierto.idconcierto != 0} ? 'Editar Concierto' : 'Nuevo Concierto'">
         Nuevo Concierto
       </h1>
+      <div th:if="${msgError}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span>La fecha y la hora están ocupadas</span>
+      </div>
 
       <form class="my-5 sombra d-flex flex-column" th:action=" @{/concierto/insertaconcierto}" th:object="${concierto}"
         method="post">

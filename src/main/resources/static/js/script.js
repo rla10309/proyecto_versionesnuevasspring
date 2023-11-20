@@ -10,7 +10,6 @@ $(".delete-group").on("click", function (e) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Sí, elimínalo",
-
   }).then((result) => {
     console.log("Resultado de la ventana modal:", result);
     if (result.isConfirmed) {
@@ -18,15 +17,12 @@ $(".delete-group").on("click", function (e) {
       console.log("Redirigiendo a:", href);
       window.location.href = href;
     }
-
   });
   $(".swal2-html-container").css({ "font-size": "1.8rem" });
   $("button").css({ "font-size": "1.5rem" });
-
-
 });
 
-$(".edit-group").on("click", function(e) {
+$(".edit-group").on("click", function (e) {
   e.preventDefault();
   console.log(e.target);
   Swal.fire({
@@ -44,11 +40,9 @@ $(".edit-group").on("click", function(e) {
       window.location.href = href;
     }
   });
-    $(".swal2-html-container").css({ "font-size": "1.8rem" });
-    $("button").css({ "font-size": "1.5rem" });
+  $(".swal2-html-container").css({ "font-size": "1.8rem" });
+  $("button").css({ "font-size": "1.5rem" });
 });
-
-
 
 // const barras = document.querySelector(".barras");
 // const navegacion = document.querySelector(".navegacion");
@@ -61,7 +55,7 @@ $(".edit-group").on("click", function(e) {
 // });
 
 /** Lanza formulario buscar por fechas **/
-$(".busca-por-fechas").on("click", function(e){
+$(".busca-por-fechas").on("click", function (e) {
   // $("#busca_por_fecha_form").css("visibility", "visible");
   $("#busca_por_fecha_form").show();
 });
@@ -72,19 +66,44 @@ const dropdownList = [...dropdownElementList].map(
 );
 
 $(function () {
+  // new DataTable("#mitabla", {
+  //   order: [[3, "desc"]],
+  // });
+
+  $("#mitabla").DataTable({
+    "columnDefs": [
+            { "orderable": false, "targets": [1, 2, 4, 6, 7] } // Las columnas 1 y 3 no serán ordenables
+        ],
+    info: false,
+    oPaginate: false,
+    language: {
+      decimal: ",",
+      thousands: ".",
+      lengthMenu: "Mostrar _MENU_ registros",
+      zeroRecords: "No se encontraron resultados",
+      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+      infoFiltered: "(filtrado de un total de _MAX_ registros)",
+      sSearch: "Buscar:",
+      oPaginate: {
+        sFirst: "Primero",
+        sLast: "Último",
+        sNext: "Siguiente",
+        sPrevious: "Anterior",
+      },
+      sProcessing: "Cargando...",
+    },
+  });
   if (window.location.href.includes("logout")) {
-          Swal.fire({
-            icon: "success",
-            text: "Sesión cerrada correctamente",
-            confirmButtonColor: "##20c997",
-            width: "40rem",
-          }).then((result) => {
-            if(result.isConfirmed){
-            window.location.href = "http://localhost:8080/index";
-            }
-          });
+    Swal.fire({
+      icon: "success",
+      text: "Sesión cerrada correctamente",
+      confirmButtonColor: "##20c997",
+      width: "40rem",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "http://localhost:8080/index";
+      }
+    });
   }
-  
 });
-
-

@@ -43,9 +43,9 @@
 					</ul>
 				</div>
 				<div class="dropdown" sec:authorize="hasRole('ADMIN')">
-					<button href="./admin/admin.html" th:href="@{/admin}" sec:authentication="principal.username"
-						class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-						aria-expanded="false"></button>
+					<button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2"
+						type="button" data-bs-toggle="dropdown" aria-expanded="false"
+						th:text="${#authentication.principal.username + ' (Admin)'}"></button>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
 								th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>

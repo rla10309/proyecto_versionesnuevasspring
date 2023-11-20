@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Sulphur+Point:wght@400;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Lato&family=Sulphur+Point:wght@400;700&display=swap');*/
 
 :root{
     --grisClaro: #f6f6f6;
@@ -23,6 +23,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
 
 h1 {
     font-size: 4.8rem;
