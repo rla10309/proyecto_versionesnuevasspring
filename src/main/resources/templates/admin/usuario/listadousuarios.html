@@ -70,7 +70,7 @@
         </button>
         <span>Usuario eliminado con éxito</span>
       </div>
-      <div class="table-responsive-md">
+      <div class="table-responsive-md" id="appendElement">
         <table class="table table-hover" id="tabla-usuarios">
           <thead>
             <tr class="text-uppercase">
@@ -85,7 +85,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each=" usuario : ${usuarios}" th:id="${'fila-usuario'  + usuario.id}">
+            <tr th:each=" usuario : ${usuarios}" th:id="${'fila-usuario'  + usuario.idusuario}">
               <td th:text="${usuario.idusuario}">1</td>
               <td th:text="${usuario.username}">Otto</td>
               <td th:text="${usuario.apellidos}">Carter</td>
@@ -104,7 +104,7 @@
 
                   <i class="fa-solid fa-eye"></i>
                 </a>
-                <a th:href="@{usuario/muestrapass(dni=${usuario.dni})}" class="link-info getpass" title="Muestra password">
+                <a  class="link-info getpass" title="Muestra password">
                   <i class="fa-solid fa-lock"></i>
                 </a>
               </td>
@@ -116,9 +116,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <span></span>
+          <span id="msg"></span>
         </div>
-        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade " role="alert">
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

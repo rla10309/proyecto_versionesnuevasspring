@@ -2,6 +2,7 @@ package com.dawes.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,8 @@ public class UsuarioController {
 	
 	@Autowired
 	ServicioVenta sv;
+	@Autowired
+	BCryptPasswordEncoder encoder;
 	
 	@RequestMapping("/listadousuarios")
 	public String listadoUsuarios(Model modelo) {
@@ -46,6 +49,7 @@ public class UsuarioController {
 	public String insertausuario(@ModelAttribute UsuarioVO usuario, Model modelo) {
 		
 		try {
+			usuario.setPassword(encoder.encode(usuario.getPassword()));
 			su.save(usuario);
 		}catch(Exception e) {
 			modelo.addAttribute("Error", "Error en " + e.getStackTrace());

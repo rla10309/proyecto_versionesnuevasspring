@@ -20,12 +20,11 @@ public class UsuarioWS {
 	@Autowired
 	ServicioUsuario su;
 	
-	@Autowired
-	BCryptPasswordEncoder encoder;
+
 	
 	
 	/*
-	 * Muestra la contraseña de un usuario
+	 * Muestra la contraseña codificada de un usuario
 	 */
 	
 	@GetMapping("/usuario/{dni}")
@@ -36,6 +35,7 @@ public class UsuarioWS {
 		usuarioDto.setDni(usuario.getDni());
 		usuarioDto.setPassword(usuario.getPassword());
 		return new ResponseEntity<UsuarioDTO>(usuarioDto, HttpStatus.OK);
+		
 	}
 	
 

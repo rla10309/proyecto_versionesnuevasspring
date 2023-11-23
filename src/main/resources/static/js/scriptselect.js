@@ -13,25 +13,43 @@ $(function () {
     });
   });
 
-  $(".getpass").click(function (e) { 
-     let dni = $("#fila-usuario").children().eq(3).text();
+  $(".getpass").click(function (e) {   
+    e.preventDefault();
+   
+     let dni = $(this).closest("tr").find("td:eq(3)").text();
+     console.log(dni);
      $.ajax({
        url: "http://localhost:8080/api/usuario/" + dni,
        type: "GET",
        contentType: "application/json",
        dataType: "json",
-       success: function (resultado){
-        $("#muestra_password").children().eq(1).html(
-          `La contraseña del usuario con dni ${resultado.dni} es ${resultado.password}`);
-          $("#muestra_password").show();
-
-        
-       }
+       cache: false,
+       success: function (resultado) {
+        let mensaje = `La contraseña del usuario con dni ${resultado.dni} es ${resultado.password}`;
+        // console.log(resultado);
+        //  $("#msg").html(
+        //      `La contraseña del usuario con dni ${resultado.dni} es ${resultado.password}`
+        //    );
+        //    console.log("Después de mostrar #muestra_password");
+        //    $("#muestra_password").addClass("show");
+             $("#muestra_password").remove();
+             $("#appendElement").append(`
+                <div id="muestra_password" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span>${mensaje}</span>
+                </div>
+            `);
+            $("#muestra_password").show();
+       },
      });
+  
+     
      
 
-    e.preventDefault();
-    console.log(dni);
+   
+    
   });
 });
   function mostrarDatos(conciertos) {

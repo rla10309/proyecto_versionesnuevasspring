@@ -17,6 +17,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 	<script src="https://kit.fontawesome.com/91eae316a2.js"></script>
 	<script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+	<link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+	<script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
 </head>
 
 <body>
@@ -25,10 +27,7 @@
 			<a href="../index.html">
 				<h1 class="text-center">Sala Corazón</h1>
 			</a>
-			<div class="mobile-menu">
-				<img src="../../../static/img/barras.svg" th:src="@{../img/barras.svg}" class="barras"
-					alt="icono menu responsive" />
-			</div>
+
 			<nav class="navegacion ">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
 						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
@@ -73,11 +72,14 @@
 
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="micuenta" aria-labelledby="offcanvasExampleLabel">
 			<div class="offcanvas-header">
-				<h3 class="offcanvas-title" id="offcanvasExampleLabel">Mi cuenta</h3>
+				<h4 class="offcanvas-title" id="offcanvasExampleLabel">Mi cuenta</h4>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
 				<div>
+					<h5 class="text-decoration-underline">Datos Personales</h5>
+					<p th:text="${usuario.username + ' ' + usuario.apellidos}"></p>
+					
 					Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
 					images, lists,
 					etc.
