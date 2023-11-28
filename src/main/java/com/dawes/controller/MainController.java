@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ScannedGenericBeanDefinition;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,13 +49,15 @@ public class MainController {
 			UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
 			modelo.addAttribute("usuario", usuario);
 		}	
-		modelo.addAttribute("conciertos", sc.findAll());
+		//modelo.addAttribute("conciertos", sc.findAll());
+		modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
 
 	@RequestMapping("public/findgrupobyid")
 	public String findGrupoById(@RequestParam int idgrupo, Model modelo) {
 		modelo.addAttribute("grupo", sg.findById(idgrupo).get());
+		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(sg.findById(idgrupo).get().getNombre()).get());
 		return "public/vistaconcierto";
 	}
 

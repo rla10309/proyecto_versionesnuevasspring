@@ -86,6 +86,12 @@
           <a th:href="@{/index}" href="index.html" class="boton-buscar">Volver</a>
         </div>
       </div>
+      <div>
+        <ul>
+          <li  th:each="c : ${conciertos}" th:text="${c.fecha}"></li>
+        </ul>
+
+      </div>
       
     </main>
     <footer class="footer">
