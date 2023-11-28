@@ -175,7 +175,10 @@
 			customClass: {
 				content: 'mi-clase-de-texto-personalizado'
 			}
-
+		}).then (result => {
+			if(result.isConfirmed){
+				window.location.href = "http://localhost:8080/concierto/listadoconciertos";
+			}
 		});
 	</script>
 </body>
