@@ -69,7 +69,7 @@
 
 
     <!-- <p th:text="${#authentication.principal.username + ' ' + 'Administrador'}"></p> -->
-   <div class="contenedor alto-screen">
+    <div class="contenedor alto-screen">
       <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
       <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
         <div class="barra-busqueda">
@@ -84,33 +84,38 @@
       </form>
       <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
       <div class="contenedor-index  sombra-negra ">
-      <!-- CONTENIDO CONCIERTOS  -->
+        <!-- CONTENIDO CONCIERTOS  -->
 
         <div class="contenido-conciertos">
-          <div class="my-3" th:each="g: ${grupos}" th:if="${not #lists.isEmpty(g.conciertos)}">
-            <div class="">
-         
-               
-                  <img th:src="@{${g.imagen}}" class="rounded-start" src="../static/img/multitud.jpg"
-                    alt="" />
+          <div class="contenido-conciertos">
+            <div class="card my-5 border-0" th:each="c: ${conciertos}">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
 
-      
-                <div class="px-4 sombra-negra rounded-end-1 rounded-start-0">
-                  <h3 class="" th:text="${g.nombre}">Nombre del Grupo</h3>
-                  <!-- <p class="card-text" th:text="${c.intro}">Texto de prueba</p> -->
-                  <!-- <p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
-                  <p class="card-text" th:text="${c.hora}">21:30</p> -->
-                  <p class=" text-center text-sm-end">
-                    <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" href="vistaconcierto.html" class="boton-info">Más información</a>
-                    <!-- <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
-                      class="btn boton-entrada mt-5">Compra entradas</a>-->
-                  </p>
+                    <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg"
+                      alt="" /></a>
                 </div>
-           
+                <div class="col-md-8">
+                  <div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
+                    <h3 class="card-title" th:text="${c.grupo.nombre}">Nombre del Grupo</h3>
+                    <p class="card-text" th:text="${c.intro}">Texto de prueba
+                    </p>
+                    <p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
+                    <p class="card-text" th:text="${c.hora}">21:30</p>
+                    <p class="card-text text-center text-sm-end">
+                      <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
+                        class="btn boton-entrada mt-5">Compra entradas</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="text-center">
+            <a th:href="@{/index}" class="boton-buscar">Todos los conciertos</a>
+          </div>
         </div>
-
       </div>
     </div>
   </main>

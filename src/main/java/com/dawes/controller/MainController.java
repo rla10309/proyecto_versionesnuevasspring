@@ -49,8 +49,8 @@ public class MainController {
 			UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
 			modelo.addAttribute("usuario", usuario);
 		}	
-		//modelo.addAttribute("conciertos", sc.findAll());
-		modelo.addAttribute("grupos", sg.findAll());
+		modelo.addAttribute("conciertos", sc.findAll());
+		//modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
 
