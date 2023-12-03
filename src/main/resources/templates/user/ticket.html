@@ -65,14 +65,8 @@
 			</div>
 		</div>
 	</header>
-	<main class="alto-screen contenedor">
-		<div class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" th:if="${msgError}">
+	<main class="alto-screen contenedor-interior">
 
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			<span th:text="${msgError}">Venta nula</span>
-		</div>
 
 
 		<section class="ticket" th:each="i : ${#numbers.sequence(1, ventaVO.numeroentradas)}">

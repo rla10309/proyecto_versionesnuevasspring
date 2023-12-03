@@ -4,6 +4,7 @@ package com.dawes.modelo;
 
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -44,28 +45,34 @@ public class UsuarioVO implements UserDetails {
 	private String dni;
 	@Column(length = 100, nullable = false)
 	private String email;
+	private LocalDate fechanacimiento;
+	private LocalDate fecharegistro;
 	
 	@ManyToOne
 	@JoinColumn(name="idrol")
 	private RolVO rol;
 
-	public UsuarioVO(String username, String apellidos, String password, String dni, String email, RolVO rol) {
+	public UsuarioVO(String username, String apellidos, String password, String dni, String email, LocalDate fechanacimiento, RolVO rol) {
 		super();
 		this.username = username;
 		this.apellidos = apellidos;
 		this.password = password;
 		this.dni = dni;
 		this.email = email;
+		this.fechanacimiento = fechanacimiento;
 		this.rol = rol;
+		this.fecharegistro = LocalDate.now();
 	}
 	
-	public UsuarioVO(String username, String apellidos, String password, String dni, String email) {
+	public UsuarioVO(String username, String apellidos, String password, String dni, String email, LocalDate fechanacimiento) {
 		super();
 		this.username = username;
 		this.apellidos = apellidos;
 		this.password = password;
 		this.dni = dni;
 		this.email = email;
+		this.fechanacimiento = fechanacimiento;
+		this.fecharegistro = LocalDate.now();
 		
 	}
 

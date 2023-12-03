@@ -94,9 +94,9 @@ class AppTests {
 	// Insertamos usuario
 	@Test
 	public void test08() {
-		su.save(new UsuarioVO("Lola", "Flores", "123456", "111", "lola@lola.com", sr.findByNombre("ROLE_ADMIN").get()));
-		su.save(new UsuarioVO("Manolo", "Escobar", "123456", "222", "manolo@manolo.com", sr.findByNombre("ROLE_USER").get()));
-		assertNotNull(su.save(new UsuarioVO("Antonio", "Molina", "123456", "333", "antonio@antonio.com", sr.findByNombre("ROLE_USER").get())));
+		su.save(new UsuarioVO("Lola", "Flores", "123456", "111", "lola@lola.com", LocalDate.of(1950, 3, 12), sr.findByNombre("ROLE_ADMIN").get()));
+		su.save(new UsuarioVO("Manolo", "Escobar", "123456", "222", "manolo@manolo.com", LocalDate.of(1975, 3, 9), sr.findByNombre("ROLE_USER").get()));
+		assertNotNull(su.save(new UsuarioVO("Antonio", "Molina", "123456", "333", "antonio@antonio.com", LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
 	}
 	
 	@Test

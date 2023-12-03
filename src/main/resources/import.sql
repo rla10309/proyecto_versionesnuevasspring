@@ -10,9 +10,9 @@ INSERT INTO `festivalrock`.`conciertos` (`fecha`, `hora`, `idgrupo`, `plazas`, `
 
 INSERT INTO `festivalrock`.`roles` (`nombre`) VALUES ('ROLE_ADMIN');
 INSERT INTO `festivalrock`.`roles` (`nombre`) VALUES ('ROLE_USER');
-INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`, `email`, `idrol`) VALUES ('111', 'Pilar', 'Fernández', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'pilar@pilar.com', 1);
-INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`,`email`, `idrol`) VALUES ('222', 'Juan', 'López', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'juan@juan.com', 2);
-INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`,`email`, `idrol`) VALUES ('333', 'Lola', 'Flores', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'lola@lola.com', 2);
+INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`, `email`,`fechanacimiento`, `idrol`) VALUES ('111', 'Pilar', 'Fernández', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'pilar@pilar.com', '1975-03-09', 1);
+INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`,`email`, `fechanacimiento`, `idrol`) VALUES ('222', 'Juan', 'López', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'juan@juan.com','1960-01-30', 2);
+INSERT INTO `festivalrock`.`usuarios` (`dni`, `username`, `apellidos`, `password`,`email`, `fechanacimiento`, `idrol`) VALUES ('333', 'Lola', 'Flores', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'lola@lola.com','2000-05-03', 2);
 
 
 INSERT INTO `festivalrock`.`ventas` (`numeroentradas`, `fechaventa`, `horaventa`, `idusuario`, `idconcierto`) VALUES (4, '2023-10-04', '21:11', 2, 2);

@@ -39,7 +39,9 @@ public class UserController {
 	public String user(Authentication  authentication, Model modelo) {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<VentaVO> ventas = sv.findByUsuarioDni(usuario.getDni()).get();
+		int edad = LocalDate.now().getYear() - usuario.getFechanacimiento().getYear();
 		modelo.addAttribute("usuario", usuario);
+		modelo.addAttribute("edad", edad);
 		if(!ventas.isEmpty())
 			modelo.addAttribute("ventas", ventas);
 		else {
@@ -93,6 +95,7 @@ public class UserController {
 		catch(Exception e) {
 			System.out.println("pasa por aquí");
 			modelo.addAttribute("msgError", "No se ha podido realizar la venta " + e.getStackTrace());
+			return "user/forminsertar";
 			
 		}
 

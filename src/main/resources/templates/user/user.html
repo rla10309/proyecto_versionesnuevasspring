@@ -84,8 +84,12 @@
 			<div class="offcanvas-body">
 				<div>
 					<h5 class="text-decoration-underline">Datos Personales</h5>
-					<p th:text="${usuario.username + ' ' + usuario.apellidos}"></p>
-					
+					<p>Nombre:  <span th:text="${usuario.username + ' ' + usuario.apellidos}"></span></p>
+					<p>Fecha de nacimiento: <span th:text="${#temporals.day(usuario.fechanacimiento) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fechanacimiento)) + ' ' + #temporals.year(usuario.fechanacimiento)}"></span></p>
+					<p>Edad: <span th:text="${edad} "></span></p>
+					<p>Registrado desde:<span
+						th:text="${#temporals.day(usuario.fecharegistro) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fecharegistro)) + ' ' + #temporals.year(usuario.fecharegistro)}"></span></p>
+
 					Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
 					images, lists,
 					etc.
@@ -152,11 +156,12 @@
 
 					<div class="row align-items-center">
 						<div class="col-md-6 text-center">
-							<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>
+
 							<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid"
 								src="/static/img/thepolice1.jpeg" alt="grupo ${v.concierto.grupo.nombre}" />
 						</div>
 						<div class="col-md-6 p-4">
+							<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>
 							<p class="fs-2 text-uppercase">Fecha:</p>
 							<p th:text="${#temporals.format(v.concierto.fecha, 'dd/MM/yyyy')}" class="info">11/10/2023
 							</p>

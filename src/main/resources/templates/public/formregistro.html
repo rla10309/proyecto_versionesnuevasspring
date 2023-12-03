@@ -68,32 +68,37 @@
 		</div>
 	</header>
 	<main class="margen container centrar alto-screen">
-		<form class="mt-5 d-flex flex-column formulario-login" th:action="@{/registro}" th:object="${usuario}" method="post" >
+		<form class="mt-5 d-flex flex-column formulario-login" th:action="@{/registro}" th:object="${usuario}"
+			method="post">
 
-				<div class="mb-5 campo">
-					<label for="username">Nombre</label>
-					<input type="text" id="username" name="username" class="form-control" placeholder="Nombre"
-						th:field="*{username}" required autofocus />
-				</div>
-				<div class="mb-5 campo">
-					<label for="apellidos">Apellidos</label>
-					<input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos"
-						th:field="*{apellidos}" required />
-				</div>
-				<div class="mb-5 campo">
-					<label for="password">Contraseña</label>
-					<input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"
-						th:field="*{password}" required />
-				</div>
-				<div class="mb-5 campo">
-					<label for="dni">DNI</label>
-					<input type="text" name="dni" id="dni" class="form-control" placeholder="DNI" required />
-				</div>
-				<div class="mb-5 campo">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" placeholder="E-mail" required />
-				</div>
-				<input class="boton azul" type="submit" value="Registrate" />
+			<div class="mb-5 campo">
+				<label for="username">Nombre</label>
+				<input type="text" id="username" name="username" class="form-control" placeholder="Nombre"
+					th:field="*{username}" required autofocus />
+			</div>
+			<div class="mb-5 campo">
+				<label for="apellidos">Apellidos</label>
+				<input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="Apellidos"
+					th:field="*{apellidos}" required />
+			</div>
+			<div class="mb-5 campo">
+				<label for="password">Contraseña</label>
+				<input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"
+					th:field="*{password}" required />
+			</div>
+			<div class="mb-5 campo">
+				<label for="dni">DNI</label>
+				<input type="text" name="dni" id="dni" class="form-control" placeholder="DNI" required />
+			</div>
+			<div class="mb-5 campo">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" class="form-control" placeholder="E-mail" required />
+			</div>
+			<div class="mb-5 campo">
+				<label for="fechanacimiento">Fecha de nacimiento</label>
+				<input type="date" name="fechanacimiento" id="fechanacimiento" class="form-control" placeholder="Fecha de nacimiento" required />
+			</div>
+			<input class="boton azul" type="submit" value="Registrate" />
 
 
 		</form>
