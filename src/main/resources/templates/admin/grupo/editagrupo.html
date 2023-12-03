@@ -21,44 +21,48 @@
 </head>
 
 <body>
-    <header>
-        <div class="contenido-navegacion fondo-negro">
-            <a href="#" th:href="@{/index}">
-                <h1 class="text-center">Sala Corazón</h1>
-            </a>
-
-
-            <nav class="navegacion-admin">
-                <div th:if="${!#authorization.expression('isAuthenticated()')}">
-                    <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
-                </div>
-                <div class="dropdown" sec:authorize="hasRole('USER')">
-                    <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
-                        class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"></button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
-                                Cuenta</a></li>
-                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown" sec:authorize="hasRole('ADMIN')">
-                    <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2"
-                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                        th:text="${#authentication.principal.username + ' (Admin)'}"></button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
-                                th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
-                        <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
-                                th:href="@{/grupo/listadogrupos}">Grupos</a></li>
-                        <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
-                                th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
-                        <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
-                                th:href="@{/venta/listadoventas}">Ventas</a></li>
-                        <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </nav>
+    <header class="header inicio">
+        <div class="container contenido-navegacion">
+            <div class="titulo-header">
+                <a href="#">
+                    <h1>Sala</h1>
+                    <h1>Corazón</h1>
+                </a>
+            </div>
+            <div class="login-header">
+                <nav class="navegacion navegacion-admin">
+                    <div th:if="${!#authorization.expression('isAuthenticated()')}">
+                        <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+                    </div>
+                    <div class="dropdown" sec:authorize="hasRole('USER')">
+                        <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+                            class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false"></button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+                                    Cuenta</a>
+                            </li>
+                            <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown " sec:authorize="hasRole('ADMIN')">
+                        <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            th:text="${#authentication.principal.username + ' (Admin)'}"></button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+                                    th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+                            <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+                                    th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+                            <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+                                    th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+                            <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                                    th:href="@{/venta/listadoventas}">Ventas</a></li>
+                            <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
     </header>
     <main class="alto-screen">
