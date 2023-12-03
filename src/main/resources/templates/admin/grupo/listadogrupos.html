@@ -31,9 +31,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -67,7 +67,7 @@
 		</div>
 	</header>
 	<main class="alto-screen">
-		<div class="contenedor-listados">
+		<div class="contenedor-interior">
 			<h1 class="text-center mb-5">Grupos</h1>
 			<div th:if="${msgSuccess}" class="alert alert-warning alert-dismissible fade show" role="alert">
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -129,8 +129,8 @@
 
 			</div>
 			<div class="my-5">
-				<a class="boton-buscar" href="../admin.html" th:href="@{/admin}">Inicio</a>
-				<a class="boton-buscar" href="insertagrupo.html" th:href="@{/grupo/creagrupo}">Nuevo Grupo</a>
+				<a class="boton negro" href="../admin.html" th:href="@{/admin}">Inicio</a>
+				<a class="boton negro" href="insertagrupo.html" th:href="@{/grupo/creagrupo}">Nuevo Grupo</a>
 			</div>
 
 		</div>

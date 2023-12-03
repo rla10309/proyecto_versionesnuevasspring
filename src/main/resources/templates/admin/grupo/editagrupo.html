@@ -32,9 +32,9 @@
                 </a>
             </div>
             <div class="login-header">
-                <nav class="navegacion navegacion-admin">
+                <nav class="navegacion">
                     <div th:if="${!#authorization.expression('isAuthenticated()')}">
-                        <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+                        <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
                     </div>
                     <div class="dropdown" sec:authorize="hasRole('USER')">
                         <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -68,7 +68,7 @@
         </div>
     </header>
     <main class="alto-screen">
-        <div class="contenedor w-xl-75">
+        <div class="contenedor-interior">
             <h2 class="text-center text-uppercase">Edita Grupo</h2>
 
             <form class="my-5 sombra d-flex flex-column" th:action="@{/grupo/insertagrupo}"
@@ -108,7 +108,7 @@
                 <input class="boton negro" type="submit" value="Edita Grupo" />
 
             </form>
-            <a class="boton-link mt-3 text-center" href="./listadogrupos.html"
+            <a class="boton negro mt-3 text-center" href="./listadogrupos.html"
                 th:href="@{/grupo/listadogrupos}">Atrás</a>
 
 

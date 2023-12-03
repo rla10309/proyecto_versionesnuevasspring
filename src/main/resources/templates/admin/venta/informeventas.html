@@ -31,9 +31,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -67,7 +67,7 @@
 		</div>
 	</header>
 	<main class="alto-screen centrar">
-		<div class="contenedor-listados">
+		<div class="contenedor-interior">
 			<h1 class="text-center mb-5">Informe de ventas</h1>
 			<h2 class="text-center mb-5" th:text="${nombregrupo}"></h2>
 			<div class="table-responsive-md mb-5">
@@ -124,7 +124,7 @@
 				<span>No hay datos que mostrar</span>
 			</div> -->
 			<div class="my-5">
-				<a class="boton-buscar" th:href="@{/concierto/listadoconciertos}">Atrás</a>
+				<a class="boton negro" th:href="@{/concierto/listadoconciertos}">Atrás</a>
 			</div>
 		</div>
 	</main>

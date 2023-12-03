@@ -33,9 +33,9 @@
         </a>
       </div>
       <div class="login-header">
-        <nav class="navegacion navegacion-admin">
+        <nav class="navegacion">
           <div th:if="${!#authorization.expression('isAuthenticated()')}">
-            <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+            <a href="login.html" class="fs-2" th:href="@{/login}">Inicia sesión</a>
           </div>
           <div class="dropdown" sec:authorize="hasRole('USER')">
             <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -72,24 +72,26 @@
 
 
     <!-- <p th:text="${#authentication.principal.username + ' ' + 'Administrador'}"></p> -->
-    <div class="contenedor alto-screen">
+    <div class="margen container alto-screen">
       <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
       <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
-        <div class="barra-busqueda">
-          <div class="row justify-content-between align-items-center col-md-10 mx-2">
-            <i class="fa-solid fa-magnifying-glass text-center col-1 lupa"></i>
+        <div class="barra-busqueda row">
+          <div class="row justify-content-between align-items-center col-md-10 mb-3 mb-md-0">
+            <i class="fa-solid fa-magnifying-glass text-center col-2 lupa"></i>
             <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
           </div>
-          <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+          <div class="col-12 col-md-2 me-md-2">
+          <button type="submit" class="boton negro w-100">
             Buscar
           </button>
+          </div>
         </div>
       </form>
       <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
-      <div class="contenedor-index  sombra-negra ">
+      <div class="sombra-negra mt-5">
         <!-- CONTENIDO CONCIERTOS  -->
 
-        <div class="contenido-conciertos">
+
           <div class="contenido-conciertos">
             <div class="card my-5 border-0" th:each="c: ${conciertos}">
               <div class="row g-0">
@@ -108,7 +110,7 @@
                     <p class="card-text" th:text="${c.hora}">21:30</p>
                     <p class="card-text text-center text-sm-end">
                       <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
-                        class="btn boton-entrada mt-5">Compra entradas</a>
+                        class="btn boton compra-entradas mt-5">Compra entradas</a>
                     </p>
                   </div>
                 </div>
@@ -116,18 +118,14 @@
             </div>
           </div>
           <div class="text-center">
-            <a th:href="@{/index}" class="boton-buscar">Todos los conciertos</a>
+            <a th:href="@{/index}" class="boton negro">Todos los conciertos</a>
           </div>
-        </div>
+
       </div>
     </div>
   </main>
   <footer class="footer">
-    <div class="contenido-navegacion justify-content-center justify-content-lg-between">
-      <a href="#">
-        <h1 class="text-center">Sala Corazón</h1>
-      </a>
-    </div>
+
     <div class="contenido-footer">
       <div class="datos">
         <ul class=" text-white">

@@ -34,9 +34,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -69,8 +69,8 @@
 			</div>
 		</div>
 	</header>
-	<main class="alto-screen centrar">
-		<div class="contenedor-listados">
+	<main class="alto-screen contenedor-interior">
+	
 			<h1 class="text-center mb-5">Conciertos</h1>
 
 			<div th:if="${msgSuccess}" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -128,20 +128,16 @@
 				</div>
 			</div>
 			<div class="my-5">
-				<a class="boton-buscar" href="../admin.html" th:href="@{/admin}">Inicio</a>
-				<a class="boton-buscar" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
+				<a class="boton negro" href="../admin.html" th:href="@{/admin}">Inicio</a>
+				<a class="boton negro" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
 					Concierto</a>
 			</div>
 
-		</div>
+	
 
 	</main>
 	<footer class="footer">
-		<div class="contenido-navegacion justify-content-center justify-content-lg-between">
-			<a href="#">
-				<h1 class="text-center">Sala Corazón</h1>
-			</a>
-		</div>
+
 		<div class="contenido-footer">
 			<div class="datos">
 				<ul>

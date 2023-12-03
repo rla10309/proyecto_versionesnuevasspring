@@ -30,9 +30,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -122,7 +122,7 @@
 			</div>
 		</section>
 
-		<div class="mt-5"><a class="boton-buscar text-center" href="user.html"
+		<div class="mt-5"><a class="boton negro text-center" href="user.html"
 				th:href="@{/user/user(dni=${ventaVO.usuario.dni})}">Atrás</a></div>
 
 

@@ -31,9 +31,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -90,19 +90,10 @@
 					images, lists,
 					etc.
 				</div>
-				<div class="dropdown mt-3">
-					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-						Dropdown button
-					</button>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Action</a></li>
-						<li><a class="dropdown-item" href="#">Another action</a></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
-					</ul>
-				</div>
+
 			</div>
 		</div>
-		<div class="contenedor-listados">
+		<div class="contenedor-interior">
 			<section id="busca_por_fecha_form" class="busca-por-fecha-form">
 				<form th:action="@{/user/findByFechaBetween}">
 					<div class="row">
@@ -116,7 +107,7 @@
 						</div>
 					</div>
 					<div class="col-12">
-						<button type="submit" class="boton-buscar ">Buscar</button>
+						<button type="submit" class="boton negro mt-3 border border-1 ">Buscar</button>
 					</div>
 				</form>
 
@@ -192,7 +183,7 @@
 				<span th:text="${msgError}">No hay datos que mostrar</span>
 			</div> -->
 			<div class="my-5">
-				<a class="boton-buscar" th:href="@{/index}" href="../index.html">Atrás</a>
+				<a class="boton negro" th:href="@{/index}" href="../index.html">Atrás</a>
 			</div>
 		</div>
 	</main>

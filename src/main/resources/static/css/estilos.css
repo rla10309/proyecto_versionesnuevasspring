@@ -17,8 +17,9 @@ body {
     line-height: 1.5;
     font-family: 'Montserrat', sans-serif;
     height: 100%;
-}´
-h1 {
+}
+
+´ h1 {
     font-size: 4.8rem;
 }
 
@@ -40,7 +41,38 @@ h5 {
 
 a {
     text-decoration: none;
+    color: white;
 }
+.fondo-negro {
+    background-color: black;
+}
+.sombra-negra {
+    background-image: linear-gradient(to top, #373737 0%, #000 100%);
+    padding: 2rem 0;
+    border-radius: 3.75px;
+    color: white;
+}
+
+.sombra {
+    background-image: linear-gradient(to top, var(--grisClaro) 0%, white 100%);
+    box-shadow: 0px 5px 15px 0px rgba(112, 112, 112, 0.48);
+    padding: 1rem 0;
+    border-radius: 3.75px;
+}
+
+.alto-screen {
+    min-height: 60vh;
+}
+.iconos {
+    display: flex;
+}
+.margen {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    padding: 0;
+}
+
+
 /***** FIN GLOBALES *****/
 
 /** HEADER Y NAVEGACION **/
@@ -50,9 +82,11 @@ a {
     color: white;
     text-align: center;
 }
+
 .titulo-header {
     margin-bottom: 2rem;
 }
+
 .header {
     background-color: #000;
 }
@@ -66,9 +100,8 @@ a {
     flex-direction: column;
 }
 
-.contenido-navegacion>a {
-    color: white;
-}
+
+
 .capa {
     background-color: rgba(0 0 0 /50%);
     width: 100%;
@@ -79,34 +112,8 @@ a {
     z-index: -10;
 }
 
-.header-body,
-.footer-body {
-    background-color: rgba(246, 246, 246, 0.5);
-    height: 25rem;
-
-}
-
 .inicio img {
     width: 90%;
-}
-/* .offcanvas-header {
-    padding: 1rem;
-    margin-top: 3rem;
-} */
-
-/***** FIN HEADER *****/
-
-.iconos {
-    display: flex;
-}
-
-#muestra_password {
-    display: none;
-}
-
-.tabla-mini {
-    min-width: 10rem;
-    max-width: 20rem;
 }
 
 .img-body {
@@ -115,73 +122,119 @@ a {
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
-    position:relative;
+    position: relative;
     z-index: 10;
 }
 
-
+.offcanvas-header {
+    padding: 1rem;
+    margin-top: 3rem;
+}
 
 .dropdown-item:hover {
     background-color: gainsboro;
     color: black;
 }
-
-.fondo-negro {
-    background-color: black;
+.dropdown-menu {
+    min-width: 12rem;
+    padding: 1rem;
+}
+.desplegable {
+    font-size: 1.5rem;
+    padding: 1rem 0.5rem;
 }
 
+/***** FIN HEADER *****/
+
+
+/***** CONTENEDORES *****/
+.contenedor-interior {
+    width: 90%;
+    max-width: 1200px;
+    margin: 5rem auto;
+}
+
+/***** FIN CONTENEDORES *****/
+
+
+
+/***** TABLAS *****/
+.tabla-mini {
+    min-width: 10rem;
+    max-width: 20rem;
+}
 .fstable {
     font-size: 1.2rem;
     text-align: center;
 }
 
-.sombra-negra {
+/***** FIN TABLAS *****/
 
-    background-image: linear-gradient(to top, #373737 0%, #000 100%);
-    padding: 2rem 0;
+/***** FORMULARIOS *****/
+.busca-por-fecha-form {
+    background-color: #000;
+    padding: 3rem;
+    margin: 0 auto 3rem auto;
     border-radius: 3.75px;
-    color: white;
-
+    /* visibility:hidden; */
+    display: none;
+}
+.busca-por-fecha-form .boton-buscar {
+    border: 0.5px solid white;
+    margin-top: 1rem;
+}
+.formulario {
+    width: 85%;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
 }
 
-.sombra {
-    background-image: linear-gradient(to top, var(--grisClaro) 0%, white 100%);
-    box-shadow: 0px 5px 15px 0px rgba(112, 112, 112, 0.48);
-    padding: 1rem 0;
-    border-radius: 3.75px;
+.formulario label {
+    text-transform: uppercase;
+    font-size: 2rem;
 }
 
-.alto-screen {
-    min-height: 60vh;
+
+.formulario input,
+.formulario textarea {
+    padding: 0.7rem;
+    font-size: 1.6rem;
 }
 
-/* .min-height{
-    min-height: 100%;
- } */
+.formulario textarea {
+    min-height: 15rem;
+}
+
+.formulario input::placeholder {
+    font-size: 1.6rem;
+}
+
+.formulario-login {
+    width: 80%;
+}
+
+.formulario input[type="submit"] {
+    width: 100%;
+}
 
 
+/***** FIN FORMULARIOS ****/
 
+/***** FOOTER ****/
 .footer {
     background-color: black;
 }
 
+/***** FIN FOOTER *****/
 
 
-.centrado-footer {
-    justify-content: center;
+
+#muestra_password {
+    display: none;
 }
 
-.alinea-navegacion {
-    display: flex;
-}
-
-
-.navegacion-admin {
-    /*display: none;*/
-    align-items: center;
-    gap: 1.5rem;
-}
-
+/***** NAVEGACION USUARIO *****/
 .navegacion-usuario {
     align-items: center;
     width: 90%;
@@ -196,20 +249,6 @@ a {
     display: flex;
     justify-content: end;
     align-content: center;
-}
-
-.navegacion .enlace {
-    color: white;
-}
-
-.desplegable {
-    font-size: 1.5rem;
-    padding: 1rem 0.5rem;
-}
-
-.dropdown-menu {
-    min-width: 12rem;
-    padding: 1rem;
 }
 
 .navegacion-usuario li {
@@ -228,93 +267,24 @@ a {
     background-color: black;
     color: white;
 }
-
-.busca-por-fecha-form {
-    background-color: #000;
-    padding: 3rem;
-    margin: 0 auto 3rem auto;
-    border-radius: 3.75px;
-    /* visibility:hidden; */
-    display: none;
-}
-
-.busca-por-fecha-form .boton-buscar {
-    border: 0.5px solid white;
-    margin-top: 1rem;
-}
-
-fieldset {
-    border: 1px solid black;
-}
-
-
-
 .micuenta a {
     color: black;
 }
 
+/***** FIN NAVEGACION USUARIO *****/
 
-.barras {
-    width: 3rem;
-}
-
+/***** INDEX *****/
 .grupo-detalle img {
     box-shadow: 10px 10px 16px 1px rgba(133 131 131 / 0.75);
     width: 90%;
     height: 90%;
 }
 
-/* .form-index{
-    width: 80%;
-    margin: 0 auto;
-} */
-
-.titulos {
-    padding: 2rem;
-    text-align: center;
-    background-color: black;
-    color: white;
-}
-
-.titulos h3 {
-    font-size: 2rem;
-}
-
-.contenedor-index {
-    max-width: 1200px;
-    margin: 5rem auto;
-}
-
-.contenedor-listados {
-    width: 90%;
-    max-width: 1200px;
-    margin: 5rem auto;
-}
-
-.contenedor {
-    width: 90%;
-
-    margin: 5rem auto
-}
-
-.contenedor h1 {
-    text-align: center;
-}
-
-.contenedor+button {
-
-    text-align: center;
-}
-
 .barra-busqueda {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
     background-color: rgba(0 0 0 / 0.5);
-    padding: 1rem;
+    padding: 1rem 0;
     border-radius: 3.75px;
+    margin: 0 1rem;
 }
 
 .icono-lupa {
@@ -329,12 +299,12 @@ fieldset {
 
 .lupa {
     font-size: 3rem;
-    color: black;
+    color: white;
 }
 
 .contenido-conciertos {
     width: 90%;
-    margin: 0 auto;
+    margin: 2rem auto;
 }
 
 .contenido-conciertos img {
@@ -376,6 +346,44 @@ i {
     font-size: 2rem;
 }
 
+/***** FIN INDEX *****/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .contenido-footer {
     margin: 0 auto;
     color: white;
@@ -385,26 +393,7 @@ i {
     align-items: center;
 }
 
-.boton-entrada {
-    background-color: tomato;
-    padding: 1rem 2rem;
-    color: white;
-    font-size: 2rem;
-    border-radius: 3.75px;
-}
-.boton-info {
-    background-color: #f6f6f6;
-    color: black;
-    border-radius: 3.75px;
-    padding: 1rem 2rem;
-    text-transform: uppercase;
-    font-weight: 700;
 
-}
-
-.boton-entrada:hover {
-    background-color: rgb(255, 99, 71 / .5);
-}
 
 /** DETALLE GRUPOS **/
 .concierto-usuario img {
@@ -526,6 +515,15 @@ i {
 }
 
 /** BOTONES **/
+.boton {
+    padding: 1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3.75px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
 
 .boton-drop {
     padding: 1rem 2rem;
@@ -534,66 +532,6 @@ i {
     background-color: black;
     color: white;
 }
-
-.boton-login {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid gainsboro;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-radius: 3.75px;
-}
-
-.boton-link {
-    background-color: black;
-    color: white;
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: 1rem;
-    border: none;
-    border-radius: 3.75px;
-    margin: 3rem auto;
-    display: inline-block;
-}
-
-.boton-registro {
-    background-color: dodgerblue;
-    padding: 1rem;
-    width: 100%;
-    margin: 1rem auto;
-    text-align: center;
-    font-weight: 700;
-    border: none;
-    border-radius: 3.75px;
-    color: white;
-    text-transform: uppercase;
-}
-
-.boton-registro a {
-    color: white;
-}
-
-.boton {
-    text-transform: uppercase;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    font-weight: 700;
-    /* border-radius: 3.75px; */
-}
-
-/* .boton {
-    width: 85%;
-    margin: 0 auto;
-    background-color: black;
-    color: white;
-    padding: 1rem;
-    border:1px solid black;
-    border-radius: 3.75px;
-    text-transform: uppercase;
-    font-weight: 700;
-} */
 
 .rojo {
     background-color: crimson;
@@ -610,17 +548,21 @@ i {
     border: black;
 }
 
-.boton-buscar {
-    background-color: black;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-radius: 3.75px;
-    border: none;
+.compra-entradas {
+    background-color: tomato;
+    border: 1px solid tomato;
 }
 
+.botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76%;
+    margin: 0 auto 2rem auto;
+    gap: 2rem;
+}
+
+/***** FIN BOTONES *****/
 table {
     padding: 1rem;
 }
@@ -647,58 +589,8 @@ th {
 
 }
 
-.botones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 76%;
-    margin: 0 auto 2rem auto;
-    gap: 2rem;
-}
-
-/** FORMULARIOS **/
-.formulario {
-    width: 85%;
-    margin: 2rem auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.formulario label {
-    text-transform: uppercase;
-    font-size: 2rem;
-}
 
 
-.formulario input,
-.formulario textarea {
-    padding: 0.7rem;
-    font-size: 1.6rem;
-}
-.formulario textarea{
-    min-height: 15rem;
-}
-
-.formulario input::placeholder {
-    font-size: 1.6rem;
-}
-
-.formulario-login {
-    width: 80%;
-}
-
-.formulario input[type="submit"] {
-    width: 100%;
-}
-
-.formulario-registro {
-    width: 90%;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid gainsboro;
-    border-radius: 3.75px;
-    background-color: white;
-}
 
 /** VENTANA MODAL **/
 .swal2-container .swal2-confirm {

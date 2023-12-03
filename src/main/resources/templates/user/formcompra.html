@@ -31,9 +31,9 @@
 				</a>
 			</div>
 			<div class="login-header">
-				<nav class="navegacion navegacion-admin">
+				<nav class="navegacion">
 					<div th:if="${!#authorization.expression('isAuthenticated()')}">
-						<a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+						<a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
 					</div>
 					<div class="dropdown" sec:authorize="hasRole('USER')">
 						<button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -66,7 +66,7 @@
 		</div>
 	</header>
 	<main class="alto-screen">
-		<div class="contenedor w-lg-75">
+		<div class="contenedor-interior ">
 			<h1 class="text-center text-uppercase">
 				Compra tu entrada</h1>
 			<form th:object="${venta}" th:action="@{/user/insertar}" class="my-5 sombra d-flex flex-column"
@@ -154,7 +154,7 @@
 				<input class="boton negro" type="submit" value="Nueva Venta" />
 			</form>
 
-			<a class="boton-buscar text-center" href="../index.html" th:href="@{/index}">Atrás</a>
+			<a class="boton negro text-center" href="../index.html" th:href="@{/index}">Atrás</a>
 
 		</div>
 

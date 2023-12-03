@@ -32,9 +32,9 @@
         </a>
       </div>
       <div class="login-header">
-        <nav class="navegacion navegacion-admin">
+        <nav class="navegacion">
           <div th:if="${!#authorization.expression('isAuthenticated()')}">
-            <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+            <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
           </div>
           <div class="dropdown" sec:authorize="hasRole('USER')">
             <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -67,7 +67,7 @@
     </div>
   </header>
   <main class="alto-screen">
-    <div class="contenedor w-xl-75">
+    <div class="contenedor-interior w-xl-75">
       <h1 class="text-center text-uppercase"
         th:text="${concierto.idconcierto != 0} ? 'Editar Concierto' : 'Nuevo Concierto'">
         Nuevo Concierto
@@ -127,7 +127,7 @@
           <input th:unless="${concierto.idconcierto != 0}" class="boton negro" type="submit" value="Nuevo Concierto" />
         </div>
       </form>
-      <a class="boton-buscar text-center" href="./listadoconciertos.html"
+      <a class="boton negro text-center" href="./listadoconciertos.html"
         th:href="@{/concierto/listadoconciertos}">Atrás</a>
     </div>
   </main>

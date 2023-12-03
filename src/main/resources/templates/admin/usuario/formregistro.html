@@ -31,9 +31,9 @@
                 </a>
             </div>
             <div class="login-header">
-                <nav class="navegacion navegacion-admin">
+                <nav class="navegacion">
                     <div th:if="${!#authorization.expression('isAuthenticated()')}">
-                        <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
+                        <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
                     </div>
                     <div class="dropdown" sec:authorize="hasRole('USER')">
                         <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -67,11 +67,11 @@
         </div>
     </header>
     <main class="alto-screen">
-        <div class="contenedor w-xl-75">
+        <div class="contenedor-interior">
             <h1 class="text-center text-uppercase"
                 th:text="${usuario.idusuario != 0} ? 'Editar Usuario' : 'Nuevo Usuario'">Nuevo Usuario</h1>
 
-            <form class="mt-5 sombra d-flex flex-column" th:action="@{/usuario/insertausuario}" th:object="${usuario}"
+            <form class="my-5 sombra" th:action="@{/usuario/insertausuario}" th:object="${usuario}"
                 method="post">
 
                 <div class="formulario">
@@ -121,19 +121,17 @@
 
 
             </form>
-            <a class="boton-link mt-3 text-center" href="./listadousuarios.html"
+            <div>
+            <a class="boton negro mt-3 text-center" href="./listadousuarios.html"
                 th:href="@{/usuario/listadousuarios}">Atrás</a>
+                </div>
 
 
         </div>
 
     </main>
     <footer class="footer">
-        <div class="contenido-navegacion justify-content-center justify-content-lg-between">
-            <a href="#">
-                <h1>Sala Corazón</h1>
-            </a>
-        </div>
+
         <div class="contenido-footer">
             <div class="datos">
                 <ul>
