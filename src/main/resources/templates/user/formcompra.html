@@ -70,7 +70,7 @@
 		<div class="contenedor-interior ">
 			<h1 class="text-center text-uppercase">
 				Compra tu entrada</h1>
-			<form th:object="${venta}" th:action="@{/user/insertar}" class="my-5 sombra d-flex flex-column"
+			<form th:object="${venta}" th:action="@{/user/insertar}" class="my-5 sombra-negra d-flex flex-column"
 				method="post">
 
 				<div th:if="${msgError}" class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert">
@@ -81,68 +81,61 @@
 				</div>
 
 
-				<div class="formulario">
+				<div class="formulario formulario-compra">
 
-					<div class="mb-5">
-						<input type="hidden" th:field="*{concierto.grupo.idgrupo}">
-						<input type="hidden" th:field="*{concierto.grupo.imagen}">
-						<label for="grupo" class="form-label">Grupo</label>
-						<input type="text" class="form-control" id="grupo" name="grupo"
-							th:value="${venta.concierto.grupo.nombre}" th:field="*{concierto.grupo.nombre}">
-					</div>
+
+					<input type="hidden" th:field="*{concierto.grupo.idgrupo}">
+					<input type="hidden" th:field="*{concierto.grupo.imagen}">
 					<input type="hidden" th:field="*{concierto.idconcierto}">
 					<input type="hidden" th:field="*{usuario.idusuario}">
-					<input type="text" class="form-control"
-						th:placeholder="${venta.usuario.username + ' ' + venta.usuario.apellidos}" readonly>
-
-					<div class="mb-5">
-						<label for="fecha" class="form-label">Fecha</label>
-						<input type="text" class="form-control" id="fecha" name="fecha"
-							th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}" readonly
-							th:field="*{concierto.fecha}">
-					</div>
-					<div class="mb-5">
-						<label for="hora" class="form-label">Hora</label>
-						<input type="text" class="form-control" id="hora" name="hora" th:value="${venta.concierto.hora}"
-							th:field="*{concierto.hora}" readonly>
-					</div>
-					<div class="mb-5">
-						<label for="precioanticipado" class="form-label">Precio Anticipado</label>
-						<input type="text" class="form-control" id="precioanticipado" name="precioanticipado"
-							th:value="${venta.concierto.precioanticipado}" th:field="*{concierto.precioanticipado}"
-							readonly>
-					</div>
-
-					<div class="row">
-						<div class="mb-5 col-xl-6">
-							<label for="numeroentradas" class="form-label">Nª de
-								Entradas</label>
-							<input type="number" class="form-control" id="numeroentradas" name="numeroentradas"
-								th:field="*{numeroentradas}" required>
+					<input type="hidden" th:field="*{fechaventa}">
+					<input type="hidden" th:field="*{horaventa}">
+					<div class="form-compra row align-items-center mb-3 justify-content-around">
+						<div class="col-3 offset-md-2"><label for="grupo" class="form-label">Grupo</label></div>
+						<div class="col-3 offset-md-2">
+							<input type="text" class="form-control" th:value="${venta.concierto.grupo.nombre}"
+								th:field="*{concierto.grupo.nombre}" readonly>
 						</div>
-						<!-- 
-						<div class="mb-5 col-xl-6">
-							<label for="usuario" class="form-label">Usuario</label>
-							<select th:field="*{usuario}" class="form-select fs-2" title="usuario">
-								<option value="0" selected>---Seleccione usuario---</option>
-								<option th:each=" u: ${usuarios}" th:value="${u.idusuario}"
-									th:text="${u.dni + ' - ' + u.username + '  ' + u.apellidos}">
-								</option>
-							</select>
-						</div> -->
 					</div>
-					<div class="mb-5">
-						<label for="fechaventa" class="form-label">Fecha Venta</label>
-						<input type="text" class="form-control" id="fechaventa" th:field="*{fechaventa}" readonly>
+					<div class="form-compra row align-items-center mb-3 justify-content-around align-items-center">
+						<div class="col-3 offset-md-2"><label for="fecha" class="form-label">Fecha</label></div>
+						<div class="col-3 offset-md-2">
+							<input type="text" class="form-control"
+								th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}"
+								th:field="*{concierto.fecha}">
+						</div>
 					</div>
-					<div class="mb-5">
-						<label for="horaventa" class="form-label">Hora Venta</label>
-						<input type="text" class="form-control" id="horaventa" th:field="*{horaventa}" readonly>
+					<div class="form-compra row align-items-center mb-3 justify-content-around ">
+						<div class="col-3 offset-md-2"><label for="hora" class="form-label">Hora</label></div>
+						<div class="col-3 offset-md-2">
+							<input type="text" class="form-control" th:value="${venta.concierto.hora}"
+								th:field="*{concierto.hora}" readonly>
+						</div>
 					</div>
-					<input class="boton negro" type="submit" value="Nueva Venta" />
+					<div class="form-compra row align-items-center mb-3 justify-content-around">
+						<div class="col-3 offset-md-2"><label for="precioanticipado" class="form-label">Precio
+								Anticipado</label></div>
+						<div class="col-3 offset-md-2">
+							<input type="text" class="form-control" id="precioanticipado" name="precioanticipado"
+								th:value="${venta.concierto.precioanticipado}+'€'"
+								th:field="*{concierto.precioanticipado}" readonly>
+						</div>
+					</div>
+					<div class="form-compra row align-items-center mb-3 justify-content-around">
+						<div class="col-3 offset-md-2"><label for="numeroentradas" class="form-label">Nª de
+								Entradas</label></div>
+						<div class="col-3 offset-md-2">
+							<input type="number" class="form-control" id="numeroentradas" name="numeroentradas"
+								th:field="*{numeroentradas}" required min="1">
+						</div>
+					</div>
+
+					<div class="form-compra row align-items-center mb-3 justify-content-around">
+						<input class="boton negro" type="submit" value="Compra" />
+					</div>
 
 				</div>
-				
+
 			</form>
 
 			<a class="boton negro text-center" href="../index.html" th:href="@{/index}">Atrás</a>

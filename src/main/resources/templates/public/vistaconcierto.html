@@ -96,6 +96,7 @@
                 <p th:text="${#temporals.year(c.fecha)}"></p>
               </li>
               <li th:text="${c.hora}"></li>
+              <li><span th:text="${c.precioanticipado}"></span>€ / <span th:text="${c.preciotaquilla}"></span>€</li>
               <li><a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
                   class="btn boton compra-entradas">Compra entradas</a></li>
 
