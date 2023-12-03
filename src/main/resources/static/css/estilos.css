@@ -89,6 +89,10 @@ a {
 .inicio img {
     width: 90%;
 }
+/* .offcanvas-header {
+    padding: 1rem;
+    margin-top: 3rem;
+} */
 
 /***** FIN HEADER *****/
 
@@ -243,10 +247,7 @@ fieldset {
     border: 1px solid black;
 }
 
-.offcanvas-header {
-    padding: 1rem;
-    margin-top: 3rem;
-}
+
 
 .micuenta a {
     color: black;
@@ -448,7 +449,6 @@ i {
 
 .logo {
     font-family: 'Sulphur Point', sans-serif;
-    text-transform: capitalize;
     font-size: 4rem;
     line-height: 0.8;
     width: 75%;
@@ -674,6 +674,9 @@ th {
 .formulario textarea {
     padding: 0.7rem;
     font-size: 1.6rem;
+}
+.formulario textarea{
+    min-height: 15rem;
 }
 
 .formulario input::placeholder {
