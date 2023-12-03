@@ -3,10 +3,7 @@ package com.dawes.controller;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ScannedGenericBeanDefinition;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dawes.modelo.ConciertoVO;
+import com.dawes.modelo.GrupoVO;
 import com.dawes.modelo.UsuarioVO;
 import com.dawes.servicio.ServicioConcierto;
 import com.dawes.servicio.ServicioGrupo;
@@ -49,15 +47,18 @@ public class MainController {
 			UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
 			modelo.addAttribute("usuario", usuario);
 		}	
-		modelo.addAttribute("conciertos", sc.findAll());
-		//modelo.addAttribute("grupos", sg.findAll());
+		//modelo.addAttribute("conciertos", sc.findAll());
+		modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
 
 	@RequestMapping("public/findgrupobyid")
 	public String findGrupoById(@RequestParam int idgrupo, Model modelo) {
-		modelo.addAttribute("grupo", sg.findById(idgrupo).get());
-		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(sg.findById(idgrupo).get().getNombre()).get());
+		Optional<GrupoVO> grupo = sg.findById(idgrupo);
+		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.get().getNombre());
+		
+		modelo.addAttribute("grupo", grupo.get());
+		modelo.addAttribute("conciertos", conciertos.get());
 		return "public/vistaconcierto";
 	}
 

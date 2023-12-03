@@ -1,4 +1,6 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Lato&family=Sulphur+Point:wght@400;700&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Permanent+Marker&display=swap');
+
 
 :root {
     --grisClaro: #f6f6f6;
@@ -43,11 +45,13 @@ a {
     text-decoration: none;
     color: white;
 }
+
 .fondo-negro {
     background-color: black;
 }
+
 .sombra-negra {
-    background-image: linear-gradient(to top, #373737 0%, #000 100%);
+    background-image: linear-gradient(to top, #1e1e1e 0%, #000 100%);
     padding: 2rem 0;
     border-radius: 3.75px;
     color: white;
@@ -63,9 +67,11 @@ a {
 .alto-screen {
     min-height: 60vh;
 }
+
 .iconos {
     display: flex;
 }
+
 .margen {
     margin-top: 5rem;
     margin-bottom: 5rem;
@@ -126,6 +132,23 @@ a {
     z-index: 10;
 }
 
+.imagen-dinamica {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 50rem;
+    position:relative;
+}
+.texto-concierto{
+
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    padding: 2rem 0;
+}
+.texto-concierto p {
+    font-size: 3rem;
+}
+
 .offcanvas-header {
     padding: 1rem;
     margin-top: 3rem;
@@ -135,10 +158,12 @@ a {
     background-color: gainsboro;
     color: black;
 }
+
 .dropdown-menu {
     min-width: 12rem;
     padding: 1rem;
 }
+
 .desplegable {
     font-size: 1.5rem;
     padding: 1rem 0.5rem;
@@ -163,9 +188,28 @@ a {
     min-width: 10rem;
     max-width: 20rem;
 }
+
 .fstable {
     font-size: 1.2rem;
     text-align: center;
+}
+
+.tabla-interior {
+    display: flex;
+    list-style: none;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 2rem 0;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.fecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.5;
 }
 
 /***** FIN TABLAS *****/
@@ -179,10 +223,12 @@ a {
     /* visibility:hidden; */
     display: none;
 }
+
 .busca-por-fecha-form .boton-buscar {
     border: 0.5px solid white;
     margin-top: 1rem;
 }
+
 .formulario {
     width: 85%;
     margin: 2rem auto;
@@ -267,6 +313,7 @@ a {
     background-color: black;
     color: white;
 }
+
 .micuenta a {
     color: black;
 }
@@ -275,7 +322,7 @@ a {
 
 /***** INDEX *****/
 .grupo-detalle img {
-    box-shadow: 10px 10px 16px 1px rgba(133 131 131 / 0.75);
+    box-shadow: 10px 10px 16px 1px #000;
     width: 90%;
     height: 90%;
 }

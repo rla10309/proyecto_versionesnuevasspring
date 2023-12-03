@@ -40,7 +40,8 @@
 							class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
 							aria-expanded="false"></button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi Cuenta</a>
+							<li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi
+									Cuenta</a>
 							</li>
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
@@ -93,12 +94,6 @@
 					<input type="hidden" th:field="*{usuario.idusuario}">
 					<input type="text" class="form-control"
 						th:placeholder="${venta.usuario.username + ' ' + venta.usuario.apellidos}" readonly>
-					<!-- <div th:if="${#authorization.expression('isAuthenticated()')}">
-						<p>Hola</p>
-					</div> -->
-
-
-
 
 					<div class="mb-5">
 						<label for="fecha" class="form-label">Fecha</label>
@@ -144,14 +139,10 @@
 						<label for="horaventa" class="form-label">Hora Venta</label>
 						<input type="text" class="form-control" id="horaventa" th:field="*{horaventa}" readonly>
 					</div>
-
-
-
-
-
+					<input class="boton negro" type="submit" value="Nueva Venta" />
 
 				</div>
-				<input class="boton negro" type="submit" value="Nueva Venta" />
+				
 			</form>
 
 			<a class="boton negro text-center" href="../index.html" th:href="@{/index}">Atrás</a>

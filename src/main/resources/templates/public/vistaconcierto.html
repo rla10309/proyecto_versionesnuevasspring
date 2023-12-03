@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-  <head>
+
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sala Corazón</title>
@@ -16,61 +17,59 @@
   <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
   <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
   <script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
-  </head>
-  <body>
-    <header class="header inicio">
-      <div class="container contenido-navegacion">
-        <div class="titulo-header">
-          <a href="../index.html" th:href="@{/index}">
-            <h1>Sala</h1>
-            <h1>Corazón</h1>
-          </a>
-        </div>
-        <div class="login-header">
-          <nav class="navegacion">
-            <div th:if="${!#authorization.expression('isAuthenticated()')}">
-              <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
-            </div>
-            <div class="dropdown" sec:authorize="hasRole('USER')">
-              <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
-                class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false"></button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi Cuenta</a>
-                </li>
-                <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-              </ul>
-            </div>
-            <div class="dropdown " sec:authorize="hasRole('ADMIN')">
-              <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false"
-                th:text="${#authentication.principal.username + ' (Admin)'}"></button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
-                    th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
-                <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
-                    th:href="@{/grupo/listadogrupos}">Grupos</a></li>
-                <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
-                    th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
-                <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
-                    th:href="@{/venta/listadoventas}">Ventas</a></li>
-                <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+</head>
+
+<body>
+  <header class="header inicio">
+    <div class="container contenido-navegacion">
+      <div class="titulo-header">
+        <a href="../index.html" th:href="@{/index}">
+          <h1>Sala</h1>
+          <h1>Corazón</h1>
+        </a>
       </div>
-    </header>
-    <main class="contenedor-interior alto-screen centrar">
-      <div class="row align-items-center grupo-detalle sombra py-5">
-        <div class="col-lg-6 text-center">
-          <img
-            src="../static/img/thepolice1.jpeg"
-            th:src="@{${grupo.imagen}}"
-            alt="the police"
-          />
+      <div class="login-header">
+        <nav class="navegacion">
+          <div th:if="${!#authorization.expression('isAuthenticated()')}">
+            <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
+          </div>
+          <div class="dropdown" sec:authorize="hasRole('USER')">
+            <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+              class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false"></button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">Mi Cuenta</a>
+              </li>
+              <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+          <div class="dropdown " sec:authorize="hasRole('ADMIN')">
+            <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false"
+              th:text="${#authentication.principal.username + ' (Admin)'}"></button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+                  th:href="@{/concierto/listadoconciertos}">Conciertos</a></li>
+              <li><a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+                  th:href="@{/grupo/listadogrupos}">Grupos</a></li>
+              <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+                  th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
+              <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                  th:href="@{/venta/listadoventas}">Ventas</a></li>
+              <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="sombra-negra container-fluid">
+    <div class="contenedor-interior alto-screen centrar ">
+      <div class="row align-items-center grupo-detalle py-5">
+        <div class="col-lg-5 text-center">
+          <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" alt="the police" />
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-7">
           <div class="text-sm-center text-lg-end mt-sm-3 py-5 pe-md-3">
             <h4 th:text="${grupo.nombre}" class="text-center fw-semibold">The Police**</h4>
             <p th:text="${grupo.estilo}" class="text-center">Pop-Rock</p>
@@ -87,51 +86,59 @@
               vulputate ut, congue in nibh. Phasellus arcu nibh, vehicula a
               vulputate ut, congue in nibh.Phasellus arcu nibh
             </p>
-           
+
           </div>
-          <a th:href="@{/index}" href="index.html" class="boton negro">Volver</a>
+          <div>
+            <ul class="tabla-interior" th:each="c : ${conciertos}">
+              <li class="fecha">
+                <p th:text="${#temporals.day(c.fecha)}"></p>
+                <p th:text="${#strings.toUpperCase(#temporals.monthNameShort(c.fecha))}" class="fw-bold"></p>
+                <p th:text="${#temporals.year(c.fecha)}"></p>
+              </li>
+              <li th:text="${c.hora}"></li>
+              <li><a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
+                  class="btn boton compra-entradas">Compra entradas</a></li>
+
+            </ul>
+          </div>
+
         </div>
       </div>
-      <div>
-        <ul>
-          <li  th:each="c : ${conciertos}" th:text="${c.fecha}"></li>
+
+
+    </div>
+          <div class="text-start"><a th:href="@{/index}" href="index.html" class="boton negro">Volver</a></div>
+
+  </main>
+  <footer class="footer">
+
+    <div class="contenido-footer">
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
         </ul>
+      </div>
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+        </ul>
+      </div>
+      <div class="datos">
+        <ul class=" text-white">
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+          <li>Datos de contacto</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
-      </div>
-      
-    </main>
-    <footer class="footer">
-      <div class="contenido-navegacion justify-content-center justify-content-lg-between">
-        <a href="#">
-          <h1 class="text-center">Sala Corazón</h1>
-        </a>
-      </div>
-      <div class="contenido-footer">
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
-        </div>
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
-        </div>
-        <div class="datos">
-          <ul class=" text-white">
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-            <li>Datos de contacto</li>
-          </ul>
-        </div>
-      </div>
-    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+</body>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
-  </body>
 </html>

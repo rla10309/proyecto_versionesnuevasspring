@@ -33,6 +33,8 @@ public class GrupoVO {
 	private String origen;
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
+	@Column(columnDefinition = "TEXT")
+	private String descripcioncorta;
 	
 	@OneToMany(mappedBy = "grupo")
 	List<ConciertoVO> conciertos;
