@@ -51,13 +51,15 @@ public class UsuarioController {
 
 		try {
 			su.save(usuario);
+			modelo.addAttribute("msg", "Usuario registrado con éxito");
+			modelo.addAttribute("usuarios", su.findAll());
 		} catch (DataIntegrityViolationException e) {
-			modelo.addAttribute("msgError", "DNI o Email ya existen en el sistema");
+			modelo.addAttribute("msg", "DNI o Email ya existen en el sistema");
 			modelo.addAttribute("usuario", new UsuarioVO());
 			modelo.addAttribute("roles", sr.findAll());
 			return "admin/usuario/formregistro";
 		}
-		return "redirect:/usuario/listadousuarios";
+		return "admin/usuario/listadousuarios";
 	}
 
 	@RequestMapping("/edit")

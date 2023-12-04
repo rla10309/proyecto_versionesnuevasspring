@@ -71,9 +71,10 @@ public class MainController {
 		usuario.setRol(sr.findByNombre("ROLE_USER").get());
 		try {
 			su.save(usuario);
+			modelo.addAttribute("msgSuccess", "Se ha registrado con éxito");
 		} catch (DataIntegrityViolationException e) {
 			modelo.addAttribute("usuario", new UsuarioVO());
-			modelo.addAttribute("msgError", "error desde main");
+			modelo.addAttribute("msgError", "DNI o Email ya existen en el sistema");
 			return "public/formregistro";
 		}
 		return "login";

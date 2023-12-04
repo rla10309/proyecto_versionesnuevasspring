@@ -79,18 +79,18 @@ public class GrupoController {
 		return "admin/grupo/editagrupo";
 	}
 	
-//	@RequestMapping("/delete")
-//	public String delete(@RequestParam int idgrupo, Model modelo) {
-//		try {
-//			sg.deleteById(idgrupo);
-//			modelo.addAttribute("msgSuccess", "Grupo eliminado con éxito");
-//		} catch (DataIntegrityViolationException e) {
-//			modelo.addAttribute("msgError", "No se puede eliminar el grupo");
-//		}
-//
-//		modelo.addAttribute("grupos", sg.findAll());
-//		return "admin/grupo/listadogrupos";
-//	}
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int idgrupo, Model modelo) {
+		try {
+			sg.deleteById(idgrupo);
+			modelo.addAttribute("msgSuccess", "Grupo eliminado con éxito");
+		} catch (DataIntegrityViolationException e) {
+			modelo.addAttribute("msgError", "Este grupo tiene conciertos pendientes");
+		}
+
+		modelo.addAttribute("grupos", sg.findAll());
+		return "admin/grupo/listadogrupos";
+	}
 	
 	@RequestMapping("/buscarporgrupo")
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
