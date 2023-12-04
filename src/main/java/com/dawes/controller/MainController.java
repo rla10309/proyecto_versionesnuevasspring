@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -37,17 +38,13 @@ public class MainController {
 	@Autowired
 	BCryptPasswordEncoder encoder;
 
-	
-	
-
-
 	@RequestMapping({ "/", "/index" })
 	public String index(Model modelo, Authentication authentication) {
-		if(authentication != null) {
-			UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
+		if (authentication != null) {
+			UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 			modelo.addAttribute("usuario", usuario);
-		}	
-		//modelo.addAttribute("conciertos", sc.findAll());
+		}
+		// modelo.addAttribute("conciertos", sc.findAll());
 		modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
@@ -56,7 +53,7 @@ public class MainController {
 	public String findGrupoById(@RequestParam int idgrupo, Model modelo) {
 		Optional<GrupoVO> grupo = sg.findById(idgrupo);
 		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.get().getNombre());
-		
+
 		modelo.addAttribute("grupo", grupo.get());
 		modelo.addAttribute("conciertos", conciertos.get());
 		return "public/vistaconcierto";
@@ -69,11 +66,17 @@ public class MainController {
 	}
 
 	@RequestMapping("/registro")
-	public String registrar(@ModelAttribute UsuarioVO usuario) {
-		 usuario.setPassword(encoder.encode(usuario.getPassword()));
-		 usuario.setRol(sr.findByNombre("ROLE_USER").get());
-		 su.save(usuario);
-		 return "login";
+	public String registrar(@ModelAttribute UsuarioVO usuario, Model modelo) {
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		usuario.setRol(sr.findByNombre("ROLE_USER").get());
+		try {
+			su.save(usuario);
+		} catch (DataIntegrityViolationException e) {
+			modelo.addAttribute("usuario", new UsuarioVO());
+			modelo.addAttribute("msgError", "error desde main");
+			return "public/formregistro";
+		}
+		return "login";
 	}
 
 	@RequestMapping("/login")
@@ -96,7 +99,6 @@ public class MainController {
 		return "user/user";
 	}
 
-
 	@RequestMapping("/public/buscarporgrupo")
 
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
@@ -106,7 +108,7 @@ public class MainController {
 			modelo.addAttribute("conciertos", conciertos.get());
 		} else {
 			modelo.addAttribute("error", "Concert not found");
-			return "error/errorPage"; 
+			return "error/errorPage";
 		}
 		return "index";
 	}

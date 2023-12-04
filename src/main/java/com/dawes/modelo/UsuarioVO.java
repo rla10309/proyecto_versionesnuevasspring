@@ -29,7 +29,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Entity
-@Table(name="usuarios", uniqueConstraints = @UniqueConstraint(columnNames = {"dni", "email"}))
+@Table(name="usuarios", uniqueConstraints = { @UniqueConstraint(columnNames = "dni"), @UniqueConstraint(columnNames = "email")})
 public class UsuarioVO implements UserDetails {
 	
 	@Id

@@ -22,42 +22,44 @@ import com.dawes.servicio.ServicioVenta;
 public class UsuarioController {
 	@Autowired
 	ServicioUsuario su;
-	
+
 	@Autowired
 	ServicioRol sr;
 
-	
 	@Autowired
 	ServicioVenta sv;
 	@Autowired
 	BCryptPasswordEncoder encoder;
-	
+
 	@RequestMapping("/listadousuarios")
 	public String listadoUsuarios(Model modelo) {
 		modelo.addAttribute("usuarios", su.findAll());
 		return "admin/usuario/listadousuarios";
-		
+
 	}
-	
+
 	@RequestMapping("/registrousuario")
 	public String registroUsuario(Model modelo) {
 		modelo.addAttribute("usuario", new UsuarioVO());
 		modelo.addAttribute("roles", sr.findAll());
 		return "admin/usuario/formregistro";
 	}
+
 	@RequestMapping("/insertausuario")
 	public String insertausuario(@ModelAttribute UsuarioVO usuario, Model modelo) {
-		
+		usuario.setPassword(encoder.encode(usuario.getPassword()));
+
 		try {
-			usuario.setPassword(encoder.encode(usuario.getPassword()));
 			su.save(usuario);
-		}catch(Exception e) {
-			modelo.addAttribute("Error", "Error en " + e.getStackTrace());
-			return "redirect:/usuario/registrousuario?error=true";
+		} catch (DataIntegrityViolationException e) {
+			modelo.addAttribute("msgError", "DNI o Email ya existen en el sistema");
+			modelo.addAttribute("usuario", new UsuarioVO());
+			modelo.addAttribute("roles", sr.findAll());
+			return "admin/usuario/formregistro";
 		}
 		return "redirect:/usuario/listadousuarios";
 	}
-	
+
 	@RequestMapping("/edit")
 	public String edit(@RequestParam int idusuario, Model modelo) {
 		modelo.addAttribute("usuario", su.findById(idusuario).get());
@@ -73,27 +75,22 @@ public class UsuarioController {
 //		return "redirect:/usuario/listadousuarios";
 //		
 //	}
-		
+
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int idusuario) {
 		try {
-		su.deleteById(idusuario);
-		}catch(DataIntegrityViolationException e) {
+			su.deleteById(idusuario);
+		} catch (DataIntegrityViolationException e) {
 			return "redirect:/usuario/listadousuarios?error=true";
 		}
 		return "redirect:/usuario/listadousuarios?success=true";
 	}
-	
+
 	@RequestMapping("/historial")
 	public String findByDni(@RequestParam String dni, Model modelo) {
-		modelo.addAttribute("ventas",sv.findByUsuarioDni(dni).get());
+		modelo.addAttribute("ventas", sv.findByUsuarioDni(dni).get());
 		modelo.addAttribute("usuario", su.findByDni(dni).get());
 		return "admin/usuario/historialusuario";
 	}
-		
-	
-	
-	
-	
 
 }

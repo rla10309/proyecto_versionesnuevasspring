@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.dawes.modelo.UsuarioVO;
 import com.dawes.repositorios.UsuarioRepositorio;
 import com.dawes.servicio.ServicioUsuario;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService  {
@@ -55,13 +56,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService 
 	public Optional<UsuarioVO> findByUsernameAndApellidos(String username, String apellidos) {
 		return ur.findByUsernameAndApellidos(username, apellidos);
 	}
-
+	@Transactional
 	@Override
-	public <S extends UsuarioVO> S save(S entity) throws DataIntegrityViolationException{
+	public <S extends UsuarioVO> S save(S entity) throws DataIntegrityViolationException {
 		try {
 		ur.save(entity);
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Error en la inserción de usuario");
+			
 		}
 		return entity;
 	}
