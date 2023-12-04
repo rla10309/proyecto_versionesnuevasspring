@@ -2,16 +2,16 @@ package com.dawes.servicioImpl;
 
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dawes.modelo.GrupoVO;
 import com.dawes.repositorios.GrupoRepositorio;
 import com.dawes.servicio.ServicioGrupo;
 
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class ServicioGrupoImpl implements ServicioGrupo {
@@ -25,14 +25,14 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 
 	@Transactional
 	@Override
-	public <S extends GrupoVO> S save(S entity)throws DataIntegrityViolationException {
+	public <S extends GrupoVO> S save(S entity) throws DataIntegrityViolationException {
 		try {
 			gr.save(entity);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException(e.getMessage());
 		}
 		return entity;
-		
+
 	}
 
 	@Override
@@ -66,15 +66,25 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 	}
 
 	@Transactional
-	@Override
-	public void deleteById(Integer id){
-	
+	public void deleteById(Integer id)throws DataIntegrityViolationException{
+		try {
 			gr.deleteById(id);
+			System.out.println("Eliminado");
+		}catch (DataIntegrityViolationException e) {
+			System.out.println("Error en deleteById " + e.getLocalizedMessage());
+			throw new DataIntegrityViolationException("Error al eliminar un grupo");
+		}
+	
 	}
 
+	@Transactional
 	@Override
 	public void delete(GrupoVO entity) {
+		try {
 		gr.delete(entity);
+		} catch(DataIntegrityViolationException e ) {
+			System.out.println("Error en delete " + e.getMessage());
+		}
 	}
 
 	@Override
@@ -91,7 +101,5 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 	public void deleteAll() {
 		gr.deleteAll();
 	}
-	
-	
 
 }

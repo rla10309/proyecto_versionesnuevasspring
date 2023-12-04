@@ -24,13 +24,12 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Entity
-@Table(name="usuarios", uniqueConstraints = @UniqueConstraint(columnNames = {"dni"}))
+@Table(name="usuarios", uniqueConstraints = @UniqueConstraint(columnNames = {"dni", "email"}))
 public class UsuarioVO implements UserDetails {
 	
 	@Id
@@ -75,7 +74,11 @@ public class UsuarioVO implements UserDetails {
 		this.fecharegistro = LocalDate.now();
 		
 	}
-
+	
+	//Constructor vacío que inserta la fecha de registro del sistema
+	public UsuarioVO() {
+		this.fecharegistro = LocalDate.now();
+	}
 	
 	
 
