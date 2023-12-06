@@ -59,6 +59,7 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
+			
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
 					</div>
@@ -84,11 +85,14 @@
 			<div class="offcanvas-body">
 				<div>
 					<h5 class="text-decoration-underline">Datos Personales</h5>
-					<p>Nombre:  <span th:text="${usuario.username + ' ' + usuario.apellidos}"></span></p>
-					<p>Fecha de nacimiento: <span th:text="${#temporals.day(usuario.fechanacimiento) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fechanacimiento)) + ' ' + #temporals.year(usuario.fechanacimiento)}"></span></p>
+					<p>Nombre: <span th:text="${usuario.username + ' ' + usuario.apellidos}"></span></p>
+					<p>Fecha de nacimiento: <span
+							th:text="${#temporals.day(usuario.fechanacimiento) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fechanacimiento)) + ' ' + #temporals.year(usuario.fechanacimiento)}"></span>
+					</p>
 					<p>Edad: <span th:text="${edad} "></span></p>
 					<p>Registrado desde:<span
-						th:text="${#temporals.day(usuario.fecharegistro) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fecharegistro)) + ' ' + #temporals.year(usuario.fecharegistro)}"></span></p>
+							th:text="${#temporals.day(usuario.fecharegistro) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fecharegistro)) + ' ' + #temporals.year(usuario.fecharegistro)}"></span>
+					</p>
 
 					Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
 					images, lists,

@@ -74,17 +74,34 @@
         </button>
         <span>Usuario eliminado con éxito</span>
       </div>
+      <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span>Error al eliminar usuario</span>
+      </div>
+
+    
+
+      <div th:if="${msg}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span th:text="${msg}"></span>
+      </div>
       <div class="table-responsive-md" id="appendElement">
         <table class="table table-hover" id="tabla-usuarios">
+
           <thead>
             <tr class="text-uppercase">
               <th scope="col">Id</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellidos</th>
               <th scope="col">Dni</th>
-              <!-- <th scope="col">Contraseña</th> -->
               <th scope="col">Email</th>
+              <th scope="col">F.Nacimiento</th>
               <th scope="col">Rol</th>
+              <th scope="col">Registro</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
@@ -96,25 +113,28 @@
               <td th:text="${usuario.dni}">10880333C</td>
               <!-- <td th:text="${usuario.password}" class="ocultar truncate-text">Contraseña</td> -->
               <td th:text="${usuario.email}">otto@ott.com</td>
+              <td th:text="${#temporals.format(usuario.fechanacimiento, 'dd/MM/yyyy')}">otto@ott.com</td>
               <td th:text="${usuario.rol.nombre.substring(5)}">otto@ott.com</td>
+              <td th:text="${#temporals.format(usuario.fecharegistro, 'dd/MM/yyyy')}">otto@ott.com</td>
               <td class="iconos">
                 <a th:href="@{/usuario/edit(idusuario=${usuario.idusuario})}" title="Editar">
                   <i class="fa-sharp fa-solid fa-pen-to-square link-primary"></i>
                 </a>
-                <a th:href="@{/usuario/delete(idusuario=${usuario.idusuario})}" class="link-danger delete-group" title="Eliminar">
+                <a th:href="@{/usuario/delete(idusuario=${usuario.idusuario})}" class="link-danger delete-group"
+                  title="Eliminar">
                   <i class="fa-solid fa-trash-can"></i>
                 </a>
                 <a th:href="@{/usuario/historial(dni=${usuario.dni})}" class="link-success" title="Historial">
 
                   <i class="fa-solid fa-eye"></i>
                 </a>
-                <a  class="link-info getpass" title="Muestra password">
+                <a class="link-info getpass" title="Muestra password">
                   <i class="fa-solid fa-lock"></i>
                 </a>
               </td>
             </tr>
           </tbody>
-       
+
         </table>
         <div id="muestra_password" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">

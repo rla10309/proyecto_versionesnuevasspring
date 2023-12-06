@@ -15,8 +15,14 @@ $(".delete-group").on("click", function (e) {
     if (result.isConfirmed) {
       href = $(this).attr("href");
       console.log("Redirigiendo a:", href);
-      window.location.href = href;
+      href+='&success=true';
+     
+    } else {
+         href = $(this).attr("href");
+         console.log("Redirigiendo a:", href);
+         href+='&error=true';
     }
+     window.location.href = href;
   });
   $(".swal2-html-container").css({ "font-size": "1.8rem" });
   $("button").css({ "font-size": "1.5rem" });

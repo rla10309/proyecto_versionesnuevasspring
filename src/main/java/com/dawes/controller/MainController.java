@@ -101,17 +101,21 @@ public class MainController {
 	}
 
 	@RequestMapping("/public/buscarporgrupo")
-
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
-		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombreIgnoreCase(nombre);
-
-		if (conciertos.isPresent()) {
-			modelo.addAttribute("conciertos", conciertos.get());
-		} else {
+		
+		GrupoVO grupo = sg.findByNombreIgnoreCase(nombre).get();
+		
+		List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.getNombre()).get();
+		modelo.addAttribute("grupo", grupo);
+		if (conciertos.size() > 0) {
+			
+			modelo.addAttribute("conciertos", conciertos);
+		} 
+		else {
 			modelo.addAttribute("error", "Concert not found");
-			return "error/errorPage";
+			
 		}
-		return "index";
+		return "public/vistaconcierto";
 	}
 
 }

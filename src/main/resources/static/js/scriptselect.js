@@ -26,12 +26,6 @@ $(function () {
        cache: false,
        success: function (resultado) {
         let mensaje = `La contraseña del usuario con dni ${resultado.dni} es ${resultado.password}`;
-        // console.log(resultado);
-        //  $("#msg").html(
-        //      `La contraseña del usuario con dni ${resultado.dni} es ${resultado.password}`
-        //    );
-        //    console.log("Después de mostrar #muestra_password");
-        //    $("#muestra_password").addClass("show");
              $("#muestra_password").remove();
              $("#appendElement").append(`
                 <div id="muestra_password" class="alert alert-info alert-dismissible fade show mt-3" role="alert">

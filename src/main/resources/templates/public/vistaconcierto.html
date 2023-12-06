@@ -66,29 +66,30 @@
   <main class="sombra-negra container-fluid">
     <div class="contenedor-interior alto-screen centrar ">
       <div class="row align-items-center grupo-detalle py-5">
-        <div class="col-lg-5 text-center">
+        <div class="col-lg-5 d-flex flex-column text-sm-center text-md-start">
           <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" alt="the police" />
         </div>
-        <div class="col-lg-7">
-          <div class="text-sm-center text-lg-end mt-sm-3 py-5 pe-md-3">
-            <h4 th:text="${grupo.nombre}" class="text-center fw-semibold">The Police**</h4>
-            <p th:text="${grupo.estilo}" class="text-center">Pop-Rock</p>
-            <p th:text="${grupo.origen}" class="text-center">UK</p>
-            <p th:text="${grupo.descripcion}" class="text-center mb-5">
-              So lonely. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Phasellus arcu nibh, vehicula a vulputate ut, congue in
-              nibh. Phasellus arcu nibh, vehicula a vulputate ut, congue in
-              nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Phasellus arcu nibh, vehicula a vulputate ut,
-              congue in nibh. Phasellus arcu nibh, vehicula a vulputate ut,
-              congue in nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus arcu nibh, vehicula a
-              vulputate ut, congue in nibh. Phasellus arcu nibh, vehicula a
-              vulputate ut, congue in nibh.Phasellus arcu nibh
-            </p>
-
-          </div>
+          <div class="col-lg-7">
+            <div class="text-sm-center text-lg-end mt-sm-3 py-5 pe-md-3">
+              <h4 th:text="${grupo.nombre}" class="text-center fw-semibold">The Police**</h4>
+              <p th:text="${grupo.estilo}" class="text-center">Pop-Rock</p>
+              <p th:text="${grupo.origen}" class="text-center">UK</p>
+              <p th:text="${grupo.descripcion}" class="text-center mb-5">
+                So lonely. Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Phasellus arcu nibh, vehicula a vulputate ut, congue in
+                nibh. Phasellus arcu nibh, vehicula a vulputate ut, congue in
+                nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Phasellus arcu nibh, vehicula a vulputate ut,
+                congue in nibh. Phasellus arcu nibh, vehicula a vulputate ut,
+                congue in nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Phasellus arcu nibh, vehicula a
+                vulputate ut, congue in nibh. Phasellus arcu nibh, vehicula a
+                vulputate ut, congue in nibh.Phasellus arcu nibh
+              </p>
+            </div>
+      
           <div>
+            <div th:if="${error}" th:text="${error}"></div>
             <ul class="tabla-interior" th:each="c : ${conciertos}">
               <li class="fecha">
                 <p th:text="${#temporals.day(c.fecha)}"></p>
@@ -108,7 +109,8 @@
 
 
     </div>
-          <div class="text-start"><a th:href="@{/index}" href="index.html" class="boton negro">Volver</a></div>
+    <div class="text-start"><a th:href="@{/index}" href="index.html" class="boton negro">Volver</a></div>
+
 
   </main>
   <footer class="footer">

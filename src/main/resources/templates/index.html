@@ -81,7 +81,7 @@
             <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
           </div>
           <div class="col-12 col-md-2 me-md-2">
-            <button type="submit" class="boton negro w-100">
+            <button type="submit" class="boton corporativo w-100">
               Buscar
             </button>
           </div>
@@ -90,6 +90,8 @@
       <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
       <div class="sombra-negra mt-5">
         <!-- CONTENIDO CONCIERTOS  -->
+        
+        
         <div class="contenido-conciertos" th:each="g: ${grupos}">
           <div th:style="'background-image:url(\'' + ${g.imagen} + '\');'"
             class="imagen-dinamica row align-items-end justify-content-center">

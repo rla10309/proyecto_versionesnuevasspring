@@ -9,7 +9,7 @@ import com.dawes.modelo.GrupoVO;
 @Service
 public interface ServicioGrupo {
 
-	Optional<GrupoVO> findByNombre(String nombre);
+	Optional<GrupoVO> findByNombreIgnoreCase(String nombre);
 
 	<S extends GrupoVO> S save(S entity);
 

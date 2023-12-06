@@ -19,8 +19,8 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 	GrupoRepositorio gr;
 
 	@Override
-	public Optional<GrupoVO> findByNombre(String nombre) {
-		return gr.findByNombre(nombre);
+	public Optional<GrupoVO> findByNombreIgnoreCase(String nombre) {
+		return gr.findByNombreIgnoreCase(nombre);
 	}
 
 	@Transactional

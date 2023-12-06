@@ -66,12 +66,19 @@
   </header>
   <main class="margen container centrar alto-screen">
     <form class="formulario-login" th:action="@{/login}" method="post">
-      <div th:if="${param.error}" class="alerta">
-        Usuario o contraseña incorrectos
+      <div th:if="${param.error}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span>Usuario o contraseña incorrectos</span>
       </div>
-      <div th:if="${param.logout}" class="alerta">
-        Has salido correctamente
+      <div th:if="${param.logout}" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span>Usuario o contraseña incorrectos</span>
       </div>
+
 
       <div class="mb-5 campo">
         <label for="username">E-Mail</label>

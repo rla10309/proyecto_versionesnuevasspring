@@ -4,6 +4,8 @@
 
 :root {
     --grisClaro: #f6f6f6;
+    --corporativo: #19199f;
+    --textos: #333;
 }
 
 
@@ -51,10 +53,11 @@ a {
 }
 
 .sombra-negra {
-    background-image: linear-gradient(to top, #1e1e1e 0%, #000 100%);
+   /*background-image: linear-gradient(to top, #1e1e1e 0%, #000 100%);*/
+   background-color: var(--grisClaro);
     padding: 2rem 0;
     border-radius: 3.75px;
-    color: white;
+    color: var(--textos);
 }
 
 .sombra {
@@ -94,7 +97,7 @@ a {
 }
 
 .header {
-    background-color: #000;
+    background-color: #19199f;
 }
 
 .contenido-navegacion {
@@ -140,7 +143,7 @@ a {
     position:relative;
 }
 .texto-concierto{
-
+    color: white;
     border-top: 3px solid white;
     border-bottom: 3px solid white;
     padding: 2rem 0;
@@ -175,7 +178,7 @@ a {
 /***** CONTENEDORES *****/
 .contenedor-interior {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 5rem auto;
 }
 
@@ -197,8 +200,8 @@ a {
 .tabla-interior {
     display: flex;
     list-style: none;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 1px solid var(--textos);
+    border-bottom: 1px solid var(--textos);
     padding: 2rem 0;
     align-items: center;
     justify-content: space-around;
@@ -209,7 +212,10 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    line-height: 0.5;
+    line-height: 1;
+}
+.fecha p{
+    margin: 0;
 }
 
 /***** FIN TABLAS *****/
@@ -290,7 +296,7 @@ a {
 
 /***** FOOTER ****/
 .footer {
-    background-color: black;
+    background-color: #19199f;
 }
 
 /***** FIN FOOTER *****/
@@ -614,6 +620,10 @@ i {
 .negro {
     background-color: black;
     border: black;
+}
+.corporativo {
+    background-color: var(--corporativo);
+    border: var(--corporativo);
 }
 
 .compra-entradas {
