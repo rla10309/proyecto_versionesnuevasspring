@@ -87,6 +87,7 @@
           </div>
         </div>
       </form>
+     
       <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
       <div class="sombra-negra mt-5">
         <!-- CONTENIDO CONCIERTOS  -->
@@ -109,34 +110,6 @@
 
           </div>
         </div>
-
-        <!-- <img th:src="@{${g.imagen}}" class="rounded-start capa" src="../static/img/multitud.jpg" alt="" /> -->
-
-        <!-- <div class="row mb-3 sombra-negra align-items-center" th:each="c: ${conciertos}"> -->
-        <!-- <div class="row mb-3 sombra-negra align-items-center" th:each="g: ${grupos}">
-            <div class="col-12 col-md-5 mb-3 mb-md-0">
-              <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" href="vistaconcierto.html">
-
-                <img th:src="@{${g.imagen}}" class="rounded-start" src="../static/img/multitud.jpg" alt="" /></a>
-
-            </div>
-            <div class="col-12 col-md-7">
-              <h3 th:text="${g.nombre}">Nombre del Grupo</h3>
-              <p th:text="${c.intro}">Texto de prueba</p>
-              <p th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
-              <p th:text="${c.hora}">21:30</p>
-              <p class=" text-center text-sm-end">
-                <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
-                  class="btn boton compra-entradas mt-5">Compra entradas</a>
-              </p>
-
-            </div>
-
-          </div>
-        </div>-->
-
-
-
       </div>
     </div>
   </main>
@@ -186,6 +159,23 @@
       confirmButtonColor: "##20c997",
       width: "40rem",
     });
+
+  </script>
+  <script th:if="${noelement}"  th:inline="javascript">
+  
+     var mensaje = /*[[${noelement}]]*/ '';
+        Swal.fire({
+            icon: 'error',
+            title: 'Lo sentimos',
+            text: mensaje,
+            confirmButtonColor: "##20c997",
+            width: "40rem",
+          }).then(result => {
+            if(result.isConfirmed){
+              window.location.href = "http://localhost:8080/index";
+
+            }
+          });
 
   </script>
 

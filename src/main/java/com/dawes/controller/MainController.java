@@ -1,6 +1,7 @@
 package com.dawes.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,21 @@ public class MainController {
 		return "index";
 	}
 
+	/*
+	 * Aquí se maneje la búsqueda del grupo desde la caja que lo muestra, a través
+	 * de su id
+	 */
 	@RequestMapping("public/findgrupobyid")
 	public String findGrupoById(@RequestParam int idgrupo, Model modelo) {
-		Optional<GrupoVO> grupo = sg.findById(idgrupo);
-		Optional<List<ConciertoVO>> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.get().getNombre());
+		GrupoVO grupo = sg.findById(idgrupo).get();
+		List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.getNombre()).get();
 
-		modelo.addAttribute("grupo", grupo.get());
-		modelo.addAttribute("conciertos", conciertos.get());
+		modelo.addAttribute("grupo", grupo);
+		if(conciertos.size() > 0) {
+			modelo.addAttribute("conciertos", conciertos);
+		} else {
+			modelo.addAttribute("noconcert", "En estos momentos no hay conciertos programados de " + grupo.getNombre().toUpperCase());
+		}
 		return "public/vistaconcierto";
 	}
 
@@ -100,22 +109,23 @@ public class MainController {
 		return "user/user";
 	}
 
+	/* Esto maneja la búsqueda del grupo por su nombre en el formulario del index */
 	@RequestMapping("/public/buscarporgrupo")
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
-		
-		GrupoVO grupo = sg.findByNombreIgnoreCase(nombre).get();
-		
-		List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.getNombre()).get();
-		modelo.addAttribute("grupo", grupo);
-		if (conciertos.size() > 0) {
-			
-			modelo.addAttribute("conciertos", conciertos);
-		} 
-		else {
-			modelo.addAttribute("error", "Concert not found");
-			
+		try {
+			GrupoVO grupo = sg.findByNombreIgnoreCase(nombre).get();
+			List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.getNombre()).get();
+			modelo.addAttribute("grupo", grupo);
+			if (conciertos.size() > 0) {
+				modelo.addAttribute("conciertos", conciertos);
+			}
+			return "public/vistaconcierto";
+		} catch (NoSuchElementException e) {
+			modelo.addAttribute("noelement",
+					"No tenemos nada programado de " + nombre.toUpperCase() + " en estos momentos");
+			return "index";
 		}
-		return "public/vistaconcierto";
+
 	}
 
 }
