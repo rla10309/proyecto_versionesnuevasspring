@@ -26,21 +26,20 @@ public class VentaController {
 	ServicioGrupo sg;
 	@Autowired
 	ServicioUsuario su;
-	
+
 	@RequestMapping("/prueba")
 	public String prueba(Model modelo) {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "admin/venta/prueba";
-		
+
 	}
-	
 
 	@RequestMapping("/listadoventas")
 	public String listadoventas(Model modelo) {
 		modelo.addAttribute("ventas", sv.findAll());
 		return "admin/venta/listadoventas";
 	}
-	
+
 	@RequestMapping("/nuevaventa")
 	public String nuevaventa(Model modelo) {
 		modelo.addAttribute("venta", new VentaVO());
@@ -48,45 +47,44 @@ public class VentaController {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "admin/venta/forminsertaventa";
 	}
-	
 
-	 
 	@RequestMapping("/insertar")
-	public String insertar(@ModelAttribute VentaVO venta)  {
-	
-			sv.save(venta);
+	public String insertar(@ModelAttribute VentaVO venta) {
+
+		sv.save(venta);
 
 		return "redirect:/venta/listadoventas";
 	}
-	
+
 	@RequestMapping("/edit")
 	public String edit(@RequestParam int idventa, @RequestParam String nombre, Model modelo) {
 		try {
-		modelo.addAttribute("venta", sv.findById(idventa).get());
-		modelo.addAttribute("usuarios", su.findAll());
-		modelo.addAttribute("grupos", sg.findAll());
-		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get());
-		} catch(Exception e) {
+			modelo.addAttribute("venta", sv.findById(idventa).get());
+			modelo.addAttribute("usuarios", su.findAll());
+			modelo.addAttribute("grupos", sg.findAll());
+			modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get());
+		} catch (Exception e) {
 			System.out.println("Error ventas: " + e.getStackTrace());
 		}
 		return "admin/venta/forminsertaventa";
 	}
-	
+
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int idventa) {
 		sv.deleteById(idventa);
 		return "redirect:/venta/listadoventas";
 	}
+
 	@RequestMapping("/informe")
 	public String findByGrupoNombre(@RequestParam String nombre, Model modelo) {
 		List<VentaVO> ventas = sv.findByConciertoGrupoNombre(nombre).get();
-		if(!ventas.isEmpty()) {
+		if (!ventas.isEmpty()) {
 			modelo.addAttribute("nombregrupo", nombre);
 			modelo.addAttribute("ventas", ventas);
 		} else {
 			modelo.addAttribute("msgError", "No hay datos que mostrar");
 		}
-		
+
 		return "admin/venta/informeventas";
 	}
 }

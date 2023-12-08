@@ -11,8 +11,6 @@ import com.dawes.modelo.GrupoVO;
 import com.dawes.repositorios.GrupoRepositorio;
 import com.dawes.servicio.ServicioGrupo;
 
-
-
 @Service
 public class ServicioGrupoImpl implements ServicioGrupo {
 	@Autowired
@@ -66,23 +64,23 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 	}
 
 	@Transactional
-	public void deleteById(Integer id)throws DataIntegrityViolationException{
+	public void deleteById(Integer id) throws DataIntegrityViolationException {
 		try {
 			gr.deleteById(id);
 			System.out.println("Eliminado");
-		}catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			System.out.println("Error en deleteById " + e.getLocalizedMessage());
 			throw new DataIntegrityViolationException("Error al eliminar un grupo");
 		}
-	
+
 	}
 
 	@Transactional
 	@Override
 	public void delete(GrupoVO entity) {
 		try {
-		gr.delete(entity);
-		} catch(DataIntegrityViolationException e ) {
+			gr.delete(entity);
+		} catch (DataIntegrityViolationException e) {
 			System.out.println("Error en delete " + e.getMessage());
 		}
 	}

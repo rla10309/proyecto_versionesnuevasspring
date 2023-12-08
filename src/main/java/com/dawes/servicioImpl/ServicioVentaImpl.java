@@ -22,13 +22,9 @@ public class ServicioVentaImpl implements ServicioVenta {
 	@Autowired
 	ConciertoRepositorio cr;
 
-
-
-	
 	public Optional<List<VentaVO>> findByUsuarioDni(String dni) {
 		return vr.findByUsuarioDni(dni);
 	}
-
 
 	public Optional<List<VentaVO>> findByConciertoGrupoNombre(String nombre) {
 		return vr.findByConciertoGrupoNombre(nombre);
@@ -39,14 +35,14 @@ public class ServicioVentaImpl implements ServicioVenta {
 	public <S extends VentaVO> S save(S entity) throws DataIntegrityViolationException {
 		ConciertoVO c = cr.findById(entity.getConcierto().getIdconcierto()).get();
 		try {
-		if(entity.getIdventa() == 0) {
-			c.setPlazas(c.getPlazas() - entity.getNumeroentradas());
-			cr.save(c);
-		}
-		} catch(DataIntegrityViolationException e) {
+			if (entity.getIdventa() == 0) {
+				c.setPlazas(c.getPlazas() - entity.getNumeroentradas());
+				cr.save(c);
+			}
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Error en la venta");
 		}
-		
+
 		return vr.save(entity);
 	}
 
@@ -83,7 +79,7 @@ public class ServicioVentaImpl implements ServicioVenta {
 	@Override
 	public void deleteById(Integer id) {
 		VentaVO venta = vr.findById(id).get();
-		
+
 		int plazasfinales = venta.getConcierto().getPlazas() + venta.getNumeroentradas();
 		venta.getConcierto().setPlazas(plazasfinales);
 		vr.deleteById(id);
@@ -108,7 +104,5 @@ public class ServicioVentaImpl implements ServicioVenta {
 	public void deleteAll() {
 		vr.deleteAll();
 	}
-	
-	
 
 }

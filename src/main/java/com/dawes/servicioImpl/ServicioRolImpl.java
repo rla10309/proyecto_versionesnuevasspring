@@ -15,8 +15,6 @@ import com.dawes.servicio.ServicioRol;
 public class ServicioRolImpl implements ServicioRol {
 	@Autowired
 	RolRepositorio rr;
-	
-
 
 	public Optional<List<UsuarioVO>> findUsuarioByNombre(String nombre) {
 		return rr.findUsuarioByNombre(nombre);
@@ -86,7 +84,5 @@ public class ServicioRolImpl implements ServicioRol {
 	public void deleteAll() {
 		rr.deleteAll();
 	}
-	
-	
 
 }

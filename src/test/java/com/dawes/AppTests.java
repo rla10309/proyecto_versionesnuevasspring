@@ -20,24 +20,22 @@ import com.dawes.servicio.ServicioVenta;
 
 @SpringBootTest
 class AppTests {
-	
+
 	@Autowired
 	ServicioConcierto sc;
-	
+
 	@Autowired
 	ServicioGrupo sg;
-	
+
 	@Autowired
 	ServicioVenta sv;
-	
+
 	@Autowired
 	ServicioUsuario su;
-	
+
 	@Autowired
 	ServicioRol sr;
 
-	
-	
 	// Crea grupos
 //	@Test
 //	public void test01() {
@@ -54,15 +52,13 @@ class AppTests {
 //		sc.save(new ConciertoVO(45.0, 55.0, LocalDate.of(2023, 11, 25), LocalTime.of(20, 30), 300, sg.findByNombre("The Police").get()));
 //		assertNotNull(sc.save(new ConciertoVO(55.0, 65.0, LocalDate.of(2023, 10, 20), LocalTime.of(20, 30), 300, sg.findByNombre("ABBA").get())));
 //	}
-	
-	
+
 	// Buscar todos los conciertos de un grupo
 	@Test
 	public void test03() {
 		List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase("ABBA").get();
 		assertEquals(2, conciertos.size());
 	}
-	
 
 	// Elimina un grupo
 //	@Test
@@ -71,7 +67,7 @@ class AppTests {
 //		sg.deleteById(sg.findByNombre("ABBA").get().getIdgrupo());
 //		assertNotNull(sg.findByNombre("ABBA").get());
 //	}
-	
+
 //	// Actualizamos un concierto 
 //	@Test
 //	public void test05() {
@@ -95,9 +91,11 @@ class AppTests {
 //		su.save(new UsuarioVO("Manolo", "Escobar", "123456", "222", "manolo@manolo.com", LocalDate.of(1975, 3, 9), sr.findByNombre("ROLE_USER").get()));
 //		assertNotNull(su.save(new UsuarioVO("Antonio", "Molina", "123456", "333", "antonio@antonio.com", LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
 //	}
-	//Insertamos usuario con el mismo dni
-	@Test void test08() {
-		assertNotNull(su.save(new UsuarioVO("Elvis", "Prestley", "123456", "333", "antonio@antonio.com", LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
+	// Insertamos usuario con el mismo dni
+	@Test
+	void test08() {
+		assertNotNull(su.save(new UsuarioVO("Elvis", "Prestley", "123456", "333", "antonio@antonio.com",
+				LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
 	}
 //	
 //	@Test
@@ -154,6 +152,5 @@ class AppTests {
 //	public void test13() {
 //		assertNotNull(sg.save(new GrupoVO("ABBA", 4, "imagenAbba.img", "Pop", "Suecia", "Waterlooo" )));
 //	}
-
 
 }

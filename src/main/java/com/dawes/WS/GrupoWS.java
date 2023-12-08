@@ -15,12 +15,12 @@ import com.dawes.servicio.ServicioGrupo;
 @RestController
 @RequestMapping("/api")
 public class GrupoWS {
-	
+
 	@Autowired
 	ServicioGrupo sg;
-	
+
 	@GetMapping("/grupo/{nombre}")
-	public ResponseEntity<?> muestraDescripcion(@PathVariable String nombre){
+	public ResponseEntity<?> muestraDescripcion(@PathVariable String nombre) {
 		GrupoVO grupoVO = sg.findByNombreIgnoreCase(nombre).get();
 		GrupoDTO grupoDTO = new GrupoDTO(grupoVO.getNombre(), grupoVO.getDescripcion());
 		return new ResponseEntity<GrupoDTO>(grupoDTO, HttpStatus.OK);

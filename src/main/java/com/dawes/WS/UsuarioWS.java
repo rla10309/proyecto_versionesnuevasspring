@@ -16,27 +16,23 @@ import com.dawes.servicio.ServicioUsuario;
 @RestController
 @RequestMapping("/api")
 public class UsuarioWS {
-	
+
 	@Autowired
 	ServicioUsuario su;
-	
 
-	
-	
 	/*
 	 * Muestra la contraseña codificada de un usuario
 	 */
-	
+
 	@GetMapping("/usuario/{dni}")
-	public ResponseEntity<?> findByUsuarioDni(@PathVariable String dni){
+	public ResponseEntity<?> findByUsuarioDni(@PathVariable String dni) {
 		UsuarioVO usuario = su.findByDni(dni).get();
 		UsuarioDTO usuarioDto = new UsuarioDTO();
 		usuarioDto.setIdUsuario(usuario.getIdusuario());
 		usuarioDto.setDni(usuario.getDni());
 		usuarioDto.setPassword(usuario.getPassword());
 		return new ResponseEntity<UsuarioDTO>(usuarioDto, HttpStatus.OK);
-		
+
 	}
-	
 
 }

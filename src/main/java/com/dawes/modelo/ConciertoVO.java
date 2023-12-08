@@ -22,10 +22,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="conciertos", uniqueConstraints = @UniqueConstraint(columnNames = {"fecha", "hora"}))
+@Table(name = "conciertos", uniqueConstraints = @UniqueConstraint(columnNames = { "fecha", "hora" }))
 public class ConciertoVO {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idconcierto;
 	@Column(nullable = false)
 	private double precioanticipado;
@@ -39,15 +39,13 @@ public class ConciertoVO {
 	private int plazas;
 	@Column(columnDefinition = "TEXT", nullable = true)
 	private String intro;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idgrupo")
+	@JoinColumn(name = "idgrupo")
 	private GrupoVO grupo;
-	
-	
+
 	@OneToMany(mappedBy = "concierto")
 	private List<VentaVO> ventas;
-
 
 	public ConciertoVO(double precioanticipado, double preciotaquilla, LocalDate fecha, LocalTime hora, int plazas,
 			GrupoVO grupo) {
@@ -60,29 +58,11 @@ public class ConciertoVO {
 		this.grupo = grupo;
 	}
 
-
 	@Override
 	public String toString() {
 		return "ConciertoVO [idconcierto=" + idconcierto + ", precioanticipado=" + precioanticipado
 				+ ", preciotaquilla=" + preciotaquilla + ", fecha=" + fecha + ", hora=" + hora + ", plazas=" + plazas
 				+ ", grupo=" + grupo.getNombre() + "]";
 	}
-	
-	
-
-
-
-
-
-	
-	
-
-
-	
-	
-	
-	
-
-	
 
 }

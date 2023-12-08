@@ -1,9 +1,5 @@
 package com.dawes.modelo;
 
-
-
-
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,9 +27,10 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Entity
-@Table(name="usuarios", uniqueConstraints = { @UniqueConstraint(columnNames = "dni"), @UniqueConstraint(columnNames = "email")})
+@Table(name = "usuarios", uniqueConstraints = { @UniqueConstraint(columnNames = "dni"),
+		@UniqueConstraint(columnNames = "email") })
 public class UsuarioVO implements UserDetails {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idusuario;
@@ -48,15 +45,19 @@ public class UsuarioVO implements UserDetails {
 	private String email;
 	private LocalDate fechanacimiento;
 	private LocalDate fecharegistro;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idrol")
+	@JoinColumn(name = "idrol")
 	private RolVO rol;
-	/* Queremos que cuando un usuario se elimine, se elimine también su historial de compras */
+	/*
+	 * Queremos que cuando un usuario se elimine, se elimine también su historial de
+	 * compras
+	 */
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	private List<VentaVO> ventas;
 
-	public UsuarioVO(String username, String apellidos, String password, String dni, String email, LocalDate fechanacimiento, RolVO rol) {
+	public UsuarioVO(String username, String apellidos, String password, String dni, String email,
+			LocalDate fechanacimiento, RolVO rol) {
 		super();
 		this.username = username;
 		this.apellidos = apellidos;
@@ -67,8 +68,9 @@ public class UsuarioVO implements UserDetails {
 		this.rol = rol;
 		this.fecharegistro = LocalDate.now();
 	}
-	
-	public UsuarioVO(String username, String apellidos, String password, String dni, String email, LocalDate fechanacimiento) {
+
+	public UsuarioVO(String username, String apellidos, String password, String dni, String email,
+			LocalDate fechanacimiento) {
 		super();
 		this.username = username;
 		this.apellidos = apellidos;
@@ -77,15 +79,13 @@ public class UsuarioVO implements UserDetails {
 		this.email = email;
 		this.fechanacimiento = fechanacimiento;
 		this.fecharegistro = LocalDate.now();
-		
+
 	}
-	
-	//Constructor vacío que inserta la fecha de registro del sistema
+
+	// Constructor vacío que inserta la fecha de registro del sistema
 	public UsuarioVO() {
 		this.fecharegistro = LocalDate.now();
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -123,13 +123,5 @@ public class UsuarioVO implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-
-
-
-		
-	
-	
-	
 
 }

@@ -19,27 +19,24 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Entity
-@Table(name="ventas", uniqueConstraints = @UniqueConstraint(columnNames = {"fechaventa", "horaventa"}))
+@Table(name = "ventas", uniqueConstraints = @UniqueConstraint(columnNames = { "fechaventa", "horaventa" }))
 public class VentaVO {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idventa;
 	private int numeroentradas;
 	private LocalDate fechaventa;
 	private LocalTime horaventa;
-	
-	@ManyToOne
-	@JoinColumn(name="idusuario")
-	private UsuarioVO usuario;
-	
-	@ManyToOne
-	@JoinColumn(name= "idconcierto")
-	private ConciertoVO concierto;
-	
-	
 
-	public VentaVO(int numeroentradas, UsuarioVO usuario,
-			ConciertoVO concierto) {
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private UsuarioVO usuario;
+
+	@ManyToOne
+	@JoinColumn(name = "idconcierto")
+	private ConciertoVO concierto;
+
+	public VentaVO(int numeroentradas, UsuarioVO usuario, ConciertoVO concierto) {
 		super();
 		this.numeroentradas = numeroentradas;
 		this.fechaventa = LocalDate.now();
@@ -63,11 +60,5 @@ public class VentaVO {
 		this.usuario = usuario;
 		this.concierto = concierto;
 	}
-	
-
-	
-
-	
-	
 
 }

@@ -24,7 +24,6 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(su).passwordEncoder(encripta());

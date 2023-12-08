@@ -94,6 +94,7 @@ public class UsuarioController {
 		modelo.addAttribute("usuario", su.findByDni(dni).get());
 		return "admin/usuario/historialusuario";
 	}
+
 	@RequestMapping("/error")
 	public String error(Model modelo) {
 		modelo.addAttribute("erroracceso", "Error de acceso");

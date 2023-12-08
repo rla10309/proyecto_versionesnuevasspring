@@ -49,6 +49,7 @@ public class MainController {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
+
 	@RequestMapping("/403")
 	public String error() {
 		return "403";
@@ -64,10 +65,11 @@ public class MainController {
 		List<ConciertoVO> conciertos = sc.findByGrupoNombreIgnoreCase(grupo.getNombre()).get();
 
 		modelo.addAttribute("grupo", grupo);
-		if(conciertos.size() > 0) {
+		if (conciertos.size() > 0) {
 			modelo.addAttribute("conciertos", conciertos);
 		} else {
-			modelo.addAttribute("noconcert", "En estos momentos no hay conciertos programados de " + grupo.getNombre().toUpperCase());
+			modelo.addAttribute("noconcert",
+					"En estos momentos no hay conciertos programados de " + grupo.getNombre().toUpperCase());
 		}
 		return "public/vistaconcierto";
 	}

@@ -10,9 +10,9 @@ import com.dawes.modelo.UsuarioVO;
 
 @Service
 public interface ServicioRol {
-	
+
 	Optional<List<UsuarioVO>> findUsuarioByNombre(String nombre);
-	
+
 	Optional<RolVO> findByNombre(String nombre);
 
 	<S extends RolVO> S save(S entity);

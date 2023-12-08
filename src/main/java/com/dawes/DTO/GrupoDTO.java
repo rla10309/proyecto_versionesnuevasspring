@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GrupoDTO {
-	
+
 	private String nombre;
 	private String descripcion;
 

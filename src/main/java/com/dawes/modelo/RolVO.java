@@ -15,29 +15,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="roles", uniqueConstraints = @UniqueConstraint(columnNames = "nombre"))
+@Table(name = "roles", uniqueConstraints = @UniqueConstraint(columnNames = "nombre"))
 public class RolVO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idrol;
 	@Column(nullable = false, length = 20)
 	private String nombre;
-	
+
 	@OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
 	List<UsuarioVO> usuarios;
-	
+
 	public RolVO(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-	
-	
+
 }
-
-
-

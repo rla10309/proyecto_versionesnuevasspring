@@ -9,12 +9,10 @@ import com.dawes.modelo.VentaVO;
 
 @Service
 public interface ServicioVenta {
-	
+
 	Optional<List<VentaVO>> findByConciertoGrupoNombre(String nombre);
 
 	Optional<List<VentaVO>> findByUsuarioDni(String dni);
-
-	
 
 	<S extends VentaVO> S save(S entity);
 

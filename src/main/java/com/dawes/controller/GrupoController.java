@@ -1,6 +1,5 @@
 package com.dawes.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,45 +23,46 @@ import com.dawes.upload.storage.StorageService;
 @Controller
 @RequestMapping("/grupo")
 public class GrupoController {
-	
+
 	@Autowired
 	ServicioGrupo sg;
-	
+
 	@Autowired
 	private StorageService storageService;
-	
+
 	@Autowired
 	ServicioConcierto sc;
-	
+
 	@RequestMapping("/listadogrupos")
 	public String listadogrupos(Model modelo) {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "admin/grupo/listadogrupos";
-		
+
 	}
+
 	@RequestMapping("/creagrupo")
 	public String creagrupo(Model modelo) {
 		modelo.addAttribute("grupo", new GrupoVO());
 		return "admin/grupo/insertagrupo";
 	}
-	
+
 	@RequestMapping("/insertagrupo")
 	public String insertagrupo(@ModelAttribute GrupoVO grupo, @RequestParam("file") MultipartFile file, Model modelo) {
-		
-		if(!file.isEmpty()) {
+
+		if (!file.isEmpty()) {
 			String imagen = storageService.store(file, grupo.getIdgrupo());
-			grupo.setImagen(MvcUriComponentsBuilder
-					.fromMethodName(GrupoController.class, "serveFile", imagen)
-					.build().toUriString());
+			grupo.setImagen(MvcUriComponentsBuilder.fromMethodName(GrupoController.class, "serveFile", imagen).build()
+					.toUriString());
 		}
 		try {
-		sg.save(grupo);
-		} catch(DataIntegrityViolationException e) {
+			sg.save(grupo);
+		} catch (DataIntegrityViolationException e) {
 			modelo.addAttribute("msgError", "Ya existe un grupo con ese nombre");
 		}
 		modelo.addAttribute("grupos", sg.findAll());
 		return "admin/grupo/listadogrupos";
 	}
+
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
@@ -72,13 +72,13 @@ public class GrupoController {
 		}
 		return ResponseEntity.ok().body(file);
 	}
-	
+
 	@RequestMapping("/edit")
-	public String edit(@RequestParam int idgrupo,  Model modelo) {
+	public String edit(@RequestParam int idgrupo, Model modelo) {
 		modelo.addAttribute("grupo", sg.findById(idgrupo).get());
 		return "admin/grupo/editagrupo";
 	}
-	
+
 	@RequestMapping("/delete")
 	public String delete(@RequestParam int idgrupo, Model modelo) {
 		try {
@@ -91,10 +91,10 @@ public class GrupoController {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "admin/grupo/listadogrupos";
 	}
-	
+
 	@RequestMapping("/buscarporgrupo")
 	public String findByGrupo(@RequestParam String nombre, Model modelo) {
-		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get() );
+		modelo.addAttribute("conciertos", sc.findByGrupoNombreIgnoreCase(nombre).get());
 		return "admin/concierto/listadoconciertos";
 	}
 

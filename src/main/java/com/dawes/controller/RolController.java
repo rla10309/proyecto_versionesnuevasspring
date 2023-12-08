@@ -59,21 +59,18 @@ public class RolController {
 			if (!sr.findById(rol.getIdrol()).get().getNombre().equals("ROLE_ADMIN")) {
 				sr.delete(rol);
 				modelo.addAttribute("msgSuccess", "Rol eliminado con éxito");
-			}else {
+			} else {
 				modelo.addAttribute("msgError", "El rol de Administrador no se puede borrar");
 			}
-				
-				
+
 		} catch (Exception e) {
 			modelo.addAttribute("msgError", "Este rol está siendo utilizado");
 		}
 
 		modelo.addAttribute("roles", sr.findAll());
-		
+
 		return "admin/rol/listadoroles";
 
 	}
-
-
 
 }

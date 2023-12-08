@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ServicioConciertoImpl implements ServicioConcierto {
-	
+
 	public Optional<ConciertoVO> findByFechaAndHora(LocalDate fecha, LocalTime hora) {
 		return cr.findByFechaAndHora(fecha, hora);
 	}
@@ -26,26 +26,19 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	@Autowired
 	ConciertoRepositorio cr;
 
-	
-
-
 	public Optional<List<ConciertoVO>> findByGrupoNombreIgnoreCase(String nombre) {
 		return cr.findByGrupoNombreIgnoreCase(nombre);
 	}
-
 
 	public Optional<List<ConciertoVO>> findByFechaBetween(LocalDate inicio, LocalDate fin) {
 		return cr.findByFechaBetween(inicio, fin);
 	}
 
-
-	
-
 	@Override
-	public <S extends ConciertoVO> S save(S entity)  throws DataIntegrityViolationException{
+	public <S extends ConciertoVO> S save(S entity) throws DataIntegrityViolationException {
 		try {
 			cr.save(entity);
-		}catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("La fecha y la hora seleccionadas están ocupadas");
 		}
 		return entity;
@@ -85,7 +78,6 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 		return cr.findAllByOrderByFechaAsc();
 	}
 
-
 	@Override
 	public void deleteById(Integer id) {
 		cr.deleteById(id);
@@ -110,7 +102,5 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	public void deleteAll() {
 		cr.deleteAll();
 	}
-	
-	
 
 }

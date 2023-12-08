@@ -10,7 +10,7 @@ import com.dawes.modelo.UsuarioVO;
 
 public interface RolRepositorio extends CrudRepository<RolVO, Integer> {
 	Optional<RolVO> findByNombre(String nombre);
+
 	Optional<List<UsuarioVO>> findUsuarioByNombre(String nombre);
-	
 
 }

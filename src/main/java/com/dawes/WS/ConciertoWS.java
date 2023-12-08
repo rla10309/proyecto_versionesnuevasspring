@@ -23,23 +23,23 @@ public class ConciertoWS {
 
 	@Autowired
 	ServicioConcierto sc;
-	
+
 	@Autowired
 	ServicioGrupo sg;
-	
-	/* 
-	 * Devuelve todos los conciertos de un grupo
-	 * desde http://localhost:808/api/conciertos/ABBA
+
+	/*
+	 * Devuelve todos los conciertos de un grupo desde
+	 * http://localhost:808/api/conciertos/ABBA
 	 */
 
 	@GetMapping("/conciertos/{nombre}")
-	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre){
+	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre) {
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();
 		List<ConciertoVO> conciertosVO = sc.findByGrupoNombreIgnoreCase(nombre).get();
-		conciertosVO.forEach(c->conciertosDTO.add(new ConciertoDTO(c.getIdconcierto(), c.getFecha(), c.getHora(), c.getPrecioanticipado(), c.getPreciotaquilla(), c.getPlazas(),
-				c.getGrupo().getIdgrupo())));
+		conciertosVO.forEach(c -> conciertosDTO.add(new ConciertoDTO(c.getIdconcierto(), c.getFecha(), c.getHora(),
+				c.getPrecioanticipado(), c.getPreciotaquilla(), c.getPlazas(), c.getGrupo().getIdgrupo())));
 		return new ResponseEntity<List<ConciertoDTO>>(conciertosDTO, HttpStatus.OK);
-		
+
 	}
-	
+
 }

@@ -16,36 +16,27 @@ import com.dawes.servicio.ServicioUsuario;
 import jakarta.transaction.Transactional;
 
 @Service
-public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService  {
+public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService {
 	@Autowired
 	UsuarioRepositorio ur;
-	
-
-	
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserDetails user = ur.findByEmail(username);
-		if(user == null) {
+		if (user == null) {
 			throw new UsernameNotFoundException("No se encuentra al usuario " + username);
 		}
-		
+
 		return user;
 	}
-	
-	
 
 	public UserDetails findByEmail(String email) {
 		return ur.findByEmail(email);
 	}
 
-
-
 	public UserDetails findByUsername(String username) {
 		return ur.findByUsername(username);
 	}
-
-
 
 	@Override
 	public Optional<UsuarioVO> findByDni(String dni) {
@@ -56,14 +47,15 @@ public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService 
 	public Optional<UsuarioVO> findByUsernameAndApellidos(String username, String apellidos) {
 		return ur.findByUsernameAndApellidos(username, apellidos);
 	}
+
 	@Transactional
 	@Override
 	public <S extends UsuarioVO> S save(S entity) throws DataIntegrityViolationException {
 		try {
-		ur.save(entity);
-		}catch (DataIntegrityViolationException e) {
+			ur.save(entity);
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Error en la inserción de usuario");
-			
+
 		}
 		return entity;
 	}
@@ -122,10 +114,5 @@ public class ServicioUsuarioImpl implements ServicioUsuario, UserDetailsService 
 	public void deleteAll() {
 		ur.deleteAll();
 	}
-
-
-
-	
-	
 
 }

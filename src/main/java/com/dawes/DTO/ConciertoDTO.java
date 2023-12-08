@@ -14,14 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConciertoDTO {
 	private int idconcierto;
-	@JsonFormat(pattern="dd-MM-yyyy")
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate fecha;
-	@JsonFormat(pattern="HH:mm")
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime hora;
 	private double preciotaquilla;
 	private double precioanticipado;
 	private int plazas;
 	private int idgrupo;
-	
 
 }

@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.dawes.modelo.UsuarioVO;
+
 @Service
 public interface ServicioUsuario {
-	
+
 	UserDetails findByUsername(String username);
-	
+
 	UserDetails findByEmail(String email);
 
 	Optional<UsuarioVO> findByDni(String dni);

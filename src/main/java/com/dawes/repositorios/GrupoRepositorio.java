@@ -8,6 +8,5 @@ import com.dawes.modelo.GrupoVO;
 
 public interface GrupoRepositorio extends CrudRepository<GrupoVO, Integer> {
 	Optional<GrupoVO> findByNombreIgnoreCase(String nombre);
-	
 
 }
