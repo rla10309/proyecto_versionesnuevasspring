@@ -59,6 +59,10 @@
                                     th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
                             <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
                                     th:href="@{/venta/listadoventas}">Ventas</a></li>
+                            <li><a class="dropdown-item desplegable " href="/templates/user/user.html"
+                                    th:href="@{/user/user}">Vista
+                                    Usuario</a>
+                            </li>
                             <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
                         </ul>
                     </div>
@@ -112,7 +116,8 @@
                         <input th:if="${usuario.idusuario != 0}" type="text" name="fechanacimiento" class="form-control"
                             placeholder="Fecha de nacimiento" th:field="*{fechanacimiento}" required />
                         <input th:unless="${usuario.idusuario != 0}" type="date" name="fechanacimiento"
-                            class="form-control" placeholder="Fecha de nacimiento" th:field="*{fechanacimiento}" required />
+                            class="form-control" placeholder="Fecha de nacimiento" th:field="*{fechanacimiento}"
+                            required />
                     </div>
                     <div class="mb-5">
                         <label for="rol">Rol</label>
@@ -128,7 +133,8 @@
                         </select>
                     </div>
                     <input type="hidden" name="fecharegistro" th:field="*{fecharegistro}" th:value="${fecharegistro}">
-                    <input th:if="${usuario.idusuario != 0}" class="boton corporativo" type="submit" value="Editar Usuario" />
+                    <input th:if="${usuario.idusuario != 0}" class="boton corporativo" type="submit"
+                        value="Editar Usuario" />
                     <input th:unless="${usuario.idusuario != 0}" class="boton corporativo" type="submit"
                         value="Nuevo Usuario" />
                 </div>

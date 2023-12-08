@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sala Corazón</title>
-  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
-  <link rel="stylesheet" href="/static/css/estilos.css" th:href="@{/css/estilos.css}" />
-  <link rel="stylesheet" href="/static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
-  <link rel="stylesheet" href="/static/css/list_btn.css" th:href="@{/css/list_btn.css}" />
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{../css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{../css/estilos.css}" />
+  <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{../css/mediaq.css}" />
+  <link rel="stylesheet" href="../static/css/list_btn.css" th:href="@{../css/list_btn.css}" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/91eae316a2.js" crossorigin="anonymous"></script>
-  <script src="/static/js/jquery-3.7.1.min.js" th:src="@{/js/jquery-3.7.1.min.js}"></script>
-  <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{/css/datatables.css}">
-  <script src="/static/js/datatables.min.js" th:src="@{/js/datatables.min.js}"></script>
+  <script src="/static/js/jquery-3.7.1.min.js" th:src="@{../../../js/jquery-3.7.1.min.js}"></script>
+  <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{../../../css/datatables.css}">
+  <script src="/static/js/datatables.min.js" th:src="@{../../../js/datatables.min.js}"></script>
 
 </head>
 
-<body>
+<body class="img-body">
+  <div class="capa"></div>
+
   <header class="header inicio">
     <div class="container contenido-navegacion">
       <div class="titulo-header">
-        <a href="../index.html" th:href="@{/index}">
+        <a href="#">
           <h1>Sala</h1>
           <h1>Corazón</h1>
         </a>
       </div>
       <div class="login-header">
-        <nav class="navegacion">
+        <nav class="navegacion navegacion-admin">
           <div th:if="${!#authorization.expression('isAuthenticated()')}">
-            <a href="login.html" class="fs-2  " th:href="@{/login}">Inicia sesión</a>
+            <a href="login.html" class="fs-2 enlace" th:href="@{/login}">Inicia sesión</a>
           </div>
           <div class="dropdown" sec:authorize="hasRole('USER')">
             <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
@@ -58,69 +60,75 @@
                   th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
               <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
                   th:href="@{/venta/listadoventas}">Ventas</a></li>
-              <li><a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">Vista
-                  Usuario</a>
-              </li>
               <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
             </ul>
           </div>
         </nav>
       </div>
     </div>
+
   </header>
-  <main class="sombra-negra container-fluid">
-    <div class="contenedor-interior alto-screen centrar ">
-      <div class="row align-items-center grupo-detalle py-5">
-        <div class="col-lg-5 d-flex flex-column align-items-center">
-          <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" alt="the police" />
-        </div>
-        <div class="col-lg-7">
-          <div class="text-sm-center text-lg-end mt-sm-3 py-5 pe-md-3">
-            <h4 th:text="${grupo.nombre}" class="text-center fw-semibold">The Police**</h4>
-            <p th:text="${grupo.estilo}" class="text-center">Pop-Rock</p>
-            <p th:text="${grupo.origen}" class="text-center">UK</p>
-            <p th:text="${grupo.descripcion}" class="text-center mb-5">
-              So lonely. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Phasellus arcu nibh, vehicula a vulputate ut, congue in
-              nibh. Phasellus arcu nibh, vehicula a vulputate ut, congue in
-              nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Phasellus arcu nibh, vehicula a vulputate ut,
-              congue in nibh. Phasellus arcu nibh, vehicula a vulputate ut,
-              congue in nibh.Phasellus arcu nibh. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Phasellus arcu nibh, vehicula a
-              vulputate ut, congue in nibh. Phasellus arcu nibh, vehicula a
-              vulputate ut, congue in nibh.Phasellus arcu nibh
-            </p>
+
+  <main>
+
+
+    <!-- <p th:text="${#authentication.principal.username + ' ' + 'Administrador'}"></p> -->
+    <div class="contenedor alto-screen">
+      <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
+      <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
+        <div class="barra-busqueda">
+          <div class="row justify-content-between align-items-center col-md-10 mx-2">
+            <i class="fa-solid fa-magnifying-glass text-center col-1 lupa"></i>
+            <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
           </div>
-
-
-
-          <ul class="tabla-interior" th:each="c : ${conciertos}">
-            <li class="fecha">
-              <p th:text="${#temporals.day(c.fecha)}"></p>
-              <p th:text="${#strings.toUpperCase(#temporals.monthNameShort(c.fecha))}" class="fw-bold"></p>
-              <p th:text="${#temporals.year(c.fecha)}"></p>
-            </li>
-            <li th:text="${c.hora}"></li>
-            <li><span th:text="${c.precioanticipado}"></span>€ / <span th:text="${c.preciotaquilla}"></span>€</li>
-            <li><a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
-                class="boton compra-entradas">Compra entradas</a></li>
-
-          </ul>
-
-
+          <button type="submit" class="boton-buscar col-xl-2 ml-lg-2">
+            Buscar
+          </button>
         </div>
-        <div class="text-start mt-3"><a th:href="@{/index}" href="index.html" class="boton corporativo">Volver</a></div>
+      </form>
+      <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
+      <div class="contenedor-index  sombra-negra ">
+        <!-- CONTENIDO CONCIERTOS  -->
+
+        <div class="contenido-conciertos">
+          <div class="contenido-conciertos">
+            <div class="card my-5 border-0" th:each="c: ${conciertos}">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}" href="vistaconcierto.html">
+
+                    <img th:src="@{${c.grupo.imagen}}" class="rounded-start" src="../static/img/multitud.jpg"
+                      alt="" /></a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
+                    <h3 class="card-title" th:text="${c.grupo.nombre}">Nombre del Grupo</h3>
+                    <p class="card-text" th:text="${c.intro}">Texto de prueba
+                    </p>
+                    <p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">21/05/2023</p>
+                    <p class="card-text" th:text="${c.hora}">21:30</p>
+                    <p class="card-text text-center text-sm-end">
+                      <a th:href="@{/user/compra(idconcierto=${c.idconcierto})}" href="./user/forminsertar.html"
+                        class="btn boton-entrada mt-5">Compra entradas</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <a th:href="@{/index}" class="boton-buscar">Todos los conciertos</a>
+          </div>
+        </div>
       </div>
-
-
     </div>
-
-
-
   </main>
   <footer class="footer">
-
+    <div class="contenido-navegacion justify-content-center justify-content-lg-between">
+      <a href="#">
+        <h1 class="text-center">Sala Corazón</h1>
+      </a>
+    </div>
     <div class="contenido-footer">
       <div class="datos">
         <ul class=" text-white">
@@ -145,6 +153,7 @@
       </div>
     </div>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
@@ -152,30 +161,22 @@
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
+  <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
 
-  <script th:if="${noconcert}" th:inline="javascript">
-    var mensaje = /*[[${noconcert}]]*/ '';
+  <script th:if="${param.success}" th:inline="javascript">
+    var mensajeExito = /*[[${msgSuccess}]]*/'';
+    // Muestra el SweetAlert2 cuando se cumple la condición
     Swal.fire({
-      icon: 'warning',
-      title: 'Lo sentimos',
-      text: mensaje,
+      icon: 'success',
+      title: '¡Enhorabuena!',
+      text: mensajeExito,
       confirmButtonColor: "##20c997",
       width: "40rem",
     });
 
   </script>
-  <script th:if="${msgError}" th:inline="javascript">
-    var mensaje = /*[[${msgError}]]*/ '';
-    Swal.fire({
-      icon: 'warning',
-      title: '¡Atención!',
-      text: mensaje,
-      confirmButtonColor: "##20c997",
-      width: "40rem",
-    });
 
-  </script>
+
 </body>
 
 </html>

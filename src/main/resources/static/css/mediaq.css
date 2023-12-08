@@ -46,12 +46,17 @@
     }
 
     .texto-concierto {
-       
         right: 1.5rem;
         width: 60%;
-      
-
     }
+    .tabla-interior{
+        flex-direction: row;
+    }
+    .tabla-interior li{
+        margin-bottom: 0;
+    }
+
+
 
 }
 
@@ -73,7 +78,7 @@
 
 
     .columna-datos .contenido div {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
 

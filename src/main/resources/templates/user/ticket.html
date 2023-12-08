@@ -58,6 +58,10 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
+							<li><a class="dropdown-item desplegable " href="/templates/user/user.html"
+									th:href="@{/user/user}">Vista
+									Usuario</a>
+							</li>
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
 					</div>
@@ -91,8 +95,8 @@
 			</div>
 			<div class="sec">
 				<div class="imagen-central">
-					<img src="/static/img/abbahorizontal.jpeg" th:src="@{${ventaVO.concierto.grupo.imagen}}" class="img-fluid"
-						alt="">
+					<img src="/static/img/abbahorizontal.jpeg" th:src="@{${ventaVO.concierto.grupo.imagen}}"
+						class="img-fluid" alt="">
 				</div>
 			</div>
 			<div class="third justify-content-center">

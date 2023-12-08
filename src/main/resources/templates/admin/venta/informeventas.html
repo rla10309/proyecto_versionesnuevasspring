@@ -59,6 +59,10 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
+							<li><a class="dropdown-item desplegable " href="/templates/user/user.html"
+									th:href="@{/user/user}">Vista
+									Usuario</a>
+							</li>
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
 					</div>
@@ -178,8 +182,8 @@
 			customClass: {
 				content: 'mi-clase-de-texto-personalizado'
 			}
-		}).then (result => {
-			if(result.isConfirmed){
+		}).then(result => {
+			if (result.isConfirmed) {
 				window.location.href = "http://localhost:8080/concierto/listadoconciertos";
 			}
 		});

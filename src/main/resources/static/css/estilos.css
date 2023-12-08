@@ -24,6 +24,10 @@ body {
     line-height: 1.5;
     font-family: 'Montserrat', sans-serif;
     height: 100%;
+    background-color: var(--grisClaro);
+}
+section h1 {
+    text-align: center;
 }
 
 ´ h1 {
@@ -49,6 +53,15 @@ h5 {
 a {
     text-decoration: none;
     color: white;
+}
+.bloque-403{
+    background-color: var(--corporativo);
+    color: white;
+    min-height: 20rem;
+    border-radius: 3.75px;
+}
+.card {
+    border: none;
 }
 
 .fondo-negro {
@@ -110,6 +123,11 @@ a {
     min-height: 10rem;
     display: flex;
     flex-direction: column;
+}
+.contenido-historial {
+    background-color: white;
+    border-top: 2px solid var(--corporativo);
+    border-bottom: 2px solid var(--corporativo);
 }
 
 
@@ -226,13 +244,17 @@ a {
 
 .tabla-interior {
     display: flex;
+    flex-direction: column;
     list-style: none;
     border-top: 1px solid var(--textos);
     border-bottom: 1px solid var(--textos);
     padding: 2rem 0;
     align-items: center;
     justify-content: space-around;
-
+    background-color: white;
+}
+.tabla-interior li {
+    margin-bottom: 1rem;
 }
 
 .fecha {
@@ -484,7 +506,7 @@ i {
 }
 
 .concierto-usuario .info {
-    color: tomato;
+    color: var(--naranja);
     font-size: 2.5rem;
 }
 
@@ -492,10 +514,10 @@ i {
 .ticket {
     display: flex;
     flex-direction: column;
-    background-color: var(--grisClaro);
+    background-color: white;
     padding: 2rem;
     margin-bottom: 2rem;
-    border: 1px solid #6F6F6F;
+    border: 1px solid var(--textos);
 }
 
 .ticket>div {
@@ -549,8 +571,8 @@ i {
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
+    border-top: 2px solid var(--corporativo);
+    border-bottom: 2px solid var(--corporativo);
     padding: 1rem;
 }
 

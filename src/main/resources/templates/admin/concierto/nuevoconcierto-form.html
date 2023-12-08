@@ -59,6 +59,9 @@
                   th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
               <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
                   th:href="@{/venta/listadoventas}">Ventas</a></li>
+              <li><a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">Vista
+                  Usuario</a>
+              </li>
               <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
             </ul>
           </div>
@@ -123,8 +126,10 @@
                 th:text="${g.nombre}"></option>
             </select>
           </div>
-          <input th:if="${concierto.idconcierto != 0}" class="boton corporativo" type="submit" value="Edita Concierto" />
-          <input th:unless="${concierto.idconcierto != 0}" class="boton corporativo" type="submit" value="Nuevo Concierto" />
+          <input th:if="${concierto.idconcierto != 0}" class="boton corporativo" type="submit"
+            value="Edita Concierto" />
+          <input th:unless="${concierto.idconcierto != 0}" class="boton corporativo" type="submit"
+            value="Nuevo Concierto" />
         </div>
       </form>
       <a class="boton corporativo text-center" href="./listadoconciertos.html"

@@ -1,11 +1,11 @@
 package com.dawes.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -97,34 +97,42 @@ public class UserController {
 	}
 
 	@RequestMapping("/findByFechaBetween")
-	public String findByFechaBetween(@RequestParam LocalDate f_inicio, LocalDate f_fin, Model modelo, Authentication authentication) {
+	public String findByFechaBetween(@RequestParam LocalDate f_inicio, LocalDate f_fin, Model modelo,
+			Authentication authentication) {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<ConciertoVO> conciertos = sc.findByFechaBetween(f_inicio, f_fin).get();
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		if (!conciertos.isEmpty()) {
 			modelo.addAttribute("conciertos", conciertos);
 
 		} else {
-			modelo.addAttribute("usuario", usuario);
+
 			modelo.addAttribute("msgError", "No hay conciertos entre esas fechas");
 		}
-
+		modelo.addAttribute("usuario", usuario);
+		modelo.addAttribute("fechas", "Conciertos entre " + formato.format(f_inicio) + " y " + formato.format(f_fin));
 		return "user/user";
 
 	}
+
 	@RequestMapping("/darsedebaja")
 	public String darsedebaja(Authentication authentication, Model modelo) {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		try {
-			su.delete(usuario);
-			modelo.addAttribute("mensaje", "Se ha eliminado su perfil correctamente");
-			
+			if (!usuario.getRol().getNombre().equals("ROLE_ADMIN")) {
+				su.delete(usuario);
+				modelo.addAttribute("mensaje", "Se ha eliminado su perfil correctamente");
+			} else {
+				modelo.addAttribute("usuario", usuario);
+				modelo.addAttribute("mensaje", "Un administrador no puede darse de baja");
+				return "user/user";
+			}
+
 		} catch (Exception e) {
 			modelo.addAttribute("mensaje", "No se ha podido completar la operación " + e.getCause());
-			
-			
+
 		}
 		return "login";
-		
-		
+
 	}
 }

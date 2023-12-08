@@ -59,6 +59,10 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
+							<li><a class="dropdown-item desplegable " href="/templates/user/user.html"
+									th:href="@{/user/user}">Vista
+									Usuario</a>
+							</li>
 
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
@@ -121,10 +125,11 @@
 
 			</section>
 			<section th:unless="${#lists.isEmpty(conciertos)}">
+				<h1 th:text="${fechas}"></h1>
 				<div class="contenido-conciertos">
-					<div class="card my-5 border-0" th:each="c: ${conciertos}">
-						<div class="row g-0">
-							<div class="col-md-4">
+					<div class="card my-5 contenido-historial py-5" th:each="c: ${conciertos}">
+						<div class="row g-0 align-items-center">
+							<div class="col-md-5">
 
 								<a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}"
 									href="vistaconcierto.html">
@@ -132,8 +137,8 @@
 										src="/static/img/multitud.jpg" alt="" /></a>
 
 							</div>
-							<div class="col-md-8">
-								<div class="card-body px-4 sombra-negra rounded-end-1 rounded-start-0">
+							<div class="col-md-7">
+								<div class="card-body px-4 rounded-end-1 rounded-start-0">
 									<h3 class="card-title" th:text="${c.grupo.nombre}">Nombre del Grupo</h3>
 									<p class="card-text" th:text="${c.intro}">Texto de prueba
 									</p>
@@ -142,7 +147,7 @@
 									<p class="card-text" th:text="${c.hora}">21:30</p>
 									<p class="card-text text-end">
 										<a th:href="@{/user/compra(idconcierto=${c.idconcierto})}"
-											href="./user/forminsertar.html" class="btn boton-entrada mt-5">Compra
+											href="./user/forminsertar.html" class="boton compra-entradas mt-5">Compra
 											entradas</a>
 									</p>
 								</div>
@@ -156,13 +161,13 @@
 
 			<section th:if="${ventas}">
 				<h3 class="text-center p-3">Historial de compras</h3>
-				<div class="concierto-usuario sombra-negra px-5 mb-3" th:each=" v : ${ventas}">
+				<div class="concierto-usuario sombra-negra mb-3" th:each=" v : ${ventas}">
 
-					<div class="row align-items-center">
+					<div class="row align-items-center contenido-historial">
 						<div class="col-md-6 text-center">
 
-							<img th:src="@{${v.concierto.grupo.imagen}}" class="img-fluid"
-								src="/static/img/thepolice1.jpeg" alt="grupo ${v.concierto.grupo.nombre}" />
+							<img th:src="@{${v.concierto.grupo.imagen}}" class="w-100" src="/static/img/thepolice1.jpeg"
+								alt="grupo ${v.concierto.grupo.nombre}" />
 						</div>
 						<div class="col-md-6 p-4">
 							<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>

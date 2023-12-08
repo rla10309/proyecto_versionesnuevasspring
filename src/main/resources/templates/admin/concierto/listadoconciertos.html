@@ -62,6 +62,10 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
+							<li><a class="dropdown-item desplegable " href="/templates/user/user.html"
+									th:href="@{/user/user}">Vista
+									Usuario</a>
+							</li>
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
 					</div>
@@ -70,70 +74,70 @@
 		</div>
 	</header>
 	<main class="alto-screen contenedor-interior">
-	
-			<h1 class="text-center mb-5">Conciertos</h1>
 
-			<div th:if="${msgSuccess}" class="alert alert-warning alert-dismissible fade show" role="alert">
+		<h1 class="text-center mb-5">Conciertos</h1>
+
+		<div th:if="${msgSuccess}" class="alert alert-warning alert-dismissible fade show" role="alert">
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<span th:text="${msgSuccess}"></span>
+		</div>
+
+		<div class="table-responsive-md mb-5">
+			<table class="table table-hover " id="mitabla">
+				<thead>
+					<tr class="text-uppercase">
+						<th scope="col" class="sortable sorting sorting_asc sorting_desc ">Id</th>
+						<th scope="col" class="sortable">Precio Anticipado</th>
+						<th scope="col">Precio Taquilla</th>
+						<th scope="col" class="sortable">Fecha</th>
+						<th scope="col">Hora</th>
+						<th scope="col">Plazas</th>
+						<th scope="col">Grupo</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each=" c : ${conciertos}">
+						<td th:text="${c.idconcierto}">1</td>
+						<td th:text="${c.precioanticipado + '€'}">P.Anticipado</td>
+						<td th:text="${c.preciotaquilla + '€'}">P.Taquilla</td>
+						<td th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">20/20/2020</td>
+						<td th:text="${c.hora}">Hora</td>
+						<td th:text="${c.plazas}">300</td>
+						<td th:text="${c.grupo.nombre}">El grupo</td>
+						<td class="text-center">
+							<a th:href="@{/concierto/edit(idconcierto=${c.idconcierto})}" class="link-primary">
+								<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+							</a>
+							<a th:href="@{/concierto/delete(idconcierto=${c.idconcierto})}"
+								class="delete-group link-danger"><i class="fa-solid fa-trash-can"></i>
+							</a>
+							<a th:href="@{/venta/informe(nombre=${c.grupo.nombre})}" class="link-success">
+
+								<i class="fa-solid fa-eye"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div th:if="${msgError}" class="alert alert-danger alert-dismissible fade show" role="alert">
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<span th:text="${msgSuccess}"></span>
+				<span th:text="${msgError}">Este concierto no se puede eliminar porque tiene
+					ventas asociadas</span>
 			</div>
+		</div>
+		<div class="my-5">
+			<a class="boton corporativo" href="../admin.html" th:href="@{/admin}">Inicio</a>
+			<a class="boton corporativo" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
+				Concierto</a>
+		</div>
 
-			<div class="table-responsive-md mb-5">
-				<table class="table table-hover " id="mitabla">
-					<thead>
-						<tr class="text-uppercase">
-							<th scope="col" class="sortable sorting sorting_asc sorting_desc ">Id</th>
-							<th scope="col" class="sortable">Precio Anticipado</th>
-							<th scope="col">Precio Taquilla</th>
-							<th scope="col" class="sortable">Fecha</th>
-							<th scope="col">Hora</th>
-							<th scope="col">Plazas</th>
-							<th scope="col">Grupo</th>
-							<th scope="col">Acciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each=" c : ${conciertos}">
-							<td th:text="${c.idconcierto}">1</td>
-							<td th:text="${c.precioanticipado + '€'}">P.Anticipado</td>
-							<td th:text="${c.preciotaquilla + '€'}">P.Taquilla</td>
-							<td th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">20/20/2020</td>
-							<td th:text="${c.hora}">Hora</td>
-							<td th:text="${c.plazas}">300</td>
-							<td th:text="${c.grupo.nombre}">El grupo</td>
-							<td class="text-center">
-								<a th:href="@{/concierto/edit(idconcierto=${c.idconcierto})}" class="link-primary">
-									<i class="fa-sharp fa-solid fa-pen-to-square"></i>
-								</a>
-								<a th:href="@{/concierto/delete(idconcierto=${c.idconcierto})}"
-									class="delete-group link-danger"><i class="fa-solid fa-trash-can"></i>
-								</a>
-								<a th:href="@{/venta/informe(nombre=${c.grupo.nombre})}" class="link-success">
 
-									<i class="fa-solid fa-eye"></i>
-								</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div th:if="${msgError}" class="alert alert-danger alert-dismissible fade show" role="alert">
-					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<span th:text="${msgError}">Este concierto no se puede eliminar porque tiene
-						ventas asociadas</span>
-				</div>
-			</div>
-			<div class="my-5">
-				<a class="boton corporativo" href="../admin.html" th:href="@{/admin}">Inicio</a>
-				<a class="boton corporativo" href="nuevoconcierto.html" th:href="@{/concierto/creaconcierto}">Nuevo
-					Concierto</a>
-			</div>
-
-	
 
 	</main>
 	<footer class="footer">

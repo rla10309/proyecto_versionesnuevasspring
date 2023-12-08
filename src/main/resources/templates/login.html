@@ -57,6 +57,9 @@
                   th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
               <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
                   th:href="@{/venta/listadoventas}">Ventas</a></li>
+              <li><a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">Vista
+                  Usuario</a>
+              </li>
               <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
             </ul>
           </div>
@@ -145,20 +148,20 @@
       width: "40rem",
     });
   </script>
-      <script th:if="${mensaje}" th:inline="javascript">
-        var mensajeExito = /*[[${mensaje}]]*/'';
-        Swal.fire({
-          icon: 'success',
-          text: mensajeExito,
-          confirmButtonColor: "##20c997",
-          width: "40rem",
-        }).then(result => {
-          if (result.isConfirmed) {
-            window.location.href = "http://localhost:8080/logout";
-          }
-        });
+  <script th:if="${mensaje}" th:inline="javascript">
+    var mensajeExito = /*[[${mensaje}]]*/'';
+    Swal.fire({
+      icon: 'success',
+      text: mensajeExito,
+      confirmButtonColor: "##20c997",
+      width: "40rem",
+    }).then(result => {
+      if (result.isConfirmed) {
+        window.location.href = "http://localhost:8080/logout";
+      }
+    });
 
-      </script>
+  </script>
 
 
 </body>
