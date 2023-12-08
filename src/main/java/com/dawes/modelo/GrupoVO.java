@@ -18,10 +18,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="grupos", uniqueConstraints = @UniqueConstraint(columnNames = "nombre"))
+@Table(name = "grupos", uniqueConstraints = @UniqueConstraint(columnNames = "nombre"))
 public class GrupoVO {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idgrupo;
 	@Column(length = 50, nullable = false)
 	private String nombre;
@@ -34,12 +34,13 @@ public class GrupoVO {
 	@Column(columnDefinition = "TEXT")
 	private String descripcion;
 	@Column(columnDefinition = "TEXT")
-	private String descripcioncorta;
-	
+	private String subtexto;
+
 	@OneToMany(mappedBy = "grupo")
 	List<ConciertoVO> conciertos;
 
-	public GrupoVO(String nombre, int miembros, String imagen, String estilo, String origen, String descripcion) {
+	public GrupoVO(String nombre, int miembros, String imagen, String estilo, String origen, String descripcion,
+			String subtexto) {
 		super();
 		this.nombre = nombre;
 		this.miembros = miembros;
@@ -47,6 +48,7 @@ public class GrupoVO {
 		this.estilo = estilo;
 		this.origen = origen;
 		this.descripcion = descripcion;
+		this.subtexto = subtexto;
 	}
 
 	@Override
@@ -54,16 +56,5 @@ public class GrupoVO {
 		return "GrupoVO [idgrupo=" + idgrupo + ", nombre=" + nombre + ", miembros=" + miembros + ", imagen=" + imagen
 				+ ", estilo=" + estilo + ", origen=" + origen + ", descripcion=" + descripcion + "]";
 	}
-
-
-	
-	
-
-
-	
-
-	
-	
-		
 
 }

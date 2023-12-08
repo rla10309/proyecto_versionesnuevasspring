@@ -99,7 +99,7 @@
 			<div class="third">
 				<div class="columna-datos">
 					<div class="contenido p-0">
-						<h4 class="fw-semibold">P.V.P <span th:text="${ventaVO.concierto.precioanticipado}">16.50</span>
+						<h4 class="fw-semibold">P.V.P <span th:text="${ventaVO.concierto.precioanticipado + '€'}">16.50</span>
 						</h4>
 						<p>Entrada 15.00€</p>
 						<p>Impuestos incluidos</p>
@@ -116,7 +116,7 @@
 			</div>
 		</section>
 
-		<div class="mt-5"><a class="boton negro text-center" href="user.html"
+		<div class="mt-5"><a class="boton corporativo text-center" href="user.html"
 				th:href="@{/user/user(dni=${ventaVO.usuario.dni})}">Atrás</a></div>
 
 

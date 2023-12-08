@@ -23,10 +23,7 @@ public class SecurityConfig {
 	public BCryptPasswordEncoder encripta() {
 		return new BCryptPasswordEncoder();
 	}
-	@Bean
-	public AccessDeniedHandler accessDeniedHandler() {
-	   return new CustomAccessDeniedHandler();
-	}
+
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,7 +36,7 @@ public class SecurityConfig {
 
 				.requestMatchers("/admin/**", "/usuario/**", "/concierto/**", "/grupo/**", "/venta/**").hasRole("ADMIN")
 				.anyRequest().authenticated())
-				.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedHandler(accessDeniedHandler()))
+				.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/403"))
 
 				.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/index").permitAll())
 				.logout((logout) -> logout.logoutSuccessUrl("/index?logout").permitAll());

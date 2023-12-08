@@ -87,6 +87,7 @@
 							<th scope="col">Estilo</th>
 							<th scope="col">Origen</th>
 							<th scope="col">Descripción</th>
+							<th scope="col">Subtexto</th>
 							<th scope="col">Acciones</th>
 
 						</tr>
@@ -101,8 +102,8 @@
 							<td th:text="${g.origen}">otto@ott.com</td>
 							<td th:text="${g.descripcion}" class="ancho-celda-descripcion truncate-text"
 								id="descripcion">
-								<p class="mb-0">otto@ott.com</p>
 							</td>
+							<td th:text="${g.subtexto}">otto@ott.com</td>
 							<td class="text-center">
 								<a th:href="@{/grupo/edit(idgrupo=${g.idgrupo})}">
 									<i class="fa-sharp fa-solid fa-pen-to-square link-primary"></i>
@@ -129,8 +130,8 @@
 
 			</div>
 			<div class="my-5">
-				<a class="boton negro" href="../admin.html" th:href="@{/admin}">Inicio</a>
-				<a class="boton negro" href="insertagrupo.html" th:href="@{/grupo/creagrupo}">Nuevo Grupo</a>
+				<a class="boton corporativo" href="../admin.html" th:href="@{/admin}">Inicio</a>
+				<a class="boton corporativo" href="insertagrupo.html" th:href="@{/grupo/creagrupo}">Nuevo Grupo</a>
 			</div>
 
 		</div>

@@ -123,11 +123,11 @@
                 th:text="${g.nombre}"></option>
             </select>
           </div>
-          <input th:if="${concierto.idconcierto != 0}" class="boton negro" type="submit" value="Edita Concierto" />
-          <input th:unless="${concierto.idconcierto != 0}" class="boton negro" type="submit" value="Nuevo Concierto" />
+          <input th:if="${concierto.idconcierto != 0}" class="boton corporativo" type="submit" value="Edita Concierto" />
+          <input th:unless="${concierto.idconcierto != 0}" class="boton corporativo" type="submit" value="Nuevo Concierto" />
         </div>
       </form>
-      <a class="boton negro text-center" href="./listadoconciertos.html"
+      <a class="boton corporativo text-center" href="./listadoconciertos.html"
         th:href="@{/concierto/listadoconciertos}">Atrás</a>
     </div>
   </main>

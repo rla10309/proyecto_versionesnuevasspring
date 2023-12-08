@@ -99,7 +99,7 @@
             <div class="row justify-content-center align-items-md-end justify-content-md-start">
               <div class="texto-concierto col-12 col-md-6 mb-md-3">
                 <h2 th:text="${g.nombre}"></h2>
-                <p th:text="${g.descripcioncorta}"></p>
+                <p th:text="${g.subtexto}"></p>
                 <div class="text-end">
                   <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" class="boton compra-entradas"> + INFO
                   </a>
