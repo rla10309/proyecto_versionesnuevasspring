@@ -72,9 +72,8 @@
 		<section class="ticket" th:each="i : ${#numbers.sequence(1, ventaVO.numeroentradas)}">
 			<div class="prim">
 				<div class="contenido">
-					<h3 class="fw-semibold" th:text="${ventaVO.concierto.grupo.nombre}">THE SADIES @ SALA CORAZÓN GIJÓN
+					<h3 class="fw-semibold" th:text="${ventaVO.concierto.grupo.nombre}">THE SADIES
 					</h3>
-					<h4>Sala Corazón</h4>
 					<p>C/ Felicidad, 5</p>
 					<p>Gijón</p>
 					<p>Asturias</p>
@@ -92,16 +91,17 @@
 			</div>
 			<div class="sec">
 				<div class="imagen-central">
-					<img src="/static/img/abba.jpg" th:src="@{${ventaVO.concierto.grupo.imagen}}" class="img-fluid"
+					<img src="/static/img/abbahorizontal.jpeg" th:src="@{${ventaVO.concierto.grupo.imagen}}" class="img-fluid"
 						alt="">
 				</div>
 			</div>
-			<div class="third">
+			<div class="third justify-content-center">
 				<div class="columna-datos">
 					<div class="contenido p-0">
-						<h4 class="fw-semibold">P.V.P <span th:text="${ventaVO.concierto.precioanticipado + '€'}">16.50</span>
+						<h4 class="fw-semibold">P.V.P <span
+								th:text="${ventaVO.concierto.precioanticipado + '€'}">16.50</span>
 						</h4>
-						<p>Entrada 15.00€</p>
+
 						<p>Impuestos incluidos</p>
 						<div>ANTICIPADA</div>
 					</div>
@@ -109,10 +109,10 @@
 						<img src="/static/img/qr.png" th:src="@{../img/qr.png}" class="w-100" alt="">
 					</div>
 				</div>
-				<div class="codigo-barras">
+				<!-- <div class="codigo-barras">
 					<img src="/static/img/codigobarras.png" th:src="@{../img/codigobarras.png}" class="w-100 h-100"
 						alt="">
-				</div>
+				</div> -->
 			</div>
 		</section>
 

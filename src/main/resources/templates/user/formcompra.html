@@ -102,7 +102,7 @@
 						<div class="col-3 offset-md-2">
 							<input type="text" class="form-control"
 								th:value="${#temporals.format(venta.concierto.fecha, 'dd/MM/yyyy')}"
-								th:field="*{concierto.fecha}">
+								th:field="*{concierto.fecha}" readonly>
 						</div>
 					</div>
 					<div class="form-compra row align-items-center mb-3 justify-content-around ">

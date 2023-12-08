@@ -87,28 +87,31 @@
           </div>
         </div>
       </form>
-     
+
       <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
       <div class="sombra-negra mt-5">
         <!-- CONTENIDO CONCIERTOS  -->
-        
-        
-        <div class="contenido-conciertos" th:each="g: ${grupos}">
-          <div th:style="'background-image:url(\'' + ${g.imagen} + '\');'"
-            class="imagen-dinamica row align-items-end justify-content-center">
-            <div class="row justify-content-center align-items-md-end justify-content-md-start">
-              <div class="texto-concierto col-12 col-md-6 mb-md-3">
-                <h2 th:text="${g.nombre}"></h2>
-                <p th:text="${g.subtexto}"></p>
-                <div class="text-end">
-                  <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" class="boton compra-entradas"> + INFO
-                  </a>
+
+
+        <div class="contenido-conciertos row justify-content-evenly" >
+          <div th:each="g: ${grupos}" class="col-12 col-md-6 mb-3">
+            <div th:style="'background-image:url(\'' + ${g.imagen} + '\');'"
+              class="imagen-dinamica ">
+              <div class="capa-index"></div>
+              <div class="d-flex d-md-block justify-content-center">
+                <div class="texto-concierto m-3">
+                  <h3 th:text="${g.nombre}"></h3>
+                  <p th:text="${g.subtexto}"></p>
+                  <div class="text-end">
+                    <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" class="boton compra-entradas"> + INFO
+                    </a>
+                  </div>
                 </div>
               </div>
-
             </div>
-
+            
           </div>
+
         </div>
       </div>
     </div>
@@ -160,21 +163,21 @@
     });
 
   </script>
-  <script th:if="${noelement}"  th:inline="javascript">
-  
-     var mensaje = /*[[${noelement}]]*/ '';
-        Swal.fire({
-            icon: 'warning',
-            title: 'Lo sentimos',
-            text: mensaje,
-            confirmButtonColor: "##20c997",
-            width: "40rem",
-          }).then(result => {
-            if(result.isConfirmed){
-              window.location.href = "http://localhost:8080/index";
+  <script th:if="${noelement}" th:inline="javascript">
 
-            }
-          });
+    var mensaje = /*[[${noelement}]]*/ '';
+    Swal.fire({
+      icon: 'warning',
+      title: 'Lo sentimos',
+      text: mensaje,
+      confirmButtonColor: "##20c997",
+      width: "40rem",
+    }).then(result => {
+      if (result.isConfirmed) {
+        window.location.href = "http://localhost:8080/index";
+
+      }
+    });
 
   </script>
 

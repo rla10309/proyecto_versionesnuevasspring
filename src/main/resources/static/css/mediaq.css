@@ -45,6 +45,14 @@
         gap: 2rem;
     }
 
+    .texto-concierto {
+       
+        right: 1.5rem;
+        width: 60%;
+      
+
+    }
+
 }
 
 @media (min-width: 992px) {

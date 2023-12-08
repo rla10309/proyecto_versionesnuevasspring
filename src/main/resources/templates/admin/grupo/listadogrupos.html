@@ -79,7 +79,7 @@
 			<div class="table-responsive-md">
 				<table class="table table-hover">
 					<thead>
-						<tr class="text-uppercase">
+						<tr class="text-uppercase text-center" >
 							<th scope="col">Id</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Miembros</th>
@@ -93,15 +93,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each=" g : ${grupos}">
+						<tr th:each=" g : ${grupos}" >
 							<td th:text="${g.idgrupo}">1</td>
 							<td th:text="${g.nombre}">Otto</td>
 							<td th:text="${g.miembros}" class="text-center">Carter</td>
 							<td><img th:src="@{${g.imagen}}" width="100px" alt="grupo ${g.nombre}" /></td>
 							<td th:text="${g.estilo}">otto@ott.com</td>
 							<td th:text="${g.origen}">otto@ott.com</td>
-							<td th:text="${g.descripcion}" class="ancho-celda-descripcion truncate-text"
-								id="descripcion">
+							<td  class="text-center text-success descripcion">
+								<i class="fa-solid fa-eye"></i>
 							</td>
 							<td th:text="${g.subtexto}">otto@ott.com</td>
 							<td class="text-center">
@@ -116,9 +116,34 @@
 								</a>
 
 							</td>
+							<!-- Modal -->
+							<div class="modal-dialog modal-dialog-centered modal" id="textoDescripcion"  tabindex="-1" aria-labelledby="exampleModalLabel"
+								aria-hidden="true">
+							
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" >Descripción</h5>
+											<h4 th:text="${g.nombre}" id="modalTitle"></h4>
+
+										</div>
+										<div class="modal-body" id="modalBody" th:text="${g.descripcion}">
+											...
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="boton corporativo" id="cierraModal"
+												data-bs-dismiss="modal">Cerrar</button>
+										</div>
+									</div>
+							
+							</div>
+
+
 						</tr>
 					</tbody>
 				</table>
+
+
+
 
 				<div th:if="${msgError}" class="alert alert-danger alert-dismissible fade show" role="alert">
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
@@ -176,7 +201,8 @@
 		crossorigin="anonymous"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+	<script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
+	<script src="/static/js/scriptselect.js" th:src="@{/js/scriptselect.js}"></script>
 
 
 </body>
