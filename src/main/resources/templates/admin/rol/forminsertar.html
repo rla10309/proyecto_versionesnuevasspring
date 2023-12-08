@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestión Grupos</title>
+    <title>Gestión Roles</title>
     <link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{/css/estilos.css}" />
     <link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
@@ -13,11 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
     <script src="https://kit.fontawesome.com/91eae316a2.js"></script>
     <script src="/static/js/jquery-3.7.1.min.js" th:src="@{/js/jquery-3.7.1.min.js}"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="/static/js/jquery-3.7.1.min.js" th:src="@{/js/jquery-3.7.1.min.js}"></script>
     <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{/css/datatables.css}">
     <script src="/static/js/datatables.min.js" th:src="@{/js/datatables.min.js}"></script>
 </head>
@@ -58,13 +57,15 @@
                                     th:href="@{/grupo/listadogrupos}">Grupos</a></li>
                             <li><a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
                                     th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
-                            <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                            <li><a class="dropdown-item desplegable " href="./admin/rol/listadoventas.html"
                                     th:href="@{/venta/listadoventas}">Ventas</a></li>
                             <li><a class="dropdown-item desplegable " href="./admin/rol/listadoroles.html"
                                     th:href="@{/rol/listadoroles}">Roles</a>
                             </li>
                             <li><a class="dropdown-item desplegable " href="/templates/user/user.html"
-                                    th:href="@{/user/user}">Vista Usuario</a></li>
+                                    th:href="@{/user/user}">Vista
+                                    Usuario</a>
+                            </li>
                             <li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
                         </ul>
                     </div>
@@ -74,64 +75,45 @@
     </header>
     <main class="alto-screen">
         <div class="contenedor-interior">
-            <h2 class="text-center text-uppercase">Edita Grupo</h2>
+            <h1 class="text-center text-uppercase" th:text="${rol.idrol != 0} ? 'Editar Rol' : 'Nuevo Rol'">
+               Nuevo Rol</h1>
+            <form th:object="${rol}" th:action="@{/rol/insertar}" class="my-5 sombra d-flex flex-column"
+                method="post">
+                <input type="hidden" th:field="*{idrol}">
 
-            <form class="my-5 sombra d-flex flex-column" th:action="@{/grupo/insertagrupo}"
-                enctype="multipart/form-data" th:object="${grupo}" method="post">
                 <div class="formulario">
-                    <input type="hidden" th:field="*{idgrupo}">
-                    <div class="mb-5">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Nombre" th:field="*{nombre}"
-                            required autofocus />
+                    <div th:if="${mensaje}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <span th:text="${mensaje}"></span>
                     </div>
+     
                     <div class="mb-5">
-                        <label for="miembros">Miembros</label>
-                        <input type="number" id="miembros" class="form-control" th:field="*{miembros}"
-                            placeholder="Miembros" required />
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" >
                     </div>
-                    <div class="mb-5">
-                        <label for="file">Imagen</label>
-                        <input type="hidden" th:field="*{imagen}">
-                        <input type="file" id="file" name="file" class="form-control" placeholder="Imagen" />
-                    </div>
-                    <div class="mb-5">
-                        <label for="estilo">Estilo</label>
-                        <input type="text" id="estilo" class="form-control" th:field="*{estilo}" placeholder="Estilo"
-                            required />
-                    </div>
-                    <div class="mb-5">
-                        <label for="origen">Origen</label>
-                        <input type="text" id="origen" class="form-control" th:field="*{origen}" placeholder="Origen"
-                            required />
-                    </div>
-                    <div class="mb-5">
-                        <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion" class="form-control" th:field="*{descripcion}"></textarea>
-                    </div>
-                    <div class="mb-5">
-                        <label for="subtexto">Subtexto</label>
-                        <textarea th:field="*{subtexto}" id="subtexto" class="form-control"></textarea>
-
-                    </div>
-                    <input class="boton corporativo" type="submit" value="Edita Grupo" />
+     
+                    <input th:if="${rol.idrol != 0}" class="boton corporativo" type="submit" value="Edita Rol" />
+                    <input th:unless="${rol.idrol != 0}" class="boton corporativo" type="submit" value="Nuevo Rol" />
                 </div>
 
-
             </form>
-            <a class="boton corporativo mt-3 text-center" href="./listadogrupos.html"
-                th:href="@{/grupo/listadogrupos}">Atrás</a>
 
+            <div class=" mb-5 alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.error}">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span>Venta nula</span>
+            </div>
+            <a class="boton corporativo text-center" href="./listadoroles.html"
+                th:href="@{/rol/listadoroles}">Atrás</a>
 
         </div>
 
     </main>
     <footer class="footer">
-        <div class="contenido-navegacion justify-content-center justify-content-lg-between">
-            <a href="#">
-                <h1>Sala Corazón</h1>
-            </a>
-        </div>
+
         <div class="contenido-footer">
             <div class="datos">
                 <ul>
@@ -156,6 +138,7 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -164,8 +147,8 @@
         crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
-
+    <script src="/static/js/scriptselect.js" th:src="@{/js/scriptselect.js}"></script>
+    <script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
 </body>
 
 </html>

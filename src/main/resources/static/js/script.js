@@ -13,14 +13,19 @@ $(".delete-group").on("click", function (e) {
     confirmButtonText: "Sí, elimínalo",
   }).then((result) => {
     console.log("Resultado de la ventana modal:", result);
+  
     if (result.isConfirmed) {
+      let nombre = $(this).closest("tr").find("td:eq(1)").text();
       href = $(this).attr("href");
-      console.log("Redirigiendo a:", href);
-      href += "&success=true";
+      if(nombre === "ROLE_ADMIN"){
+        href += "&error=true";
+      } 
+     
     } else {
-      href = $(this).attr("href");
-      console.log("Redirigiendo a:", href);
+          
       href += "&error=true";
+      console.log("Redirigiendo a:", href);
+     
     }
     window.location.href = href;
   });
@@ -49,6 +54,7 @@ $(".edit-group").on("click", function (e) {
   $(".swal2-html-container").css({ "font-size": "1.8rem" });
   $("button").css({ "font-size": "1.5rem" });
 });
+
 
 /** Lanza formulario buscar por fechas **/
 $(".busca-por-fechas").on("click", function (e) {
@@ -157,6 +163,28 @@ $(function () {
       sProcessing: "Cargando...",
     },
   });
+  // TABLA DE ROLES
+  $("#tabla-rol").DataTable({
+    info: false,
+    oPaginate: false,
+    language: {
+      decimal: ",",
+      thousands: ".",
+      lengthMenu: "Mostrar _MENU_ registros",
+      zeroRecords: "No se encontraron resultados",
+      info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+      infoFiltered: "(filtrado de un total de _MAX_ registros)",
+      sSearch: "Buscar:",
+      oPaginate: {
+        sFirst: "Primero",
+        sLast: "Último",
+        sNext: "Siguiente",
+        sPrevious: "Anterior",
+      },
+      sProcessing: "Cargando...",
+    },
+  });
 
   /** darse de baja */
   $("#baja").on("click", (e) => {
@@ -182,7 +210,6 @@ $(function () {
       }
     });
   });
-
 
   if (window.location.href.includes("logout")) {
     Swal.fire({

@@ -57,6 +57,9 @@
                   th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
               <li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
                   th:href="@{/venta/listadoventas}">Ventas</a></li>
+              <li><a class="dropdown-item desplegable " href="./admin/rol/listadoroles.html"
+                  th:href="@{/rol/listadoroles}">Roles</a>
+              </li>
               <li><a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">Vista
                   Usuario</a>
               </li>
@@ -93,8 +96,8 @@
         <input type="password" name="password" id="password" class="form-control" placeholder="Introduzca contraseña"
           required />
       </div>
-      <input class="boton azul w-100 mb-3" type="submit" value="Inicia sesión" />
-      <button class="boton azul w-100"><a th:href="@{/registrousuario}">Regístrate</a></button>
+      <input class="boton corporativo w-100 mb-3" type="submit" value="Inicia sesión" />
+      <button class="boton corporativo w-100"><a th:href="@{/registrousuario}">Regístrate</a></button>
 
     </form>
 

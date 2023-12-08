@@ -267,7 +267,10 @@ a {
 .fecha p {
     margin: 0;
 }
-
+#tabla-rol {
+    width: 30%;
+    margin: 0 auto;
+}
 /***** FIN TABLAS *****/
 
 /***** FORMULARIOS *****/
@@ -605,7 +608,7 @@ i {
 .campo label {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: dodgerblue;
+    color: var(--corporativo);
     font-weight: 700;
 }
 
