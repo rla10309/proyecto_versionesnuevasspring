@@ -49,6 +49,10 @@ public class MainController {
 		modelo.addAttribute("grupos", sg.findAll());
 		return "index";
 	}
+	@RequestMapping("/403")
+	public String error() {
+		return "403";
+	}
 
 	/*
 	 * Aquí se maneje la búsqueda del grupo desde la caja que lo muestra, a través

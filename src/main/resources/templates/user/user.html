@@ -59,7 +59,7 @@
 									th:href="@{/usuario/listadousuarios}">Usuarios</a></li>
 							<li><a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
 									th:href="@{/venta/listadoventas}">Ventas</a></li>
-			
+
 							<li><a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a></li>
 						</ul>
 					</div>
@@ -83,20 +83,20 @@
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
-				<div>
-					<h5 class="text-decoration-underline">Datos Personales</h5>
+				<div class="micuenta-body">
+					<h5 class="text-decoration-underline mb-5">Datos Personales</h5>
 					<p>Nombre: <span th:text="${usuario.username + ' ' + usuario.apellidos}"></span></p>
 					<p>Fecha de nacimiento: <span
-							th:text="${#temporals.day(usuario.fechanacimiento) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fechanacimiento)) + ' ' + #temporals.year(usuario.fechanacimiento)}"></span>
+							th:text="${#temporals.day(usuario.fechanacimiento) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fechanacimiento)) + ' - ' + #temporals.year(usuario.fechanacimiento)}"></span>
 					</p>
 					<p>Edad: <span th:text="${edad} "></span></p>
-					<p>Registrado desde:<span
-							th:text="${#temporals.day(usuario.fecharegistro) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fecharegistro)) + ' ' + #temporals.year(usuario.fecharegistro)}"></span>
+					<p>Registrado desde: <span
+							th:text="${#temporals.day(usuario.fecharegistro) + ' - ' + #strings.capitalize(#temporals.monthName(usuario.fecharegistro)) + ' - ' + #temporals.year(usuario.fecharegistro)}"></span>
 					</p>
+					<a th:href="@{/user/darsedebaja}" class="boton corporativo" id="baja">
+						Quiero darme de baja
+					</a>
 
-					Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
-					images, lists,
-					etc.
 				</div>
 
 			</div>
@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<div class="col-12">
-						<button type="submit" class="boton negro mt-3 border border-1 ">Buscar</button>
+						<button type="submit" class="boton corporativo mt-3 border border-1 ">Buscar</button>
 					</div>
 				</form>
 
@@ -183,16 +183,8 @@
 
 			</section>
 
-
-
-			<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${alertError}">
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<span th:text="${msgError}">No hay datos que mostrar</span>
-			</div> -->
 			<div class="my-5">
-				<a class="boton negro" th:href="@{/index}" href="../index.html">Atrás</a>
+				<a class="boton corporativo" th:href="@{/index}" href="../index.html">Atrás</a>
 			</div>
 		</div>
 	</main>
@@ -236,13 +228,24 @@
 	<script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
 	<script th:if="${msgError}" th:inline="javascript">
 		var mensajeError = /*[[${msgError}]]*/'';
-		// Muestra el SweetAlert2 cuando se cumple la condición
 		Swal.fire({
-			icon: 'error',
-			title: 'Error',
+			icon: 'warning',
+			title: '¡Atención!',
 			text: mensajeError,
-			confirmButtonColor: "#000",
+			confirmButtonColor: "#20c997",
 			width: "40rem",
+			padding: "1rem"
+		});
+	</script>
+	<script th:if="${mensaje}" th:inline="javascript">
+		var mensaje = /*[[${mensaje}]]*/'';
+		Swal.fire({
+			icon: 'warning',
+			title: '¡Atención!',
+			text: mensaje,
+			confirmButtonColor: "#20c997",
+			width: "40rem",
+			padding: "1rem"
 		});
 	</script>
 </body>

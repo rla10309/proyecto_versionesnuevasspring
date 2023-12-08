@@ -151,7 +151,6 @@
 
   <script th:if="${param.success}" th:inline="javascript">
     var mensajeExito = /*[[${msgSuccess}]]*/'';
-    // Muestra el SweetAlert2 cuando se cumple la condición
     Swal.fire({
       icon: 'success',
       title: '¡Enhorabuena!',
@@ -165,7 +164,7 @@
   
      var mensaje = /*[[${noelement}]]*/ '';
         Swal.fire({
-            icon: 'error',
+            icon: 'warning',
             title: 'Lo sentimos',
             text: mensaje,
             confirmButtonColor: "##20c997",

@@ -116,6 +116,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/static/js/script.js" th:src="@{../../../js/script.js}"></script>
+
+    <script th:if="${mensaje}" th:inline="javascript">
+        var mensajeExito = /*[[${mensaje}]]*/'';
+        Swal.fire({
+            icon: 'success',
+            text: mensajeExito,
+            confirmButtonColor: "##20c997",
+            width: "40rem",
+        }).then(result => {
+            if(result.isConfirmed){
+                window.location.href = "http://localhost:8080/logout";
+            }
+        });
+
+    </script>
 </body>
 
 </html>

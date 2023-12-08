@@ -138,14 +138,27 @@
   <script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
   <script th:if="${msgError}" th:inline="javascript">
     var mensajeError = /*[[${msgError}]]*/'';
-    // Muestra el SweetAlert2 cuando se cumple la condición
     Swal.fire({
       icon: 'error',
       text: mensajeError,
-      confirmButtonColor: "#000",
+      confirmButtonColor: "#20c997",
       width: "40rem",
     });
   </script>
+      <script th:if="${mensaje}" th:inline="javascript">
+        var mensajeExito = /*[[${mensaje}]]*/'';
+        Swal.fire({
+          icon: 'success',
+          text: mensajeExito,
+          confirmButtonColor: "##20c997",
+          width: "40rem",
+        }).then(result => {
+          if (result.isConfirmed) {
+            window.location.href = "http://localhost:8080/logout";
+          }
+        });
+
+      </script>
 
 
 </body>

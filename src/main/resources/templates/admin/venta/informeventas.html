@@ -170,11 +170,10 @@
 	<script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
 	<script th:if="${msgError}" th:inline="javascript">
 		var mensajeError = /*[[${msgError}]]*/'';
-		// Muestra el SweetAlert2 cuando se cumple la condición
 		Swal.fire({
 			icon: 'error',
 			text: mensajeError,
-			confirmButtonColor: "#000",
+			confirmButtonColor: "#20c997",
 			width: "40rem",
 			customClass: {
 				content: 'mi-clase-de-texto-personalizado'

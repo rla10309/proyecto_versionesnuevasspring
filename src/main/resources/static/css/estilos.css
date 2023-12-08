@@ -97,7 +97,7 @@ a {
 }
 
 .header {
-    background-color: #19199f;
+    background-color: #1a1a9e;
 }
 
 .contenido-navegacion {
@@ -112,7 +112,8 @@ a {
 
 
 .capa {
-    background-color: rgba(0 0 0 /50%);
+    /*background-color: rgba(0 0 0 /50%);*/
+    background-color: rgba(26 26 158 /20%);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -222,7 +223,7 @@ a {
 
 /***** FORMULARIOS *****/
 .busca-por-fecha-form {
-    background-color: #000;
+    background-color: var(--corporativo);
     padding: 3rem;
     margin: 0 auto 3rem auto;
     border-radius: 3.75px;
@@ -266,12 +267,12 @@ a {
 .formulario-compra input {
     font-size: 2rem;
     border: none;
-    color: #000;
+    color:var(--textos);
     background-color: unset;
 
 }
 .formulario-compra label {
-    color: #000;
+    color: var(--textos);
     font-size: 1.6rem;
 }
 
@@ -329,20 +330,29 @@ a {
     padding: 2rem;
 }
 
-.navegacion-usuario li:hover,
-.micuenta a:hover {
-    background-color: black;
+.navegacion-usuario li:hover, .navegacion-usuario li:active,
+.navegacion-usuario li:active a, .navegacion-usuario li:hover a
+ {
+    background-color: #19199f;
     color: white;
 }
 
-.navegacion-usuario li a:hover,
-.micuenta a:hover {
-    background-color: black;
-    color: white;
-}
+/* .navegacion-usuario li a:focus,
+.micuenta a:focus {
+    
+    color: var(--corporativo);
+    font-weight: 600;
+} */
 
 .micuenta a {
-    color: black;
+    color: var(--textos);
+}
+.micuenta a:hover{
+    color: white;
+}
+.micuenta-body{
+    line-height: 2;
+    margin-top: 5rem;
 }
 
 /***** FIN NAVEGACION USUARIO *****/
@@ -355,7 +365,7 @@ a {
 }
 
 .barra-busqueda {
-    background-color: rgba(0 0 0 / 0.5);
+    background-color: rgba(26 26 158 /20%);
     padding: 1rem 0;
     border-radius: 3.75px;
     margin: 0 1rem;
@@ -603,7 +613,7 @@ i {
     padding: 1rem 2rem;
     border: 1px solid white;
     border-radius: 3.75px;
-    background-color: black;
+    background-color: var(--corporativo);
     color: white;
 }
 
@@ -671,7 +681,10 @@ th {
 
 
 /** VENTANA MODAL **/
-.swal2-container .swal2-confirm {
+.swal2-container .swal2-confirm,  .swal2-container .swal-cancel {
+    font-size: 2rem;
+}
+.swal2-actions .swal2-cancel {
     font-size: 2rem;
 }
 

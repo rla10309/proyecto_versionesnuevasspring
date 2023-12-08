@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -50,6 +52,9 @@ public class UsuarioVO implements UserDetails {
 	@ManyToOne
 	@JoinColumn(name="idrol")
 	private RolVO rol;
+	/* Queremos que cuando un usuario se elimine, se elimine también su historial de compras */
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private List<VentaVO> ventas;
 
 	public UsuarioVO(String username, String apellidos, String password, String dni, String email, LocalDate fechanacimiento, RolVO rol) {
 		super();

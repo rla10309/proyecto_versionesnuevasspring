@@ -3,7 +3,6 @@ package com.dawes.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +23,7 @@ import com.dawes.servicio.ServicioVenta;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
 	@Autowired
 	ServicioVenta sv;
 	@Autowired
@@ -34,86 +33,98 @@ public class UserController {
 	@Autowired
 	ServicioUsuario su;
 
-	
 	@RequestMapping("/user")
-	public String user(Authentication  authentication, Model modelo) {
+	public String user(Authentication authentication, Model modelo) {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<VentaVO> ventas = sv.findByUsuarioDni(usuario.getDni()).get();
 		int edad = LocalDate.now().getYear() - usuario.getFechanacimiento().getYear();
 		modelo.addAttribute("usuario", usuario);
 		modelo.addAttribute("edad", edad);
-		if(!ventas.isEmpty())
+		if (!ventas.isEmpty())
 			modelo.addAttribute("ventas", ventas);
 		else {
 			modelo.addAttribute("msgError", "No hay datos que mostrar");
 		}
-		
-		
-		return "user/user";
-	}
-	
-	@RequestMapping("/userByDni")
-	public String userByDni(@RequestParam String dni, Model modelo ) {
-		List<VentaVO> ventas = sv.findByUsuarioDni(dni).get();
-		modelo.addAttribute("usuario", su.findByDni(dni).get() );
-		if(!ventas.isEmpty())
-			modelo.addAttribute("ventas", ventas);
-		else {
-			modelo.addAttribute("msgError", "No hay datos que mostrar");
-		}
-		return "user/user";
-	}
-	
 
-	
+		return "user/user";
+	}
+
+	@RequestMapping("/userByDni")
+	public String userByDni(@RequestParam String dni, Model modelo) {
+		List<VentaVO> ventas = sv.findByUsuarioDni(dni).get();
+		modelo.addAttribute("usuario", su.findByDni(dni).get());
+		if (!ventas.isEmpty())
+			modelo.addAttribute("ventas", ventas);
+		else {
+			modelo.addAttribute("msgError", "No hay datos que mostrar");
+		}
+		return "user/user";
+	}
 
 	@RequestMapping("/compra")
 	public String compra(@RequestParam int idconcierto, Model modelo, Authentication authentication) {
-	    VentaVO venta = new VentaVO();
-	    ConciertoVO concierto = sc.findById(idconcierto).get();
-	    UsuarioVO usuario =  (UsuarioVO) authentication.getPrincipal();
-	    if(usuario!=null) {
-	    venta.setConcierto(concierto);
-	    venta.setUsuario(usuario);
-		modelo.addAttribute("venta", venta);
-		modelo.addAttribute("grupo", concierto.getGrupo());
-		
+		try {
+			VentaVO venta = new VentaVO();
+			ConciertoVO concierto = sc.findById(idconcierto).get();
+			UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
+			if (usuario != null) {
+				venta.setConcierto(concierto);
+				venta.setUsuario(usuario);
+				modelo.addAttribute("venta", venta);
+				modelo.addAttribute("grupo", concierto.getGrupo());
+			}
+		} catch (NullPointerException e) {
+			modelo.addAttribute("msgError", "Debes estar registrado/a para comprar");
+			return "login";
+		}
 		return "user/formcompra";
-	    } else {
-	    	modelo.addAttribute("msgError", "Debes estar registrado/a para comprar");
-	    	return "login";
-	    }
-		
+
 	}
-	
+
 	@RequestMapping("/insertar")
-	public String insertar(@ModelAttribute VentaVO venta, Model modelo)  {
+	public String insertar(@ModelAttribute VentaVO venta, Model modelo) {
 		try {
 			sv.save(venta);
 			modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("pasa por aquí");
 			modelo.addAttribute("msgError", "No se ha podido realizar la venta " + e.getStackTrace());
 			return "user/forminsertar";
-			
+
 		}
 
 		return "user/ticket";
 	}
-	
+
 	@RequestMapping("/findByFechaBetween")
-	public String findByFechaBetween(@RequestParam LocalDate f_inicio, LocalDate f_fin, Model modelo) {
-		
+	public String findByFechaBetween(@RequestParam LocalDate f_inicio, LocalDate f_fin, Model modelo, Authentication authentication) {
+		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<ConciertoVO> conciertos = sc.findByFechaBetween(f_inicio, f_fin).get();
-		if(!conciertos.isEmpty()) {
+		if (!conciertos.isEmpty()) {
 			modelo.addAttribute("conciertos", conciertos);
-			
+
 		} else {
+			modelo.addAttribute("usuario", usuario);
 			modelo.addAttribute("msgError", "No hay conciertos entre esas fechas");
 		}
 
 		return "user/user";
+
+	}
+	@RequestMapping("/darsedebaja")
+	public String darsedebaja(Authentication authentication, Model modelo) {
+		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
+		try {
+			su.delete(usuario);
+			modelo.addAttribute("mensaje", "Se ha eliminado su perfil correctamente");
+			
+		} catch (Exception e) {
+			modelo.addAttribute("mensaje", "No se ha podido completar la operación " + e.getCause());
+			
+			
+		}
+		return "login";
+		
 		
 	}
 }
