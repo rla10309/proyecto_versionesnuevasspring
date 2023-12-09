@@ -239,6 +239,10 @@ a {
     min-width: 10rem;
     max-width: 20rem;
 }
+.tabla-mini th{
+    background-color: var(--corporativo);
+    color: white;
+}
 
 .fstable {
     font-size: 1.2rem;
@@ -296,6 +300,9 @@ a {
     border-bottom: 1px solid white;
     padding: 1rem 0;
     background-color: var(--corporativo)
+}
+.form-compra div{
+    padding: 0;
 }
 
 .form-label {

@@ -68,24 +68,26 @@ public class UsuarioController {
 		modelo.addAttribute("roles", sr.findAll());
 		return "admin/usuario/formregistro";
 	}
-//	
-//	@RequestMapping("/insertaeditado")
-//	public String insertaeditado(@ModelAttribute UsuarioRolVO usuariorol) {
-//		UsuarioVO usuario = usuariorol.getUsuario();
-//		su.save(usuario);
-//		sur.save(usuariorol);
-//		return "redirect:/usuario/listadousuarios";
-//		
-//	}
+
 
 	@RequestMapping("/delete")
-	public String delete(@RequestParam int idusuario) {
+	public String delete(@RequestParam int idusuario, Model modelo) {
+//		try {
+//			su.deleteById(idusuario);
+//		} catch (DataIntegrityViolationException e) {
+//			return "redirect:/usuario/listadousuarios?error=true";
+//		}
+//		return "redirect:/usuario/listadousuarios?success=true";
+		UsuarioVO usuario = su.findById(idusuario).get();
 		try {
-			su.deleteById(idusuario);
+			
+			su.delete(usuario);
 		} catch (DataIntegrityViolationException e) {
-			return "redirect:/usuario/listadousuarios?error=true";
+			modelo.addAttribute("mensaje", "Este usuario tiene entradas " + e.getCause());
+
 		}
-		return "redirect:/usuario/listadousuarios?success=true";
+		modelo.addAttribute("usuarios", su.findAll());
+		return "admin/usuario/listadousuarios";
 	}
 
 	@RequestMapping("/historial")

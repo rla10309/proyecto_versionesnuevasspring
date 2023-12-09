@@ -83,7 +83,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <span>Error al eliminar usuario</span>
+        <span>Un usuario administrdor no se puede eliminar</span>
       </div>
       <div th:text="${erroracceso}"></div>
 
@@ -148,12 +148,7 @@
           </button>
           <span id="msg"></span>
         </div>
-        <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade " role="alert">
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <span>Error al eliminar usuario</span>
-        </div>
+
       </div>
       <div class="my-5">
         <a class="boton corporativo" href="../admin.html" th:href="@{/admin}">Inicio</a>
@@ -178,7 +173,7 @@
             <h1>Corazón</h1>
           </a>
         </div>
-  
+
       </div>
       <div class="datos col-sm-12 col-md-4">
         <ul class=" text-white">

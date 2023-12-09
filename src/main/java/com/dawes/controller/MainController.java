@@ -56,7 +56,7 @@ public class MainController {
 	}
 
 	/*
-	 * Aquí se maneje la búsqueda del grupo desde la caja que lo muestra, a través
+	 * Aquí se maneja la búsqueda del grupo desde la caja que lo muestra, a través
 	 * de su id
 	 */
 	@RequestMapping("public/findgrupobyid")

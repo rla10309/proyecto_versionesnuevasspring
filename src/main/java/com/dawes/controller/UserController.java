@@ -81,6 +81,8 @@ public class UserController {
 
 	}
 
+
+	
 	@RequestMapping("/insertar")
 	public String insertar(@ModelAttribute VentaVO venta, Model modelo) {
 		try {
@@ -90,9 +92,7 @@ public class UserController {
 			System.out.println("pasa por aquí");
 			modelo.addAttribute("msgError", "No se ha podido realizar la venta " + e.getStackTrace());
 			return "user/forminsertar";
-
 		}
-
 		return "user/ticket";
 	}
 

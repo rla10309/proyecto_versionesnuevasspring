@@ -50,9 +50,7 @@ public class VentaController {
 
 	@RequestMapping("/insertar")
 	public String insertar(@ModelAttribute VentaVO venta) {
-
 		sv.save(venta);
-
 		return "redirect:/venta/listadoventas";
 	}
 

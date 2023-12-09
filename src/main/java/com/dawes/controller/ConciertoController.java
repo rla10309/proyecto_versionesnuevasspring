@@ -35,6 +35,10 @@ public class ConciertoController {
 
 	@RequestMapping("/insertaconcierto")
 	public String insertaConcierto(@ModelAttribute ConciertoVO concierto, Model modelo) {
+		boolean existe = false;
+		if(concierto.getIdconcierto() !=0) {
+			existe = true;
+		}
 		try {
 			sc.save(concierto);
 		} catch (DataIntegrityViolationException e) {
@@ -45,7 +49,11 @@ public class ConciertoController {
 			return "admin/concierto/nuevoconcierto-form";
 		}
 		modelo.addAttribute("conciertos", sc.findAll());
-		modelo.addAttribute("msgSuccess", "Se ha creado un nuevo concierto");
+		if(!existe) {
+			modelo.addAttribute("msgSuccess", "Se ha creado un nuevo concierto");
+		} else {
+			modelo.addAttribute("msgSuccess", "Se ha modificado el concierto");
+		}
 		return "admin/concierto/listadoconciertos";
 	}
 
