@@ -49,6 +49,9 @@ h4 {
 h5 {
     font-size: 2.2rem;
 }
+h6 {
+    font-size: 1.8rem;
+}
 
 a {
     text-decoration: none;
@@ -352,9 +355,58 @@ a {
 /***** FIN FORMULARIOS ****/
 
 /***** FOOTER ****/
+.contenido-footer {
+    margin: 0 auto;
+    color: white;
+    padding: 2rem 5rem;
+   
+}
+li {
+    list-style-type: none;
+}
 .footer {
     background-color: #19199f;
 }
+.redes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+.redes ul {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+.redes i {
+    font-size: 3rem;
+}
+.titulo-footer {
+    margin: 2rem 0;
+}
+.datos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.datos ul {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.titulo-footer h1 {
+    font-size: 5rem;
+}
+
+.copyright, .copyright i {
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+
 
 /***** FIN FOOTER *****/
 
@@ -490,14 +542,7 @@ i {
 }
 
 /***** FIN INDEX *****/
-.contenido-footer {
-    margin: 0 auto;
-    color: white;
-    padding: 2rem 5rem 5rem 5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 
 

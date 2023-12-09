@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
-
 import com.dawes.servicioImpl.ServicioUsuarioImpl;
 
 @Configuration
@@ -29,7 +27,7 @@ public class SecurityConfig {
 		http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(su).passwordEncoder(encripta());
 
 		http.authorizeHttpRequests((authz) -> authz
-				.requestMatchers("/", "/index", "/403", "/public/**", "/css/**", "/js/**", "/img/**", "/vistaconcierto",
+				.requestMatchers("/", "/index", "/403", "/error", "/public/**", "/css/**", "/js/**", "/img/**", "/vistaconcierto",
 						"/user/compra", "/public/formregistro", "/registrousuario", "/registro", "/index?logout")
 				.permitAll().requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 

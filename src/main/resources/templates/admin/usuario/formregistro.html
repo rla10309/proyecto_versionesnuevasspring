@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../../../static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../../../static/css/estilos.css" th:href="@{/css/estilos.css}" />
     <link rel="stylesheet" href="../../../static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
-    <link rel="stylesheet" href="../../../static/css/list_btn.css" th:href="@{/css/list_btn.css}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
@@ -153,32 +152,40 @@
         </div>
 
     </main>
-    <footer class="footer">
-
-        <div class="contenido-footer">
-            <div class="datos">
-                <ul>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                </ul>
-            </div>
-            <div class="datos">
-                <ul>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                </ul>
-            </div>
-            <div class="datos">
-                <ul>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                    <li>Datos de contacto</li>
-                </ul>
-            </div>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="contenido-footer row align-items-center">
+        <div class="redes col-sm-12 col-md-4">
+            <ul class=" text-white">
+                <li><i class="fa-brands fa-facebook"></i></li>
+                <li><i class="fa-brands fa-x-twitter"></i></li>
+                <li><i class="fa-brands fa-square-instagram"></i></li>
+            </ul>
         </div>
-    </footer>
+        <div class="col-sm-12 col-md-4 titulo-footer">
+            <div class=" text-center">
+                <a href="./index.html" th:href="@{/index}">
+                    <h1>Sala</h1>
+                    <h1>Corazón</h1>
+                </a>
+            </div>
+
+        </div>
+        <div class="datos col-sm-12 col-md-4">
+            <ul class=" text-white">
+                <li>C/Felicidad, 20</li>
+                <li>33205, Gijón</li>
+                <li><i class="fa-brands fa-whatsapp"></i> 666 888 222</li>
+                <li><i class="fa-regular fa-envelope"></i> salacorazon@inf.com</li>
+            </ul>
+        </div>
+    </div>
+    <div class="last-line contenido-footer">
+        <div class="copyright">
+        </div>
+    </div>
+</footer>
+<!-- FIN FOOTER -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

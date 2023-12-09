@@ -66,8 +66,19 @@ const dropdownElementList = document.querySelectorAll(".dropdown-toggle");
 const dropdownList = [...dropdownElementList].map(
   (dropdownToggleEl) => new bootstrap.Dropdown(dropdownToggleEl)
 );
+$(document).ready(function () {
+ let year =  getFecha();
+ $(".copyright").html(`<p><i class="fa-regular fa-copyright"></i> Todos los derechos reservados ${year}`);
+});
+
+function getFecha() {
+  let fecha = new Date();
+  let anio = fecha.getFullYear();
+  return anio;
+}
 
 $(function () {
+  
   // TABLA DE CONCIERTOS
   $("#mitabla").DataTable({
     columnDefs: [{ orderable: false, targets: [1, 2, 4, 6, 7] }],

@@ -49,11 +49,28 @@
         right: 1.5rem;
         width: 60%;
     }
-    .tabla-interior{
+
+    .tabla-interior {
         flex-direction: row;
     }
-    .tabla-interior li{
+
+    .tabla-interior li {
         margin-bottom: 0;
+    }
+
+    .redes {
+        align-items: start;
+        margin: 0
+    }
+
+    .titulo-footer {
+        margin: 0;
+    }
+    .datos {
+        align-items: end;
+    }
+    .datos ul {
+        text-align: right;
     }
 
 
