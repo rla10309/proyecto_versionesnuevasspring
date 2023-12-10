@@ -24,7 +24,7 @@ public class ServicioConciertoImpl implements ServicioConcierto {
 	}
 
 	@Autowired
-	ConciertoRepositorio cr;
+	private ConciertoRepositorio cr;
 
 	public Optional<List<ConciertoVO>> findByGrupoNombreIgnoreCase(String nombre) {
 		return cr.findByGrupoNombreIgnoreCase(nombre);

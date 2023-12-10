@@ -37,7 +37,7 @@ public class GrupoVO {
 	private String subtexto;
 
 	@OneToMany(mappedBy = "grupo")
-	List<ConciertoVO> conciertos;
+	private List<ConciertoVO> conciertos;
 
 	public GrupoVO(String nombre, int miembros, String imagen, String estilo, String origen, String descripcion,
 			String subtexto) {

@@ -1,5 +1,7 @@
 package com.dawes.controller;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -80,10 +82,10 @@ public class UsuarioController {
 //		return "redirect:/usuario/listadousuarios?success=true";
 		UsuarioVO usuario = su.findById(idusuario).get();
 		try {
-			
+			if (!usuario.getRol().getNombre().equals("ROLE_ADMIN"))
 			su.delete(usuario);
-		} catch (DataIntegrityViolationException e) {
-			modelo.addAttribute("mensaje", "Este usuario tiene entradas " + e.getCause());
+		} catch (NoSuchElementException e) {
+			return "error/errorPage";
 
 		}
 		modelo.addAttribute("usuarios", su.findAll());

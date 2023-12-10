@@ -72,7 +72,7 @@
   <main class="sombra-negra container-fluid">
     <div class="contenedor-interior alto-screen centrar ">
       <div class="row align-items-center grupo-detalle py-5">
-        <div class="col-lg-5 d-flex flex-column align-items-center">
+        <div class="col-lg-5 d-flex flex-column align-items-center mb-5">
           <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" alt="the police" />
         </div>
         <div class="col-lg-7">
@@ -93,7 +93,9 @@
               vulputate ut, congue in nibh.Phasellus arcu nibh
             </p>
           </div>
-
+          <ul  th:if="${noconcert}" class="tabla-interior">
+            <li th:text="${noconcert}"></li>
+          </ul>
 
 
           <ul class="tabla-interior" th:each="c : ${conciertos}">
@@ -164,17 +166,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/static/js/script.js" th:src="@{/js/script.js}"></script>
 
-  <script th:if="${noconcert}" th:inline="javascript">
-    var mensaje = /*[[${noconcert}]]*/ '';
-    Swal.fire({
-      icon: 'warning',
-      title: 'Lo sentimos',
-      text: mensaje,
-      confirmButtonColor: "##20c997",
-      width: "40rem",
-    });
-
-  </script>
   <script th:if="${msgError}" th:inline="javascript">
     var mensaje = /*[[${msgError}]]*/ '';
     Swal.fire({

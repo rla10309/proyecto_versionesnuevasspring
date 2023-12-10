@@ -3,6 +3,7 @@ package com.dawes.controller;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -128,8 +129,8 @@ public class UserController {
 				return "user/user";
 			}
 
-		} catch (Exception e) {
-			modelo.addAttribute("mensaje", "No se ha podido completar la operación " + e.getCause());
+		} catch (NoSuchElementException e) {
+			return "error/errorPage";
 
 		}
 		return "login";

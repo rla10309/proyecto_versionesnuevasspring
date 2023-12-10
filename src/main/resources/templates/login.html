@@ -147,7 +147,7 @@
   <script th:if="${msgError}" th:inline="javascript">
     var mensajeError = /*[[${msgError}]]*/'';
     Swal.fire({
-      icon: 'error',
+      icon: 'warning',
       text: mensajeError,
       confirmButtonColor: "#20c997",
       width: "40rem",

@@ -83,7 +83,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <span>Un usuario administrdor no se puede eliminar</span>
+        <span>Un usuario administrador no se puede eliminar</span>
       </div>
       <div th:text="${erroracceso}"></div>
 
@@ -117,7 +117,6 @@
               <td th:text="${usuario.username}">Otto</td>
               <td th:text="${usuario.apellidos}">Carter</td>
               <td th:text="${usuario.dni}">10880333C</td>
-              <!-- <td th:text="${usuario.password}" class="ocultar truncate-text">Contraseña</td> -->
               <td th:text="${usuario.email}">otto@ott.com</td>
               <td th:text="${#temporals.format(usuario.fechanacimiento, 'dd/MM/yyyy')}">otto@ott.com</td>
               <td th:text="${usuario.rol.nombre.substring(5)}">otto@ott.com</td>

@@ -28,7 +28,7 @@ public class RolVO {
 	private String nombre;
 
 	@OneToMany(mappedBy = "rol", fetch = FetchType.LAZY)
-	List<UsuarioVO> usuarios;
+	private List<UsuarioVO> usuarios;
 
 	public RolVO(String nombre) {
 		super();

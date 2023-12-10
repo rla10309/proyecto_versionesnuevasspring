@@ -1,9 +1,36 @@
 $(".delete-group").on("click", function (e) {
   e.preventDefault();
-  console.log("Botón de eliminar clicado");
   Swal.fire({
     title:
-      "¿Seguro que quieres eliminar este elemento? Perderás todos los datos",
+      "¿Seguro que quieres eliminar este usuario? Perderás todos los datos",
+    text: "Esta acción no se puede deshacer",
+    icon: "warning",
+    width: "40rem",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, elimínalo",
+  }).then((result) => {  
+    if (result.isConfirmed) {
+      let nombreRol = $(this).closest("tr").find("td:eq(6)").text();
+      href = $(this).attr("href");
+      if (nombreRol === "ADMIN") {
+        href += "&error=true";
+      } else {
+        href += "&success=true";
+      }
+     
+    }
+  
+    window.location.href = href;
+   
+  });
+});
+  $(".delete-groupRol").on("click", function (e) {
+  e.preventDefault();
+  Swal.fire({
+    title:
+      "¿Seguro que quieres eliminar este rol? Perderás todos los datos",
     text: "Esta acción no se puede deshacer",
     icon: "warning",
     width: "40rem",
@@ -12,56 +39,20 @@ $(".delete-group").on("click", function (e) {
     cancelButtonColor: "#d33",
     confirmButtonText: "Sí, elimínalo",
   }).then((result) => {
-    console.log("Resultado de la ventana modal:", result);
-  
     if (result.isConfirmed) {
-      let nombre = $(this).closest("tr").find("td:eq(6)").text();
+      let nombreRol = $(this).closest("tr").find("td:eq(1)").text();
       href = $(this).attr("href");
-      if(nombre === "ADMIN"){
+      if(nombreRol === "ROLE_ADMIN"){
         href += "&error=true";
       } else {
-        href += "&success=true";
+        href="&success=true";
       }
-     
-    } else {
-          
-      href += "&error=true";
-      console.log("Redirigiendo a:", href);
      
     }
     window.location.href = href;
+   
   });
-  // $(".delete-group").on("click", function (e) {
-  // e.preventDefault();
-  // console.log("Botón de eliminar clicado");
-  // Swal.fire({
-  //   title:
-  //     "¿Seguro que quieres eliminar este elemento? Perderás todos los datos",
-  //   text: "Esta acción no se puede deshacer",
-  //   icon: "warning",
-  //   width: "40rem",
-  //   showCancelButton: true,
-  //   confirmButtonColor: "#3085d6",
-  //   cancelButtonColor: "#d33",
-  //   confirmButtonText: "Sí, elimínalo",
-  // }).then((result) => {
-  //   console.log("Resultado de la ventana modal:", result);
-  
-  //   if (result.isConfirmed) {
-  //     let nombre = $(this).closest("tr").find("td:eq(6)").text();
-  //     href = $(this).attr("href");
-  //     if(nombre === "ROLE_ADMIN"){
-  //       href += "&error=true";
-  //     } 
-     
-  //   } else {
-          
-  //     href += "&error=true";
-  //     console.log("Redirigiendo a:", href);
-     
-  //   }
-  //   window.location.href = href;
-  // });
+
   $(".swal2-html-container").css({ "font-size": "1.8rem" });
   $("button").css({ "font-size": "1.5rem" });
 });
@@ -99,10 +90,7 @@ const dropdownElementList = document.querySelectorAll(".dropdown-toggle");
 const dropdownList = [...dropdownElementList].map(
   (dropdownToggleEl) => new bootstrap.Dropdown(dropdownToggleEl)
 );
-$(document).ready(function () {
- let year =  getFecha();
- $(".copyright").html(`<p><i class="fa-regular fa-copyright"></i> Todos los derechos reservados ${year}`);
-});
+
 
 function getFecha() {
   let fecha = new Date();
@@ -111,6 +99,8 @@ function getFecha() {
 }
 
 $(function () {
+   let year =  getFecha();
+ $(".copyright").html(`<p><i class="fa-regular fa-copyright"></i> Todos los derechos reservados ${year}`);
   
   // TABLA DE CONCIERTOS
   $("#mitabla").DataTable({
@@ -268,3 +258,4 @@ $(function () {
     });
   }
 });
+
