@@ -18,12 +18,18 @@ public class GrupoWS {
 
 	@Autowired
 	ServicioGrupo sg;
+	
+	//"https://app-tickets-c6dfd5dd1620.herokuapp.com/api/grupo/"
 
 	@GetMapping("/grupo/{nombre}")
 	public ResponseEntity<?> muestraDescripcion(@PathVariable String nombre) {
+		try {
 		GrupoVO grupoVO = sg.findByNombreIgnoreCase(nombre).get();
 		GrupoDTO grupoDTO = new GrupoDTO(grupoVO.getNombre(), grupoVO.getDescripcion());
 		return new ResponseEntity<GrupoDTO>(grupoDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error en la operación", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

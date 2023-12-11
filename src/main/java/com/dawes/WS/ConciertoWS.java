@@ -29,16 +29,21 @@ public class ConciertoWS {
 
 	/*
 	 * Devuelve todos los conciertos de un grupo desde
-	 * http://localhost:808/api/conciertos/ABBA
+	 * http://localhost:8080/api/conciertos/ABBA
+	 * "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/conciertos/The Soulers"
 	 */
 
 	@GetMapping("/conciertos/{nombre}")
 	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre) {
+		try {
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();
 		List<ConciertoVO> conciertosVO = sc.findByGrupoNombreIgnoreCase(nombre).get();
 		conciertosVO.forEach(c -> conciertosDTO.add(new ConciertoDTO(c.getIdconcierto(), c.getFecha(), c.getHora(),
 				c.getPrecioanticipado(), c.getPreciotaquilla(), c.getPlazas(), c.getGrupo().getIdgrupo())));
 		return new ResponseEntity<List<ConciertoDTO>>(conciertosDTO, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>("Error en la búsqueda ", HttpStatus.NOT_FOUND);
+		}
 
 	}
 

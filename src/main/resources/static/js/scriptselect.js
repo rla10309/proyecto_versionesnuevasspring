@@ -3,7 +3,7 @@ $(function () {
     $("#concierto").children().remove();
     var text = $("#grupo option:selected").text();
     $.ajax({
-      url: "https://git.heroku.com/api/conciertos/" + text,
+      url: "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/conciertos/" + text,
       type: "GET",
       contentType: "application/json",
       dataType: "json",
@@ -19,7 +19,7 @@ $(function () {
     let dni = $(this).closest("tr").find("td:eq(3)").text();
     console.log(dni);
     $.ajax({
-      url: "https://git.heroku.com/api/usuario/" + dni,
+      url: "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/usuario/" + dni,
       type: "GET",
       contentType: "application/json",
       dataType: "json",
@@ -52,7 +52,7 @@ $(function () {
     let nombre = $(this).closest("tr").find("td:eq(1)").text();
     $.ajax({
       type: "GET",
-      url: "https://git.heroku.com/api/grupo/" + nombre,
+      url: "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/grupo/" + nombre,
       contentType: "application/json",
       dataType: "json",
       cache: false,
