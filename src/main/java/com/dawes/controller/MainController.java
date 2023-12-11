@@ -1,5 +1,6 @@
 package com.dawes.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -71,6 +72,7 @@ public class MainController {
 			modelo.addAttribute("noconcert",
 					"En estos momentos no hay conciertos programados de " + grupo.getNombre().toUpperCase());
 		}
+		modelo.addAttribute("now", LocalDate.now());
 		return "public/vistaconcierto";
 	}
 
@@ -102,7 +104,7 @@ public class MainController {
 
 	@RequestMapping("/logout")
 	public String logout() {
-		return "index";
+		return "login";
 	}
 
 	@RequestMapping("/admin")
