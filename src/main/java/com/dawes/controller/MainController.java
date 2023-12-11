@@ -129,6 +129,7 @@ public class MainController {
 		} catch (NoSuchElementException e) {
 			modelo.addAttribute("noelement",
 					"No tenemos nada programado de " + nombre.toUpperCase() + " en estos momentos");
+			modelo.addAttribute("grupos", sg.findAll());
 			return "index";
 		}
 
