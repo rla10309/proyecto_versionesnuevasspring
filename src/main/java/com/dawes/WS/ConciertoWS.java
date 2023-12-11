@@ -29,7 +29,6 @@ public class ConciertoWS {
 
 	/*
 	 * Devuelve todos los conciertos de un grupo desde
-	 * http://localhost:8080/api/conciertos/ABBA
 	 * "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/conciertos/The Soulers"
 	 */
 
