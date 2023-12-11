@@ -2,7 +2,7 @@ $(".delete-group").on("click", function (e) {
   e.preventDefault();
   Swal.fire({
     title:
-      "¿Seguro que quieres eliminar este usuario? Perderás todos los datos",
+      "¿Seguro que quieres eliminar este elemento? Perderás todos los datos",
     text: "Esta acción no se puede deshacer",
     icon: "warning",
     width: "40rem",
