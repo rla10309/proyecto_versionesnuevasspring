@@ -100,9 +100,9 @@
           </div>
           <div class="mb-5">
             <label for="fecha">Fecha</label>
-            <input th:if="${concierto.idconcierto != 0}" type="text" id="fecha" th:field="*{fecha}" class="form-control"
+            <input th:if="${concierto.idconcierto != 0}" type="text" th:field="*{fecha}" class="form-control" th:attr="min=${now}" 
               placeholder="Fecha" required />
-            <input th:unless="${concierto.idconcierto != 0}" type="date" th:field="*{fecha}" class="form-control"
+            <input th:unless="${concierto.idconcierto != 0}" type="date" th:field="*{fecha}" th:attr="min=${now}" th:value="${fecha}" class="form-control"
               placeholder="Fecha" required />
           </div>
           <div class="mb-5">
@@ -162,7 +162,7 @@
           <li>C/Felicidad, 20</li>
           <li>33205, Gijón</li>
           <li><i class="fa-brands fa-whatsapp"></i> 666 888 222</li>
-          <li><i class="fa-regular fa-envelope"></i> salacorazon@inf.com</li>
+          <li><i class="fa-regular fa-envelope"></i> salacorazon@info.com</li>
         </ul>
       </div>
     </div>

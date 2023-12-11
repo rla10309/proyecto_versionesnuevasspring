@@ -1,5 +1,7 @@
 package com.dawes.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -28,8 +30,11 @@ public class ConciertoController {
 
 	@RequestMapping("/creaconcierto")
 	public String creaconcierto(Model modelo) {
+		//LocalDate now = LocalDate.now();
 		modelo.addAttribute("concierto", new ConciertoVO());
 		modelo.addAttribute("grupos", sg.findAll());
+		modelo.addAttribute("now", LocalDate.now());
+		
 		return "admin/concierto/nuevoconcierto-form";
 	}
 

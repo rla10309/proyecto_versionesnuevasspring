@@ -2,6 +2,7 @@ package com.dawes.modelo;
 
 import java.util.List;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class GrupoVO {
 	private int idgrupo;
 	@Column(length = 50, nullable = false)
 	private String nombre;
+	@Column(nullable = true)
 	private int miembros;
 	private String imagen;
 	@Column(length = 20)
@@ -43,7 +45,7 @@ public class GrupoVO {
 			String subtexto) {
 		super();
 		this.nombre = nombre;
-		this.miembros = miembros;
+		this.miembros = miembros>0?miembros:0;
 		this.imagen = imagen;
 		this.estilo = estilo;
 		this.origen = origen;

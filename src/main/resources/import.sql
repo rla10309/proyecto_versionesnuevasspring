@@ -16,3 +16,5 @@ INSERT INTO usuarios (dni, username, apellidos, password, email, fechanacimiento
 INSERT INTO usuarios (dni, username, apellidos, password, email, fechanacimiento, idrol, fecharegistro) VALUES ('11258444K', 'Lola', 'Flores', '$2a$10$LGNROB2dz.wjU50QDfvcpOkcZXyUnEt0oQaakELTZewsAg3cd3t26', 'lola@lola.com','2000-05-03', 2, '2022-8-12');
 
 INSERT INTO ventas (numeroentradas, fechaventa, horaventa, idusuario, idconcierto) VALUES (4, '2023-10-04', '21:11', 2, 2);
+
+

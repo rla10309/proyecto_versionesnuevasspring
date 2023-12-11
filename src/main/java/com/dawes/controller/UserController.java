@@ -102,8 +102,11 @@ public class UserController {
 			Authentication authentication) {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<ConciertoVO> conciertos = sc.findByFechaBetween(f_inicio, f_fin).get();
+		boolean actual = false;
+		
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		if (!conciertos.isEmpty()) {
+			modelo.addAttribute("now", LocalDate.now());
 			modelo.addAttribute("conciertos", conciertos);
 
 		} else {
