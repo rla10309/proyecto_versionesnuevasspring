@@ -113,7 +113,8 @@
 					<div class="row">
 						<div class="col">
 							<label for="f_inicio" class="form-label text-white">Fecha Inicio</label>
-							<input type="date" class="form-control fs-2" id="f_inicio" name="f_inicio" required>
+							<input type="date" class="form-control fs-2" id="f_inicio" name="f_inicio"
+								 required>
 						</div>
 						<div class="col">
 							<label for="f_fin" class="form-label text-white">Fecha Fin</label>
@@ -147,11 +148,15 @@
 									<p class="card-text" th:text="${#temporals.format(c.fecha, 'dd/MM/yyyy')}">
 										21/05/2023</p>
 									<p class="card-text" th:text="${c.hora}">21:30</p>
-									<p class="card-text text-end">
+									<p th:if="${c.fecha gt now}" class="card-text text-end">
 										<a th:href="@{/user/compra(idconcierto=${c.idconcierto})}"
 											href="./user/forminsertar.html" class="boton compra-entradas mt-5">Compra
 											entradas</a>
 									</p>
+									<p th:if="${c.fecha lt now}" class="boton compra-entradas mt-5 text-center">
+										El evento ha pasado
+									</p>
+
 								</div>
 							</div>
 						</div>
@@ -212,7 +217,7 @@
 						<h1>Corazón</h1>
 					</a>
 				</div>
-	
+
 			</div>
 			<div class="datos col-sm-12 col-md-4">
 				<ul class=" text-white">
