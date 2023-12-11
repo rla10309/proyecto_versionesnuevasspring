@@ -124,7 +124,7 @@ public class MainController {
 			modelo.addAttribute("grupo", grupo);
 			if (conciertos.size() > 0) {
 				modelo.addAttribute("conciertos", conciertos);
-			}
+			} 
 			return "public/vistaconcierto";
 		} catch (NoSuchElementException e) {
 			modelo.addAttribute("noelement",
