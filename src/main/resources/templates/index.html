@@ -167,7 +167,9 @@
       text: mensajeExito,
       confirmButtonColor: "##20c997",
       width: "40rem",
-    });
+    })    
+    .then(result => { if(result.isConfirmed){ window.location.href = "http://localhost:8080/index"; } });
+    
 
   </script>
   <script th:if="${noelement}" th:inline="javascript">
