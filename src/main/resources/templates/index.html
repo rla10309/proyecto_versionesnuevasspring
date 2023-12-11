@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       Sala Corazón
     </title>
+
     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}" />
     <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
@@ -21,6 +23,8 @@
     <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{/css/datatables.css}">
     <script src="/static/js/datatables.min.js" th:src="@{/js/datatables.min.js}">
     </script>
+    <link rel="icon" type="image/jpg" href="/static/img/favicon.png" th:href="@{/img/favicon.png}" />
+
 
   </head>
 
@@ -57,6 +61,8 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false">
 
+
+
               </button>
               <ul class="dropdown-menu">
                 <li>
@@ -81,6 +87,8 @@
               aria-expanded="false"
               th:text="${#authentication.principal.username + ' (Admin)'}">
 
+
+
           </button>
           <ul class="dropdown-menu">
             <li>
@@ -88,6 +96,8 @@
                 class="dropdown-item desplegable "
                 href="./admin/concierto/listadoconciertos.html"
                 th:href="@{/concierto/listadoconciertos}">
+
+
 
               Conciertos
             </a>
@@ -98,6 +108,8 @@
               href="./admin/grupo/listadogrupos.html"
               th:href="@{/grupo/listadogrupos}">
 
+
+
             Grupos
           </a>
         </li>
@@ -106,6 +118,8 @@
             class="dropdown-item desplegable "
             href="./admin/usuario/listadousuarios.html"
             th:href="@{/usuario/listadousuarios}">
+
+
 
           Usuarios
         </a>
@@ -261,6 +275,7 @@ salacorazon@info.com
 <script src="/static/js/script.js" th:src="@{/js/script.js}">
 </script>
 
+
 <script th:if="${param.success}" th:inline="javascript">
   var mensajeExito = /*[[${msgSuccess}]]*/'';
   Swal.fire({
@@ -269,30 +284,29 @@ salacorazon@info.com
     text: mensajeExito,
     confirmButtonColor: "##20c997",
     width: "40rem",
-  }).then(result => {
-    if(result.isConfirmed){
-      window.location.href = "http://localhost:8080/index";
-    }
-
-    });
-  </script>
-  <script th:if="${noelement}" th:inline="javascript">
-    var mensaje = /*[[${noelement}]]*/ '';
-    Swal.fire({
-      icon: 'warning',
-      title: 'Lo sentimos',
-      text: mensaje,
-      confirmButtonColor: "##20c997",
-      width: "40rem",
-    }).then(result => {
-      if (result.isConfirmed) {
+    })
+    .then(result => {
+      if(result.isConfirmed){
         window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
+        } });
+      </script>
+      <script th:if="${noelement}" th:inline="javascript">
+        var mensaje = /*[[${noelement}]]*/ '';
+        Swal.fire({
+          icon: 'warning',
+          title: 'Lo sentimos',
+          text: mensaje,
+          confirmButtonColor: "##20c997",
+          width: "40rem",
+        }).then(result => {
+          if (result.isConfirmed) {
+            window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
 
-      }
-      });
-    </script>
+          }
+          });
+        </script>
 
 
-  </body>
+      </body>
 
-</html>
+    </html>
