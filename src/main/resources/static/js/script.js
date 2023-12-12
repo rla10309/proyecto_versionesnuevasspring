@@ -233,7 +233,7 @@ $(function () {
       confirmButtonText: "Quiero darme de baja",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "https://git.heroku.com/user/darsedebaja";
+        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com/user/darsedebaja";
         // Swal.fire({
         //   title: "Se ha dado de baja con éxito",
         //   icon: "success",
@@ -254,7 +254,7 @@ $(function () {
       width: "40rem",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "https://git.heroku.com/index";
+        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com";
       }
     });
   }
