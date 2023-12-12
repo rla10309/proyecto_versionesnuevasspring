@@ -66,6 +66,7 @@
 
 
 
+
               </button>
               <ul class="dropdown-menu">
                 <li>
@@ -95,6 +96,7 @@
 
 
 
+
           </button>
           <ul class="dropdown-menu">
             <li>
@@ -102,6 +104,7 @@
                 class="dropdown-item desplegable "
                 href="./admin/concierto/listadoconciertos.html"
                 th:href="@{/concierto/listadoconciertos}">
+
 
 
 
@@ -122,6 +125,7 @@
 
 
 
+
             Grupos
           </a>
         </li>
@@ -130,6 +134,7 @@
             class="dropdown-item desplegable "
             href="./admin/usuario/listadousuarios.html"
             th:href="@{/usuario/listadousuarios}">
+
 
 
 
@@ -278,7 +283,7 @@ salacorazon@info.com
 -->
 <script 
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous">
 
 </script>
@@ -294,9 +299,7 @@ salacorazon@info.com
 </script>
 <script th:if="${param.success}" th:inline="javascript">
   var
-  mensajeExito
-  =
-  /*[[${msgSuccess}]]*/'';
+  mensajeExito = /*[[${msgSuccess}]]*/'';
   Swal.fire({
     icon: 'success',
     title:
@@ -308,29 +311,29 @@ salacorazon@info.com
     width:
     "40rem",
     })
-    .then(result
-    =>
-
-
-    { if(result.isConfirmed){ window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index"; } });
-  </script>
-  <script th:if="${noelement}" th:inline="javascript">
-    var mensaje = /*[[${noelement}]]*/ '';
-    Swal.fire({
-      icon: 'warning',
-      title: 'Lo sentimos',
-      text: mensaje,
-      confirmButtonColor: "##20c997",
-      width: "40rem",
-    }).then(result => {
-      if (result.isConfirmed) {
+    .then(result=>{
+      if(result.isConfirmed){
         window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
-
       }
       });
     </script>
+    <script th:if="${noelement}" th:inline="javascript">
+      var mensaje = /*[[${noelement}]]*/ '';
+      Swal.fire({
+        icon: 'warning',
+        title: 'Lo sentimos',
+        text: mensaje,
+        confirmButtonColor: "##20c997",
+        width: "40rem",
+      }).then(result => {
+        if (result.isConfirmed) {
+          window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
+
+        }
+        });
+      </script>
 
 
-  </body>
+    </body>
 
-</html>
+  </html>
