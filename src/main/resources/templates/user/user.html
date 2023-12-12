@@ -138,7 +138,7 @@
 								<a th:href="@{/public/findgrupobyid(idgrupo = ${c.grupo.idgrupo})}"
 									href="vistaconcierto.html">
 									<img th:src="@{${c.grupo.imagen}}" class="rounded-start"
-										src="/static/img/multitud.jpg" alt="" /></a>
+										src="/static/img/multitud.jpg" alt="multitud" th:alt="${'Foto de ' + c.grupo.nombre}" /></a>
 
 							</div>
 							<div class="col-md-7">
@@ -175,7 +175,7 @@
 						<div class="col-md-6 text-center my-5">
 
 							<img th:src="@{${v.concierto.grupo.imagen}}" class="w-100" src="/static/img/thepolice1.jpeg"
-								alt="grupo ${v.concierto.grupo.nombre}" />
+								th:alt="${'Foto de ' + v.concierto.grupo.nombre}" />
 						</div>
 						<div class="col-md-6 p-4 my-5">
 							<h3 th:text="${v.concierto.grupo.nombre}" class="text-start">The Police</h3>

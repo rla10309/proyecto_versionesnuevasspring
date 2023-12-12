@@ -1,6 +1,7 @@
 package com.dawes.controller;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -82,17 +83,19 @@ public class UserController {
 
 	}
 
-
-	
 	@RequestMapping("/insertar")
 	public String insertar(@ModelAttribute VentaVO venta, Model modelo) {
+
 		try {
-			sv.save(venta);
-			modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
+			
+				sv.save(venta);
+				modelo.addAttribute("grupo", sg.findById(venta.getConcierto().getGrupo().getIdgrupo()).get());
+			
+			
 		} catch (Exception e) {
 			System.out.println("pasa por aquí");
-			modelo.addAttribute("msgError", "No se ha podido realizar la venta " + e.getStackTrace());
-			return "user/forminsertar";
+			modelo.addAttribute("msgError", "Espere unos segundos para seguir comprando");
+			return "error";
 		}
 		return "user/ticket";
 	}
@@ -103,7 +106,7 @@ public class UserController {
 		UsuarioVO usuario = (UsuarioVO) authentication.getPrincipal();
 		List<ConciertoVO> conciertos = sc.findByFechaBetween(f_inicio, f_fin).get();
 		boolean actual = false;
-		
+
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		if (!conciertos.isEmpty()) {
 			modelo.addAttribute("now", LocalDate.now());

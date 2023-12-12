@@ -74,7 +74,7 @@
     <div class="contenedor-interior alto-screen centrar ">
       <div class="row align-items-center grupo-detalle py-5">
         <div class="col-lg-5 d-flex flex-column align-items-center mb-5">
-          <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" alt="the police" />
+          <img src="../static/img/thepolice1.jpeg" th:src="@{${grupo.imagen}}" th:alt="${'Foto de ' + grupo.nombre}" />
         </div>
         <div class="col-lg-7">
           <div class="text-sm-center text-lg-end mt-sm-3 py-5 pe-md-3">
