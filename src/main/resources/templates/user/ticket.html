@@ -74,7 +74,8 @@
 	</header>
 	<main class="alto-screen contenedor-interior">
 
-
+<p th:text="${horaventamascinco}"></p>
+<p th:text="${now}"></p>
 
 		<section class="ticket" th:each="i : ${#numbers.sequence(1, ventaVO.numeroentradas)}">
 			<div class="prim">
@@ -99,7 +100,7 @@
 			<div class="sec">
 				<div class="imagen-central">
 					<img src="/static/img/abbahorizontal.jpeg" th:src="@{${ventaVO.concierto.grupo.imagen}}"
-						class="img-fluid" alt="">
+						class="img-fluid" alt="foto de abba" th:alt="${'Foto de ' + ventaVO.concierto.grupo.nombre}">
 				</div>
 			</div>
 			<div class="third justify-content-center">

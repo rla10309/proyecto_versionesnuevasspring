@@ -104,7 +104,7 @@
 							<td th:text="${g.idgrupo}">1</td>
 							<td th:text="${g.nombre}">Otto</td>
 							<td th:text="${g.miembros}" class="text-center">Carter</td>
-							<td><img th:src="@{${g.imagen}}" width="100px" alt="grupo ${g.nombre}" /></td>
+							<td><img th:src="@{${g.imagen}}" width="100px" th:alt="${'Foto de ' + g.nombre}" /></td>
 							<td th:text="${g.estilo}">otto@ott.com</td>
 							<td th:text="${g.origen}">otto@ott.com</td>
 							<td class="text-center text-success descripcion">
