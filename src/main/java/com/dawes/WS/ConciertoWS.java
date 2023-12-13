@@ -34,15 +34,12 @@ public class ConciertoWS {
 
 	@GetMapping("/conciertos/{nombre}")
 	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre) {
-		try {
+
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();
 		List<ConciertoVO> conciertosVO = sc.findByGrupoNombreIgnoreCase(nombre).get();
 		conciertosVO.forEach(c -> conciertosDTO.add(new ConciertoDTO(c.getIdconcierto(), c.getFecha(), c.getHora(),
 				c.getPrecioanticipado(), c.getPreciotaquilla(), c.getPlazas(), c.getGrupo().getIdgrupo())));
 		return new ResponseEntity<List<ConciertoDTO>>(conciertosDTO, HttpStatus.OK);
-		}catch(Exception e) {
-			return new ResponseEntity<>("Error en la búsqueda ", HttpStatus.NOT_FOUND);
-		}
 
 	}
 
