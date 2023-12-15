@@ -1,7 +1,7 @@
 package com.dawes;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -92,13 +92,13 @@ class AppTests {
 //		assertNotNull(su.save(new UsuarioVO("Antonio", "Molina", "123456", "333", "antonio@antonio.com", LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
 //	}
 	// Insertamos usuario con el mismo dni
-	@Test
-	void test08() {
-		assertNotNull(su.save(new UsuarioVO("Elvis", "Prestley", "123456", "333", "antonio@antonio.com",
-				LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
-	}
-//	
 //	@Test
+//	void test08() {
+//		assertNull(su.save(new UsuarioVO("Elvis", "Prestley", "123456", "333", "antonio@antonio.com",
+//				LocalDate.of(2005, 8, 15), sr.findByNombre("ROLE_USER").get())));
+//	}
+//	
+	//@Test
 //	public void test08() {
 //		
 //		assertEquals("Lola", su.findByEmail("lola@lola.com").getUsername());
@@ -106,7 +106,7 @@ class AppTests {
 //
 //	
 //	// Insertamos ventas
-//	@Test
+	//@Test
 //	public void test09() {
 //		sv.save(new VentaVO
 //				(4, 

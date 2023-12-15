@@ -104,7 +104,7 @@ public class MainController {
 
 	@RequestMapping("/logout")
 	public String logout() {
-		return "index";
+		return "login";
 	}
 
 	@RequestMapping("/admin")

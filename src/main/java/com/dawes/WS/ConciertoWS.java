@@ -29,11 +29,12 @@ public class ConciertoWS {
 
 	/*
 	 * Devuelve todos los conciertos de un grupo desde
-	 * http://localhost:808/api/conciertos/ABBA
+	 * "https://app-tickets-c6dfd5dd1620.herokuapp.com/api/conciertos/The Soulers"
 	 */
 
 	@GetMapping("/conciertos/{nombre}")
 	public ResponseEntity<?> findByGrupoNombre(@PathVariable String nombre) {
+
 		List<ConciertoDTO> conciertosDTO = new ArrayList<ConciertoDTO>();
 		List<ConciertoVO> conciertosVO = sc.findByGrupoNombreIgnoreCase(nombre).get();
 		conciertosVO.forEach(c -> conciertosDTO.add(new ConciertoDTO(c.getIdconcierto(), c.getFecha(), c.getHora(),

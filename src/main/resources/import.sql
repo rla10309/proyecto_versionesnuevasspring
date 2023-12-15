@@ -18,5 +18,3 @@ INSERT INTO usuarios (dni, username, apellidos, password, email, fechanacimiento
 INSERT INTO ventas (numeroentradas, fechaventa, horaventa, idusuario, idconcierto) VALUES (4, '2023-10-04', '21:11', 2, 2);
 
 
-
-

@@ -233,16 +233,17 @@ $(function () {
       confirmButtonText: "Quiero darme de baja",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "http://localhost:8080/user/darsedebaja";
+        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com/user/darsedebaja";
         // Swal.fire({
         //   title: "Se ha dado de baja con éxito",
         //   icon: "success",
         //   width: "40rem",
         //   confirmButtonColor: "#3085d6",
         // });
-        // window.location.href = "http://localhost:8080/logout";
+        // window.location.href = "http:///logout";
       }
     });
+//https://git.heroku.com
   });
 
   if (window.location.href.includes("logout")) {
@@ -253,7 +254,7 @@ $(function () {
       width: "40rem",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "http://localhost:8080/index";
+        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com";
       }
     });
   }
