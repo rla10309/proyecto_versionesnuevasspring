@@ -136,7 +136,7 @@ public class UserController {
 			}
 
 		} catch (NoSuchElementException e) {
-			return "error/errorPage";
+			return "error";
 
 		}
 		return "login";

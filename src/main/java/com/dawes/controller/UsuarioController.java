@@ -85,7 +85,7 @@ public class UsuarioController {
 			if (!usuario.getRol().getNombre().equals("ROLE_ADMIN"))
 			su.delete(usuario);
 		} catch (NoSuchElementException e) {
-			return "error/errorPage";
+			return "error";
 
 		}
 		modelo.addAttribute("usuarios", su.findAll());
