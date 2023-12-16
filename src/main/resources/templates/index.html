@@ -2,39 +2,183 @@
 <html lang="es" xmlns:th="html://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Sala Corazón
-    </title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    Sala Corazón
+  </title>
 
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
-    <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}" />
-    <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/91eae316a2.js" crossorigin="anonymous">
-    </script>
-    <script src="/static/js/jquery-3.7.1.min.js" th:src="@{/js/jquery-3.7.1.min.js}">
-    </script>
-    <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{/css/datatables.css}">
-    <script src="/static/js/datatables.min.js" th:src="@{/js/datatables.min.js}">
-    </script>
-    <link rel="icon" type="image/jpg" href="/static/img/favicon.png" th:href="@{/img/favicon.png}" />
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}" />
+  <link rel="stylesheet" href="../static/css/mediaq.css" th:href="@{/css/mediaq.css}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/91eae316a2.js" crossorigin="anonymous">
+  </script>
+  <script src="/static/js/jquery-3.7.1.min.js" th:src="@{/js/jquery-3.7.1.min.js}">
+  </script>
+  <link rel="stylesheet" href="/static/css/datatables.css" th:href="@{/css/datatables.css}">
+  <script src="/static/js/datatables.min.js" th:src="@{/js/datatables.min.js}">
+  </script>
+  <link rel="icon" type="image/jpg" href="/static/img/favicon.png" th:href="@{/img/favicon.png}" />
 
 
-  </head>
+</head>
 
-  <body class="img-body">
-    <div class="capa">
+<body class="img-body">
+  <div class="capa">
+  </div>
+
+  <header class="header inicio">
+    <div class="container contenido-navegacion">
+      <div class="titulo-header">
+        <a href="./index.html" th:href="@{/index}">
+          <h1>
+            Sala
+          </h1>
+          <h1>
+            Corazón
+          </h1>
+        </a>
+      </div>
+      <div class="login-header">
+        <nav class="navegacion">
+          <div th:if="${!#authorization.expression('isAuthenticated()')}">
+            <a href="login.html" class="fs-2" th:href="@{/login}">
+              Inicia sesión
+            </a>
+          </div>
+          <div class="dropdown" sec:authorize="hasRole('USER')">
+            <button href="./user/user.html" th:href="@{/user/user}" sec:authentication="principal.username"
+              class="dropdown-toggle boton-drop fs-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">
+                  Mi Cuenta
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable" th:href="@{/logout}">
+                  Cerrar Sesión
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown " sec:authorize="hasRole('ADMIN')">
+            <button href="./admin/admin.html" th:href="@{/admin}" class="dropdown-toggle boton-drop fs-2" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false"
+              th:text="${#authentication.principal.username + ' (Admin)'}">
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item desplegable " href="./admin/concierto/listadoconciertos.html"
+                  th:href="@{/concierto/listadoconciertos}"> Conciertos</a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable " href="./admin/grupo/listadogrupos.html"
+                  th:href="@{/grupo/listadogrupos}">Grupos</a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable " href="./admin/usuario/listadousuarios.html"
+                  th:href="@{/usuario/listadousuarios}">Usuarios</a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html"
+                  th:href="@{/venta/listadoventas}">Ventas</a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable " href="./admin/rol/listadoroles.html"
+                  th:href="@{/rol/listadoroles}">Roles</a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">
+                  Vista Usuario
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item desplegable" th:href="@{/logout}">Cerrar Sesión</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
+  </header>
 
-    <header class="header inicio">
-      <div class="container contenido-navegacion">
-        <div class="titulo-header">
+  <main>
+    <div class="margen container alto-screen">
+      <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
+      <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
+        <div class="barra-busqueda row">
+          <div class="row justify-content-between align-items-center col-md-10 mb-3 mb-md-0">
+            <i class="fa-solid fa-magnifying-glass text-center col-2 lupa">
+            </i>
+            <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" aria-label="input-nombre" />
+          </div>
+          <div class="col-12 col-md-2 me-md-2">
+            <button type="submit" class="boton corporativo w-100">
+              Buscar
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
+
+      <div class="sombra-negra mt-5">
+
+        <!-- CONTENIDO CONCIERTOS  -->
+        <div class="contenido-conciertos row justify-content-evenly">
+          <div th:each="g: ${grupos}" class="col-12 col-md-6 mb-3">
+            <div th:style="'background-image:url(\'' + ${g.imagen} + '\');'" class="imagen-dinamica ">
+              <div class="capa-index">
+              </div>
+              <div class="d-flex d-md-block justify-content-center">
+                <div class="texto-concierto m-3">
+                  <h3 th:text="${g.nombre}">
+                  </h3>
+                  <p th:text="${g.subtexto}">
+                  </p>
+                  <div class="text-end">
+                    <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" class="boton compra-entradas">
+                      + INFO
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FIN DEL CONTENIDO CONCIERTOS -->
+
+      </div>
+    </div>
+  </main>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="contenido-footer row align-items-center">
+      <div class="redes col-sm-12 col-md-4">
+        <ul class=" text-white">
+          <li>
+            <i class="fa-brands fa-facebook">
+            </i>
+          </li>
+          <li>
+            <i class="fa-brands fa-x-twitter">
+            </i>
+          </li>
+          <li>
+            <i class="fa-brands fa-square-instagram">
+            </i>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-12 col-md-4 titulo-footer">
+        <div class=" text-center">
           <a href="./index.html" th:href="@{/index}">
             <h1>
               Sala
@@ -44,296 +188,87 @@
             </h1>
           </a>
         </div>
-        <div class="login-header">
-          <nav class="navegacion">
-            <div th:if="${!#authorization.expression('isAuthenticated()')}">
-              <a href="login.html" class="fs-2" th:href="@{/login}">
-                Inicia sesión
-              </a>
-            </div>
-            <div class="dropdown" sec:authorize="hasRole('USER')">
-              <button 
-                  href="./user/user.html"
-                  th:href="@{/user/user}"
-                  sec:authentication="principal.username"
-                  class="dropdown-toggle boton-drop fs-2"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
 
 
-
-
-
-
-
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                <a class="dropdown-item desplegable " href="./user/user.html" th:href="@{/user/user}">
-                  Mi Cuenta
-                </a>
-              </li>
-              <li>
-              <a class="dropdown-item desplegable" th:href="@{/logout}">
-                Cerrar Sesión
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="dropdown " sec:authorize="hasRole('ADMIN')">
-          <button 
-              href="./admin/admin.html"
-              th:href="@{/admin}"
-              class="dropdown-toggle boton-drop fs-2"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              th:text="${#authentication.principal.username + ' (Admin)'}">
-
-
-
-
-
-
-
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-            <a 
-                class="dropdown-item desplegable "
-                href="./admin/concierto/listadoconciertos.html"
-                th:href="@{/concierto/listadoconciertos}">
-
-
-
-
-
-
-
-              Conciertos
-            </a>
+      </div>
+      <div class="datos col-sm-12 col-md-4">
+        <ul class=" text-white">
+          <li>
+            C/Felicidad, 20
           </li>
           <li>
-          <a 
-              class="dropdown-item desplegable "
-              href="./admin/grupo/listadogrupos.html"
-              th:href="@{/grupo/listadogrupos}">
-
-
-
-
-
-
-
-            Grupos
-          </a>
-        </li>
-        <li>
-        <a 
-            class="dropdown-item desplegable "
-            href="./admin/usuario/listadousuarios.html"
-            th:href="@{/usuario/listadousuarios}">
-
-
-
-
-
-
-
-          Usuarios
-        </a>
-      </li>
-      <li>
-      <a class="dropdown-item desplegable " href="./admin/venta/listadoventas.html" th:href="@{/venta/listadoventas}">
-        Ventas
-      </a>
-    </li>
-    <li>
-    <a class="dropdown-item desplegable " href="./admin/rol/listadoroles.html" th:href="@{/rol/listadoroles}">
-      Roles
-    </a>
-  </li>
-  <li>
-  <a class="dropdown-item desplegable " href="/templates/user/user.html" th:href="@{/user/user}">
-    Vista Usuario
-  </a>
-</li>
-<li>
-<a class="dropdown-item desplegable" th:href="@{/logout}">
-  Cerrar Sesión
-</a>
-</li>
-</ul>
-</div>
-</nav>
-</div>
-</div>
-</header>
-
-<main>
-  <div class="margen container alto-screen">
-    <!-- FORMULARIO DE BUSQUEDA DE GRUPOS -->
-    <form th:action="@{/public/buscarporgrupo}" method="post" class="form-index">
-      <div class="barra-busqueda row">
-        <div class="row justify-content-between align-items-center col-md-10 mb-3 mb-md-0">
-          <i class="fa-solid fa-magnifying-glass text-center col-2 lupa">
-          </i>
-          <input type="text" placeholder="Busca tu grupo" class="col-10" name="nombre" />
-        </div>
-        <div class="col-12 col-md-2 me-md-2">
-          <button type="submit" class="boton corporativo w-100">
-            Buscar
-          </button>
-        </div>
+            33205, Gijón
+          </li>
+          <li>
+            <i class="fa-brands fa-whatsapp">
+            </i>
+            666 888 222
+          </li>
+          <li>
+            <i class="fa-regular fa-envelope">
+            </i>
+            salacorazon@info.com
+          </li>
+        </ul>
       </div>
-    </form>
-    <!-- FIN DEL FORMULARIO DE BUSQUEDA  -->
-
-    <div class="sombra-negra mt-5">
-
-      <!-- CONTENIDO CONCIERTOS  -->
-      <div class="contenido-conciertos row justify-content-evenly">
-        <div th:each="g: ${grupos}" class="col-12 col-md-6 mb-3">
-          <div th:style="'background-image:url(\'' + ${g.imagen} + '\');'" class="imagen-dinamica ">
-            <div class="capa-index">
-            </div>
-            <div class="d-flex d-md-block justify-content-center">
-              <div class="texto-concierto m-3">
-                <h3 th:text="${g.nombre}">
-                </h3>
-                <p th:text="${g.subtexto}">
-                </p>
-                <div class="text-end">
-                  <a th:href="@{/public/findgrupobyid(idgrupo = ${g.idgrupo})}" class="boton compra-entradas">
-                    + INFO
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- FIN DEL CONTENIDO CONCIERTOS -->
-
     </div>
-  </div>
-</main>
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="contenido-footer row align-items-center">
-    <div class="redes col-sm-12 col-md-4">
-      <ul class=" text-white">
-        <li>
-        <i class="fa-brands fa-facebook">
-        </i>
-      </li>
-      <li>
-      <i class="fa-brands fa-x-twitter">
-      </i>
-    </li>
-    <li>
-    <i class="fa-brands fa-square-instagram">
-    </i>
-  </li>
-</ul>
-</div>
-<div class="col-sm-12 col-md-4 titulo-footer">
-  <div class=" text-center">
-    <a href="./index.html" th:href="@{/index}">
-      <h1>
-        Sala
-      </h1>
-      <h1>
-        Corazón
-      </h1>
-    </a>
-  </div>
-
-
-</div>
-<div class="datos col-sm-12 col-md-4">
-  <ul class=" text-white">
-    <li>
-    C/Felicidad, 20
-  </li>
-  <li>
-  33205, Gijón
-</li>
-<li>
-<i class="fa-brands fa-whatsapp">
-</i>
-666 888 222
-</li>
-<li>
-<i class="fa-regular fa-envelope">
-</i>
-salacorazon@info.com
-</li>
-</ul>
-</div>
-</div>
-<div class="last-line contenido-footer">
-  <div class="copyright">
-  </div>
-</div>
-</footer>
-<!--
+    <div class="last-line contenido-footer">
+      <div class="copyright">
+      </div>
+    </div>
+  </footer>
+  <!--
   FIN FOOTER
 -->
-<script 
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
 
-</script>
-<script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous">
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-</script>
-<script src="/static/js/script.js" th:src="@{/js/script.js}">
-</script>
-<script th:if="${param.success}" th:inline="javascript">
-  var
-  mensajeExito = /*[[${msgSuccess}]]*/'';
-  Swal.fire({
-    icon: 'success',
-    title:
-    '¡Enhorabuena!',
-    text:
-    mensajeExito,
-    confirmButtonColor:
-    "##20c997",
-    width:
-    "40rem",
-    })
-    .then(result=>{
-      if(result.isConfirmed){
-        window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
-      }
-      });
     </script>
-    <script th:if="${noelement}" th:inline="javascript">
-      var mensaje = /*[[${noelement}]]*/ '';
-      Swal.fire({
-        icon: 'warning',
-        title: 'Lo sentimos',
-        text: mensaje,
-        confirmButtonColor: "##20c997",
-        width: "40rem",
-      }).then(result => {
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
+
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
+  <script src="/static/js/script.js" th:src="@{/js/script.js}">
+  </script>
+  <script th:if="${param.success}" th:inline="javascript">
+    var
+      mensajeExito = /*[[${msgSuccess}]]*/'';
+    Swal.fire({
+      icon: 'success',
+      title:
+        '¡Enhorabuena!',
+      text:
+        mensajeExito,
+      confirmButtonColor:
+        "##20c997",
+      width:
+        "40rem",
+    })
+      .then(result => {
         if (result.isConfirmed) {
           window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
-
         }
-        });
-      </script>
+      });
+  </script>
+  <script th:if="${noelement}" th:inline="javascript">
+    var mensaje = /*[[${noelement}]]*/ '';
+    Swal.fire({
+      icon: 'warning',
+      title: 'Lo sentimos',
+      text: mensaje,
+      confirmButtonColor: "##20c997",
+      width: "40rem",
+    }).then(result => {
+      if (result.isConfirmed) {
+        window.location.href = "https://app-tickets-c6dfd5dd1620.herokuapp.com/index";
+
+      }
+    });
+  </script>
 
 
-    </body>
+</body>
 
-  </html>
+</html>

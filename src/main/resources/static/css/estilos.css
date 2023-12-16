@@ -7,7 +7,7 @@
     --corporativo: #19199f;
     --textos: #333;
     --corporativo-hover: #4646b2;
-    --naranja: #FC4B08;
+    --naranja: #DF3603;
     --naranja-hover: #FF7C39;
 }
 
@@ -150,7 +150,7 @@ a {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: rgba(0 0 0 /30%);
+    background-color: rgba(0 0 0 /50%);
     z-index: 5;
     width: 100%;
     height: 100%;

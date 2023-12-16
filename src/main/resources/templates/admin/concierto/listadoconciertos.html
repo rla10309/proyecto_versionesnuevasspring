@@ -112,14 +112,14 @@
 						<td th:text="${c.grupo.nombre}">El grupo</td>
 						<td class="text-center">
 							<a th:href="@{/concierto/edit(idconcierto=${c.idconcierto})}" class="link-primary">
-								<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+								<i class="fa-sharp fa-solid fa-pen-to-square" aria-label="Editar"></i>
 							</a>
 							<a th:href="@{/concierto/delete(idconcierto=${c.idconcierto})}"
-								class="delete-group link-danger"><i class="fa-solid fa-trash-can"></i>
+								class="delete-group link-danger"><i class="fa-solid fa-trash-can" aria-label="Borrar"></i>
 							</a>
 							<a th:href="@{/venta/informe(nombre=${c.grupo.nombre})}" class="link-success">
 
-								<i class="fa-solid fa-eye"></i>
+								<i class="fa-solid fa-eye" aria-label="Ventas"></i>
 							</a>
 						</td>
 					</tr>
