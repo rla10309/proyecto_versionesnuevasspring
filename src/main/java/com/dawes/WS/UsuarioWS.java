@@ -27,14 +27,16 @@ public class UsuarioWS {
 
 	@GetMapping("/usuario/{dni}")
 	public ResponseEntity<?> findByUsuarioDni(@PathVariable String dni) {
-		
-		UsuarioVO usuario = su.findByDni(dni).get();
-		UsuarioDTO usuarioDto = new UsuarioDTO();
-		usuarioDto.setIdUsuario(usuario.getIdusuario());
-		usuarioDto.setDni(usuario.getDni());
-		usuarioDto.setPassword(usuario.getPassword());
-		return new ResponseEntity<UsuarioDTO>(usuarioDto, HttpStatus.OK);
-	
+		try {
+			UsuarioVO usuario = su.findByDni(dni).get();
+			UsuarioDTO usuarioDto = new UsuarioDTO();
+			usuarioDto.setIdUsuario(usuario.getIdusuario());
+			usuarioDto.setDni(usuario.getDni());
+			usuarioDto.setPassword(usuario.getPassword());
+			return new ResponseEntity<UsuarioDTO>(usuarioDto, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error en la búsqueda", HttpStatus.NOT_FOUND);
+		}
 
 	}
 
