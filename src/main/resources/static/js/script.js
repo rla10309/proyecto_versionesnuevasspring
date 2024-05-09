@@ -233,8 +233,8 @@ $(function () {
       confirmButtonText: "Quiero darme de baja",
     }).then((result) => {
       if (result.isConfirmed) {
-        //window.location.href = "http://localhost:8080/user/darsedebaja";
-        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com/user/darsedebaja";
+        window.location.href = "http://localhost:8080/user/darsedebaja";
+        //window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com/user/darsedebaja";
        
       }
     });
@@ -248,8 +248,8 @@ $(function () {
       width: "40rem",
     }).then((result) => {
       if (result.isConfirmed) {
-        //window.location.href = "http://localhost:8080";
-        window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com";
+        window.location.href = "http://localhost:8080";
+        //window.location.href = " https://app-tickets-c6dfd5dd1620.herokuapp.com";
       }
     });
   }

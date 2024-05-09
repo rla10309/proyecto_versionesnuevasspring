@@ -67,7 +67,7 @@ public class ServicioGrupoImpl implements ServicioGrupo {
 	public void deleteById(Integer id) throws DataIntegrityViolationException {
 		try {
 			gr.deleteById(id);
-			System.out.println("Eliminado");
+			
 		} catch (DataIntegrityViolationException e) {
 			System.out.println("Error en deleteById " + e.getLocalizedMessage());
 			throw new DataIntegrityViolationException("Error al eliminar un grupo");
